@@ -1,22 +1,23 @@
 import personaje.*
 import wollok.game.*
 import arbol.*
+import edificios.*
 
 
 
 object config {
 	
 	method iniciar(){
+	
 	self.configurarTeclas()
-	
-	game.addVisualCharacter(personaje)
-	
+	const city = "city.png"
+	game.ground(city) 
+	game.addVisual(personaje)
 	
 	const a0 = new Arbol(
 		position = game.at(0,0)
 	)
 	game.addVisual(a0)
-	
 	const a1 = new Arbol(
 		position = game.at(2,0)
 	)
@@ -65,7 +66,6 @@ object config {
 		position = game.at(24,0)
 	)
 	game.addVisual(a12)
-	
 	const a14 = new Arbol(
 		position = game.at(24,2)
 	)
@@ -77,18 +77,14 @@ object config {
 	const a16 = new Arbol(
 		position = game.at(24,6)
 	)
-	game.addVisual(a16)
-	const a17 = new Arbol(
-		position = game.at(24,8)
-	)
-	game.addVisual(a17)
+	game.addVisual(a16)	
 	const a18 = new Arbol(
-		position = game.at(24,10)
-	)
-	game.addVisual(a18)
-	const a19 = new Arbol(
 		position = game.at(24,12)
 	)
+	game.addVisual(a18)
+	const a19 = new ArbolInvisible(
+		position = game.at(24,10))
+		a19.image("arbolInvisible.png")
 	game.addVisual(a19)
 	const a20 = new Arbol(
 		position = game.at(24,14)
@@ -134,14 +130,10 @@ object config {
 		position = game.at(6,16)
 	)
 	game.addVisual(a30)
-	const a31 = new Arbol(
-		position = game.at(4,16)
-	)
+	const a31 = new ArbolInvisible(
+		position = game.at(4,16))
+		a31.image("arbolInvisible.png")
 	game.addVisual(a31)
-	const a32 = new Arbol(
-		position = game.at(2,16)
-	)
-	game.addVisual(a32)
 	const a33 = new Arbol(
 		position = game.at(0,16)
 	)
@@ -198,16 +190,15 @@ object config {
 		position = game.at(16,6)
 	)
 	game.addVisual(a46)
-	
+	const gim = new Gimnasio(
+		position = game.at(2,16)
+	)
+	game.addVisual(gim)
+	const cen = new Centro(
+		position = game.at(24,8)
+	)
+	game.addVisual(cen)
 
-	game.onCollideDo(personaje, { algo => algo.teEncontro()})
-}
-			
-
-	
-	
-	
-	
 	
 	method configurarTeclas(){
 		keyboard.left().onPressDo({personaje.irA(personaje.position().left(1))})
@@ -216,16 +207,16 @@ object config {
 		
 		keyboard.right().onPressDo({personaje.irA(personaje.position().right(1))})
 		keyboard.right().onPressDo({personaje.image("player_Right.png")})		
-
-
+	
+	
 		keyboard.up().onPressDo({personaje.irA(personaje.position().up(1))})
 		keyboard.up().onPressDo({personaje.image("player_Up.png")})		
-
+	
 	
 		keyboard.down().onPressDo({personaje.irA(personaje.position().down(1))})
-		keyboard.down().onPressDo({personaje.image("player_Down.png")})		
-
+		keyboard.down().onPressDo({personaje.image("assets//player_Down.png")})		
+	
 		keyboard.p().onPressDo({personaje.pos()})
 	}
-	
+
 }
