@@ -199,10 +199,15 @@ object config {
 	)
 	game.addVisual(a46)
 	
+
+	game.onCollideDo(personaje, { algo => algo.teEncontro()})
+}
+			
+
 	
 	
 	
-	}	
+	
 	
 	method configurarTeclas(){
 		keyboard.left().onPressDo({personaje.irA(personaje.position().left(1))})
@@ -223,9 +228,4 @@ object config {
 		keyboard.p().onPressDo({personaje.pos()})
 	}
 	
-	method configurarColisiones() {
-		game.onCollideDo(personaje, { algo => algo.teEncontro()
-			
-		})
-	}
 }
