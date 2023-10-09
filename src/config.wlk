@@ -198,7 +198,13 @@ object config {
 		position = game.at(24,8)
 	)
 	game.addVisual(cen)
-
+	
+	const  visual = [gim,cen,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a14,a15,a16,a18,a19,a20,a21,
+		a22,a23,a24,a25,a26,a27,a28,a29,a30,a31,a33,a34,a35,a36,a37,a38,a39,a40,a41,a42,a43,a44,a45,a46
+	]
+	
+	game.onCollideDo(personaje, { algo => algo.teEncontro()})
+}	
 	
 	method configurarTeclas(){
 		keyboard.left().onPressDo({personaje.irA(personaje.position().left(1))})
@@ -218,5 +224,33 @@ object config {
 	
 		keyboard.p().onPressDo({personaje.pos()})
 	}
+	
+}
+object pelea{
+	method iniciar(city){
+	
+	self.configurarTeclas()
+		
+	game.ground(city) 
 
+	
+	}
+	method configurarTeclas(){
+		keyboard.left().onPressDo({personaje.irA(personaje.position().left(1))})
+		keyboard.left().onPressDo({personaje.image("player_Left.png")})		
+		
+		
+		keyboard.right().onPressDo({personaje.irA(personaje.position().right(1))})
+		keyboard.right().onPressDo({personaje.image("player_Right.png")})		
+	
+	
+		keyboard.up().onPressDo({personaje.irA(personaje.position().up(1))})
+		keyboard.up().onPressDo({personaje.image("player_Up.png")})		
+	
+	
+		keyboard.down().onPressDo({personaje.irA(personaje.position().down(1))})
+		keyboard.down().onPressDo({personaje.image("assets//player_Down.png")})		
+	
+		keyboard.p().onPressDo({personaje.pos()})
+	}
 }

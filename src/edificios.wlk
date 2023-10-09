@@ -10,9 +10,7 @@ class Edificio {
 
 		game.say(personaje,"el gym")
 		game.clear()
-		game.removeVisual("city.png")
 		pelea.iniciar(pel)
-		game.ground(pel) 
 	}		
 }
 
