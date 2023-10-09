@@ -5,26 +5,18 @@ import personaje.*
 
 class Edificio {
 	
-	var property position = 0
-	var property image = "gimnasio1.png"
-	
-	
-	
-	
+	method teEncontro(){
+		personaje.position(personaje.posicionAnterior())
+		game.say(personaje,"el gym")
+	}		
 }
-
-
-
-
 
 class Gimnasio inherits Edificio{
-	override method image(){
-		image = "gimnasio.png"
-	}
-	
+	var property image = "gimnasio.png"
+	var property position = 0	
 }
+
 class Centro inherits Edificio{
-	override method image(){
-		image = "mercado.png"
-	}
+	var property image = "mercado.png"
+	var property position = 0
 }

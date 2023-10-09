@@ -12,13 +12,6 @@ program pokeworld {
 	game.boardGround("city.png") 
 	
 	
-	
-	
-	
-
-
-	
-
 	//  VISUALES
 	config.iniciar()
  	
