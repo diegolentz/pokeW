@@ -10,7 +10,7 @@ object personaje {
    
    
     method irA(nuevaPosicion) {
-
+			posicionAnterior = position
             position = nuevaPosicion
             
          

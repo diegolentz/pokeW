@@ -199,6 +199,7 @@ object config {
 	)
 	game.addVisual(a46)
 	
+	game.onCollideDo(personaje, { algo => algo.teEncontro()})
 	
 	
 	
@@ -218,14 +219,11 @@ object config {
 
 	
 		keyboard.down().onPressDo({personaje.irA(personaje.position().down(1))})
-		keyboard.down().onPressDo({personaje.image("player_Down.png")})		
+		keyboard.down().onPressDo({personaje.image("assets//player_Down.png")})		
 
 		keyboard.p().onPressDo({personaje.pos()})
 	}
 	
-	method configurarColisiones() {
-		game.onCollideDo(personaje, { algo => algo.teEncontro()
-			
-		})
-	}
+	
+	
 }
