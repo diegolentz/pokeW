@@ -8,12 +8,11 @@ import edificios.*
 object config {
 	
 	method iniciar(){
+	
 	self.configurarTeclas()
-	self.cambioBackground("city")
-	
-	
-	game.addVisualCharacter(personaje)
-	//game.boardGround("city.png") 
+	const city = "city.png"
+	game.ground(city) 
+	game.addVisual(personaje)
 	
 	const a0 = new Arbol(
 		position = game.at(0,0)
@@ -226,16 +225,32 @@ object config {
 		keyboard.p().onPressDo({personaje.pos()})
 	}
 	
-	method removeVisual(visual){
-		visual.forEach({objeto => game.removeVisual(objeto)})
-		
-	}	
-	method cambioBackground(estado){
-		if(estado == "city"){
-		game.boardGround("city.png")
-		}else if(estado == "gimnasio"){
-			game.boardGround("gimnasio.png")
-		}else game.boardGround("mercado.png")
-	}
+}
+object pelea{
+	method iniciar(city){
 	
+	self.configurarTeclas()
+		
+	game.ground(city) 
+
+	
+	}
+	method configurarTeclas(){
+		keyboard.left().onPressDo({personaje.irA(personaje.position().left(1))})
+		keyboard.left().onPressDo({personaje.image("player_Left.png")})		
+		
+		
+		keyboard.right().onPressDo({personaje.irA(personaje.position().right(1))})
+		keyboard.right().onPressDo({personaje.image("player_Right.png")})		
+	
+	
+		keyboard.up().onPressDo({personaje.irA(personaje.position().up(1))})
+		keyboard.up().onPressDo({personaje.image("player_Up.png")})		
+	
+	
+		keyboard.down().onPressDo({personaje.irA(personaje.position().down(1))})
+		keyboard.down().onPressDo({personaje.image("assets//player_Down.png")})		
+	
+		keyboard.p().onPressDo({personaje.pos()})
+	}
 }
