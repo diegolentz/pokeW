@@ -1,1 +1,1 @@
-se arregla mapa
+se recupera desp de marge trajico
