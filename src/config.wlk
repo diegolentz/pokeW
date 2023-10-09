@@ -9,8 +9,11 @@ object config {
 	
 	method iniciar(){
 	self.configurarTeclas()
+	self.cambioBackground("city")
+	
 	
 	game.addVisualCharacter(personaje)
+	//game.boardGround("city.png") 
 	
 	const a0 = new Arbol(
 		position = game.at(0,0)
@@ -197,8 +200,9 @@ object config {
 	)
 	game.addVisual(cen)
 	
-	
-	
+	const  visual = [gim,cen,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a14,a15,a16,a18,a19,a20,a21,
+		a22,a23,a24,a25,a26,a27,a28,a29,a30,a31,a33,a34,a35,a36,a37,a38,a39,a40,a41,a42,a43,a44,a45,a46
+	]
 	
 	game.onCollideDo(personaje, { algo => algo.teEncontro()})
 }	
@@ -222,6 +226,16 @@ object config {
 		keyboard.p().onPressDo({personaje.pos()})
 	}
 	
-	
+	method removeVisual(visual){
+		visual.forEach({objeto => game.removeVisual(objeto)})
+		
+	}	
+	method cambioBackground(estado){
+		if(estado == "city"){
+		game.boardGround("city.png")
+		}else if(estado == "gimnasio"){
+			game.boardGround("gimnasio.png")
+		}else game.boardGround("mercado.png")
+	}
 	
 }

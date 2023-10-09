@@ -6,7 +6,7 @@ import personaje.*
 class Edificio {
 	
 	method teEncontro(){
-		personaje.position(personaje.posicionAnterior())
+		//personaje.position(personaje.posicionAnterior())
 		game.say(personaje,"el gym")
 	}		
 }

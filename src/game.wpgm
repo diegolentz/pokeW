@@ -9,7 +9,7 @@ program pokeworld {
 	game.title("pokeworld")
 	game.height(18)
 	game.width(26)
-	game.boardGround("city.png") 
+	//game.boardGround("city.png") 
 	
 	
 	//  VISUALES
