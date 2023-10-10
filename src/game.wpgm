@@ -13,10 +13,8 @@ program pokeworld {
 	
 	//  VISUALES
 
-	
 	config.iniciar()
 	
-	//config.cambiarFondo()
  	
  	//  COMIENZA
 	game.start()
