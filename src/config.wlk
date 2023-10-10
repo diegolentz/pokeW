@@ -17,6 +17,8 @@ object config {
 	)
 	
 	game.addVisual(city)
+	
+	
 	game.addVisual(personaje)
 	
 	
@@ -256,10 +258,46 @@ object config {
 		
 	
 }
-/*object batalla{
-	method iniciar(posAnterior){
-		game.addVisual(positionable)
-	}*/
+
+
+
+
+
+object gimnasio{
+	
+	method iniciar(){
+		
+		const batalla = new Batalla(
+		position = game.at(0,0)
+	)
+	
+	game.addVisual(batalla)
+	game.addVisual(rival)
+	
+	
+	}
+
+}
+
+
+
+
+object market{
+	
+	method iniciar(){
+		
+		const market = new Market(
+		position = game.at(0,0)
+	)
+	
+	//game.addVisual(market)
+	game.addVisual(market)
+	game.addVisual(enfermera)	
+	
+
+	}
+
+}
 
 
 

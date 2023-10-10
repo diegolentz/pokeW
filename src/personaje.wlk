@@ -15,4 +15,24 @@ object personaje {
 	method pos() {
 		game.say(self,position)
 	}
+	method iniciaBatalla(){
+		
+	}
+	method iniciaMarket(){}
+}
+
+
+object rival{
+    var property position = game.at(20,12)
+    var property image = "enemigoBatalla.png"
+    
+   
+}
+
+
+object enfermera{
+   var property position = game.at(12,8)
+    var property image = "enfermera.png"
+    
+   
 }
