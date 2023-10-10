@@ -9,6 +9,7 @@ class Edificio {
 		//var pelea = "gimnasio.png"
 
 		game.clear()
+	//	batalla.iniciar(personaje.posicionAnterior())
 	}		
 }
 

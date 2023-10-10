@@ -1,8 +1,8 @@
+import city.*
 import personaje.*
 import wollok.game.*
 import arbol.*
 import edificios.*
-import places.*
 
 object config {
 	
@@ -10,12 +10,15 @@ object config {
 	
 	self.configurarTeclas()
 	
+	
+	
 	const city = new City(
 		position = game.at(0,0)
 	)
-	game.addVisual(city)
 	
+	game.addVisual(city)
 	game.addVisual(personaje)
+	
 	
 	const a0 = new Arbol(
 		position = game.at(0,0)
@@ -250,6 +253,13 @@ object config {
 	
 		keyboard.p().onPressDo({personaje.pos()})
 	}
+		
 	
 }
+/*object batalla{
+	method iniciar(posAnterior){
+		game.addVisual(positionable)
+	}*/
+
+
 
