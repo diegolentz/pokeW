@@ -2,17 +2,19 @@ import personaje.*
 import wollok.game.*
 import arbol.*
 import edificios.*
-
-
+import places.*
 
 object config {
 	
 	method iniciar(){
 	
 	self.configurarTeclas()
-	const city = "city.png"
-	game.ground(city) 
-	//game.boardGround(city)
+	
+	const city = new City(
+		position = game.at(0,0)
+	)
+	game.addVisual(city)
+	
 	game.addVisual(personaje)
 	
 	const a0 = new Arbol(
@@ -62,7 +64,20 @@ object config {
 	const a11 = new Arbol(
 		position = game.at(22,0)
 	)
+	
 	game.addVisual(a11)
+	//carteles
+	const c1 = new CartelGym(
+		image = "cartelM.png",
+		position = game.at(4,14)
+	)
+	game.addVisual(c1)
+		const c2 = new CartelMarket(
+		image = "cartelM.png",
+		position = game.at(22,10)
+	)
+	game.addVisual(c2)
+	
 	const a12 = new Arbol(
 		position = game.at(24,0)
 	)
@@ -87,6 +102,16 @@ object config {
 		position = game.at(24,10))
 		a19.image("arbolInvisible.png")
 	game.addVisual(a19)
+	
+	
+	const inv1 = new ArbolInvisible(
+		position = game.at(0,2))
+		inv1.image("arbolInvisible.png")
+	game.addVisual(inv1)
+	const inv2 = new ArbolInvisible(
+		position = game.at(0,4))
+		inv2.image("arbolInvisible.png")
+	game.addVisual(inv2)
 	const a20 = new Arbol(
 		position = game.at(24,14)
 	)
@@ -227,37 +252,4 @@ object config {
 	}
 	
 }
-object pelea{
-	method iniciar(city){
-	
-	self.configurarTeclas()
-	
-	const pelea = "gimansio.png"
-	game.ground(pelea) 
 
-	
-	}
-	method configurarTeclas(){
-		keyboard.left().onPressDo({personaje.irA(personaje.position().left(1))})
-		keyboard.left().onPressDo({personaje.image("player_Left.png")})		
-		
-		
-		keyboard.right().onPressDo({personaje.irA(personaje.position().right(1))})
-		keyboard.right().onPressDo({personaje.image("player_Right.png")})		
-	
-	
-		keyboard.up().onPressDo({personaje.irA(personaje.position().up(1))})
-		keyboard.up().onPressDo({personaje.image("player_Up.png")})		
-	
-	
-		keyboard.down().onPressDo({personaje.irA(personaje.position().down(1))})
-		keyboard.down().onPressDo({personaje.image("assets//player_Down.png")})		
-	
-		keyboard.p().onPressDo({personaje.pos()})
-	}
-}
-object ground{
-	method cambiarFondo(){
-		
-	}
-}
