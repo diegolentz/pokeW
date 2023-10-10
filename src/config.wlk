@@ -12,6 +12,7 @@ object config {
 	self.configurarTeclas()
 	const city = "city.png"
 	game.ground(city) 
+	//game.boardGround(city)
 	game.addVisual(personaje)
 	
 	const a0 = new Arbol(
@@ -207,19 +208,19 @@ object config {
 }	
 	
 	method configurarTeclas(){
-		keyboard.left().onPressDo({personaje.irA(personaje.position().left(1))})
+		keyboard.left().onPressDo({personaje.irA(personaje.position().left(2))})
 		keyboard.left().onPressDo({personaje.image("player_Left.png")})		
 		
 		
-		keyboard.right().onPressDo({personaje.irA(personaje.position().right(1))})
+		keyboard.right().onPressDo({personaje.irA(personaje.position().right(2))})
 		keyboard.right().onPressDo({personaje.image("player_Right.png")})		
 	
 	
-		keyboard.up().onPressDo({personaje.irA(personaje.position().up(1))})
+		keyboard.up().onPressDo({personaje.irA(personaje.position().up(2))})
 		keyboard.up().onPressDo({personaje.image("player_Up.png")})		
 	
 	
-		keyboard.down().onPressDo({personaje.irA(personaje.position().down(1))})
+		keyboard.down().onPressDo({personaje.irA(personaje.position().down(2))})
 		keyboard.down().onPressDo({personaje.image("assets//player_Down.png")})		
 	
 		keyboard.p().onPressDo({personaje.pos()})
@@ -230,8 +231,9 @@ object pelea{
 	method iniciar(city){
 	
 	self.configurarTeclas()
-		
-	game.ground(city) 
+	
+	const pelea = "gimansio.png"
+	game.ground(pelea) 
 
 	
 	}
@@ -252,5 +254,10 @@ object pelea{
 		keyboard.down().onPressDo({personaje.image("assets//player_Down.png")})		
 	
 		keyboard.p().onPressDo({personaje.pos()})
+	}
+}
+object ground{
+	method cambiarFondo(){
+		
 	}
 }
