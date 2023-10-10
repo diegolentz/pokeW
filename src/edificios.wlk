@@ -6,11 +6,9 @@ import personaje.*
 class Edificio {
 	
 	method teEncontro(){
-		var pel = "gimnasio.png"
+		//var pelea = "gimnasio.png"
 
-		//game.say(personaje,"el gym")
 		game.clear()
-		pelea.iniciar(pel)
 	}		
 }
 

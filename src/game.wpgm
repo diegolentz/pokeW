@@ -16,7 +16,7 @@ program pokeworld {
 	
 	config.iniciar()
 	
-	
+	//config.cambiarFondo()
  	
  	//  COMIENZA
 	game.start()
