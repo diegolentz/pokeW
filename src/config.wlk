@@ -3,6 +3,7 @@ import personaje.*
 import wollok.game.*
 import arbol.*
 import edificios.*
+import pokemons.*
 
 object config {
 	
@@ -267,16 +268,16 @@ object gimnasio{
 	
 	method iniciar(){
 		
-		const batalla = new Batalla(
-		position = game.at(0,0)
-	)
+	const batalla = new Batalla(
+	position = game.at(0,0))
 	
 	game.addVisual(batalla)
 	game.addVisual(rival)
 	
+	const gimnasio = new Gimnasio()
+	gimnasio.pelea()
 	
 	}
-
 }
 
 
