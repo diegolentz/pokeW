@@ -21,10 +21,10 @@ class Gimnasio inherits Edificio{
 	
 	
 	
-	method pelea(){
 		var esJugador = true
 		var termino = false
 		var sinVida = false
+	method pelea(){
 		
 		
 		//AGREGA LOS POKEMONES PROPIOS DEL PERSONAJE A LA LISTA DEL PERSONAJE
@@ -33,12 +33,16 @@ class Gimnasio inherits Edificio{
 		rival.iniciaBatalla(rival.propios())
 		game.addVisual(personaje.sacaPokemon())
 		game.addVisual(rival.sacaPokemon())
-		//game.addVisual(rival.pokemones())
+		
 		
 		self.iniciarBatalla()
 	}
 	method iniciarBatalla(){
-		
+		if(esJugador){
+			var poke = personaje.pokemones().first()
+			keyboard.num1().onPressDo({poke.ataqueMin()})
+			keyboard.num1().onPressDo({game.say(self,"Primer Ataque")})
+		}
 	}
 	
 }

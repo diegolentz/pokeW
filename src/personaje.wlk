@@ -5,7 +5,7 @@ import pokemons.*
 
 
 class Human{
-	const pokemones = []
+	const property pokemones = []
 	
 	
 	//AGREGA LOS POKEMONES PROPIOS 
@@ -25,6 +25,7 @@ object personaje inherits Human{
    	
    	//LISTA DE POKEMONES PROPIOS DEL PERSONAJE
    	var property propios = [charmileon]
+    
     
    
     method irA(nuevaPosicion) {
