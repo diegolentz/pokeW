@@ -41,11 +41,12 @@ object mewTwo inherits Pokemon {
 	
 }
 object machamp inherits Pokemon {
-	
+	var property position = game.at(15,11)	
+	var property image = "machamp.png"
 	
 }
 object charmileon inherits Pokemon {
- 	var property position = game.at(10,10)	
+ 	var property position = game.at(7,5)	
 	var property image = "charmileon.png"
 	//var position = game.at(10,10)
 	

@@ -5,17 +5,27 @@ import pokemons.*
 
 
 class Human{
+	const pokemones = []
 	
 	
+	//AGREGA LOS POKEMONES PROPIOS 
+	//DE CADA PERSONAJE A SU JUGADOR CORRESPONDIENTE	
+	method iniciaBatalla(propios){
+	    pokemones.addAll(propios)
+	}
+	//RETORNA EL PRIMER POKEMON 
+	//DE LA LISTA DE CADA PERSONAJE
+	method sacaPokemon() = pokemones.first()
 }
 
 object personaje inherits Human{
     var property position = game.at(2,12)
     var property image = "player_Up.png"
     var property posicionAnterior = game.at(2, 12)   
-   
-   
-    const pokemones = [charmileon]
+   	
+   	//LISTA DE POKEMONES PROPIOS DEL PERSONAJE
+   	var property propios = [charmileon]
+    
    
     method irA(nuevaPosicion) {
 			posicionAnterior = position
@@ -25,13 +35,10 @@ object personaje inherits Human{
 	method pos() {
 		game.say(self,position)
 	}
-	method iniciaBatalla(){
-		
-	}
 	method iniciaMarket(){}
 	
 	
-	method sacaPokemon() = charmileon
+	
 }
 
 
@@ -39,7 +46,8 @@ object rival inherits Human{
     var property position = game.at(20,12)
     var property image = "enemigoBatalla.png"
     
-    const pokemones = [machamp,blastoise,mewTwo]
+    //LISTA DE POKEMONES PROPIOS DEL PERSONAJE
+    var property propios = [machamp,blastoise,mewTwo]
     
     method batalla(){
     	

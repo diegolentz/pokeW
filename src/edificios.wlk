@@ -25,14 +25,21 @@ class Gimnasio inherits Edificio{
 		var esJugador = true
 		var termino = false
 		var sinVida = false
-		//const posJugador = game.at(7,7)
 		
-		//const pok = personaje.sacaPokemon()
-		//pok.position(10,10)
-		game.addVisual(charmileon)
-		//jugador.
+		
+		//AGREGA LOS POKEMONES PROPIOS DEL PERSONAJE A LA LISTA DEL PERSONAJE
+		
+		personaje.iniciaBatalla(personaje.propios())
+		rival.iniciaBatalla(rival.propios())
+		game.addVisual(personaje.sacaPokemon())
+		game.addVisual(rival.sacaPokemon())
+		//game.addVisual(rival.pokemones())
+		
+		self.iniciarBatalla()
 	}
-	
+	method iniciarBatalla(){
+		
+	}
 	
 }
 
