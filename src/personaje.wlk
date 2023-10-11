@@ -1,11 +1,21 @@
 import wollok.game.*
 import config.*
+import pokemons.*
 
 
-object personaje {
-    var property position = game.at(2,4)
+
+class Human{
+	
+	
+}
+
+object personaje inherits Human{
+    var property position = game.at(2,12)
     var property image = "player_Up.png"
-    var property posicionAnterior = game.at(6, 19)   
+    var property posicionAnterior = game.at(2, 12)   
+   
+   
+    const pokemones = [charmileon]
    
     method irA(nuevaPosicion) {
 			posicionAnterior = position
@@ -19,13 +29,21 @@ object personaje {
 		
 	}
 	method iniciaMarket(){}
+	
+	
+	method sacaPokemon() = charmileon
 }
 
 
-object rival{
+object rival inherits Human{
     var property position = game.at(20,12)
     var property image = "enemigoBatalla.png"
     
+    const pokemones = [machamp,blastoise,mewTwo]
+    
+    method batalla(){
+    	
+    }
    
 }
 
