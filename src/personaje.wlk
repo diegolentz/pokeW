@@ -50,9 +50,7 @@ object rival inherits Human{
     //LISTA DE POKEMONES PROPIOS DEL PERSONAJE
     var property propios = [machamp,blastoise,mewTwo]
     
-    method batalla(){
-    	
-    }
+    
    
 }
 

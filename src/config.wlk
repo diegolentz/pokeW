@@ -267,13 +267,12 @@ object config {
 object gimnasio{
 	
 	method iniciar(){
-	//self.configurarTeclas()	
 	const gimnasio1 = new Gimnasio(
 		position = game.at(0,0)
 	)
-	const batalla = new Batalla(
-	position = game.at(0,0))
+	const batalla = new Batalla()
 	
+	game.addVisual(gimnasio1)
 	game.addVisual(batalla)
 	game.addVisual(rival)
 	
@@ -281,24 +280,10 @@ object gimnasio{
 	
 	}
 	
-	/*method configurarTeclas(){
-		//keyboard.1().onPressDo({poke.ataqueMin()})
-		keyboard.left().onPressDo({personaje.image("player_Left.png")})		
+	method configurarTeclas(){
 		
-		
-		keyboard.right().onPressDo({personaje.irA(personaje.position().right(2))})
-		keyboard.right().onPressDo({personaje.image("player_Right.png")})		
-	
-	
-		keyboard.up().onPressDo({personaje.irA(personaje.position().up(2))})
-		keyboard.up().onPressDo({personaje.image("player_Up.png")})		
-	
-	
-		keyboard.down().onPressDo({personaje.irA(personaje.position().down(2))})
-		keyboard.down().onPressDo({personaje.image("assets//player_Down.png")})		
-	
-		keyboard.p().onPressDo({personaje.pos()})
-	}*/
+		keyboard.num1().onPressDo({game.say(rival,"Primer Ataque")})
+		}
 }
 
 

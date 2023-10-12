@@ -40,12 +40,17 @@ class Gimnasio inherits Edificio{
 	method iniciarBatalla(){
 		if(esJugador){
 			var poke = personaje.pokemones().first()
-			keyboard.num1().onPressDo({poke.ataqueMin()})
-			keyboard.num1().onPressDo({game.say(self,"Primer Ataque")})
-		}
-	}
-	
+			keyboard.num1().onPressDo({game.say(rival,"Primer Ataque")})
+			keyboard.num1().onPressDo({personaje.sacaPokemon().ataqueMin()})
+			rival.sacaPokemon().vida() = (self.vida() - personaje.sacaPokemon().ataqueMin() )
+			keyboard.num1().onPressDo({game.say(rival.sacaPokemon())})
+			esJugador = false
+		}else 
+		rival.sacaPokemon().atacar()
+		
+	}	
 }
+
 
 class Centro inherits Edificio{
 	var property image = "mercado.png"
