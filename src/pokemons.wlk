@@ -4,6 +4,7 @@ class Pokemon{
 	var property vida = 100
 	var property nivel = 4
 	const ataques = [0,1,2]
+	//var ataque = self.atacar()
 	
 	
 	
@@ -11,21 +12,22 @@ class Pokemon{
 	method atacar(){
 		var ataque = 0.randomUpTo(3).truncate(0)
 		
-		self.autoattack(ataque)
+		return self.autoattack(ataque)
+		
 		}
 	
 	method autoattack(ataque){
-		if(ataque == 0){
+		return if(ataque == 0){
 			self.ataqueMin()
 		}else if(ataque == 1){
 			self.ataqueMed()
-		}else self.ataqueAlt()
+		}else {self.ataqueAlt()}
 	}
 	
 	
 	method ataqueMin(){
 		
-		var danio = nivel * 10 
+		const danio = nivel * 10 
 		return danio
 	}
 	method ataqueMed(){
