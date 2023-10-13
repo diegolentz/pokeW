@@ -1,23 +1,24 @@
+import wollok.game.*
+class Mapa{
+	
+    var property position = game.at(0,0)
+}
 
 
-
-class City {
+class City inherits Mapa{
 	var property image = "city.png"
-    var property position = 0
 	
 }
 
-class Batalla{
+class Batalla inherits Mapa{
 	var property image = "pelea.png"
-    var property position = 0
 	
 	method batalla(){
 		
 	}
 	
 }
-class Market{
+class Market inherits Mapa{
 	var property image = "centro_pokemon.jpg"
-    var property position = 0
 	
 }
