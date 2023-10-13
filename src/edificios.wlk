@@ -31,30 +31,42 @@ class Gimnasio inherits Edificio{
 		game.addVisual(personaje.sacaPokemon())
 		game.addVisual(rival.sacaPokemon())
 		
-		self.iniciarBatalla()
+		self.turnoJugador()
 	}
-	method iniciarBatalla(){
-		if(esJugador){
-			var pokeJugador = personaje.pokemones().first()
-			var pokeRival = rival.pokemones().first()
-			
+	method turnoJugador(){
+		const pokeJugador = personaje.sacaPokemon()
+		const pokeRival = rival.sacaPokemon()
+	
+		if(pokeJugador.vida() > 0){			
 			//asdasd
 			keyboard.num1().onPressDo({game.say(pokeJugador,"Primer Ataque")})
 			keyboard.num1().onPressDo({pokeJugador.ataqueMin()})
+			keyboard.num2().onPressDo({game.say(pokeJugador,"Segundo Ataque")})
+			keyboard.num2().onPressDo({pokeJugador.ataqueMed()})
+			keyboard.num3().onPressDo({game.say(pokeJugador,"Tercer Ataque")})
+			keyboard.num3().onPressDo({pokeJugador.ataqueAlt()})
 			var vida = pokeRival.vida()
 			pokeRival.vida(vida - pokeJugador.ataqueMin()) 
 			
 			keyboard.num1().onPressDo({game.say(pokeRival,pokeRival.vida().toString())})
-			esJugador = false
-		}else {
-		rival.sacaPokemon().atacar()
+			//esJugador = false
+			keyboard.num5().onPressDo({self.turnoRival()})
+			
+		}	
+	}
+	method turnoRival() {
+		const pokeJugador = personaje.sacaPokemon()
+		const pokeRival = rival.sacaPokemon()
+	
+		if(pokeRival.vida()>0){
+		pokeRival.atacar()
 		//esto guarda la vida del pokemon para calcular el descuento
 		var vida = personaje.sacaPokemon().vida()
-		personaje.sacaPokemon().vida(vida - rival.sacaPokemon().atacar())
-		game.say(personaje.sacaPokemon(),personaje.sacaPokemon().vida().toString())
+		pokeJugador.vida(vida - rival.sacaPokemon().atacar())
+		game.say(pokeJugador,pokeJugador.vida().toString())
 		
-		esJugador = true}
-		}	
+		keyboard.num5().onPressDo({self.turnoJugador()})}
+		}
 }
 
 

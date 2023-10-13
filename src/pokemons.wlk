@@ -3,7 +3,7 @@ import wollok.game.*
 class Pokemon{
 	var property vida = 100
 	var property nivel = 4
-	const ataques = [0,1,2]
+	//const ataques = [0,1,2]
 	//var ataque = self.atacar()
 	
 	
