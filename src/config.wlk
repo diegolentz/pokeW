@@ -273,17 +273,17 @@ object gimnasio{
 	const batalla = new Batalla()
 	
 	game.addVisual(gimnasio1)
+	game.addVisual(personaje)
 	game.addVisual(batalla)
 	game.addVisual(rival)
+	
+	
 	
 	gimnasio1.pelea()
 	
 	}
 	
-	method configurarTeclas(){
-		
-		keyboard.num1().onPressDo({game.say(rival,"Primer Ataque")})
-		}
+	
 }
 
 

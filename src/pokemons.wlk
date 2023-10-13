@@ -10,8 +10,18 @@ class Pokemon{
 	
 	method atacar(){
 		var ataque = 0.randomUpTo(3).truncate(0)
-		return ataque
+		
+		self.autoattack(ataque)
+		}
+	
+	method autoattack(ataque){
+		if(ataque == 0){
+			self.ataqueMin()
+		}else if(ataque == 1){
+			self.ataqueMed()
+		}else self.ataqueAlt()
 	}
+	
 	
 	method ataqueMin(){
 		
@@ -26,7 +36,6 @@ class Pokemon{
 		var danio = nivel * 20
 		return danio
 	}
-	
 	
 	
 }

@@ -40,15 +40,21 @@ class Gimnasio inherits Edificio{
 	method iniciarBatalla(){
 		if(esJugador){
 			var poke = personaje.pokemones().first()
-			keyboard.num1().onPressDo({game.say(rival,"Primer Ataque")})
+			//keyboard.num1().onPressDo({game.say(personaje,"Primer Ataque")})
 			keyboard.num1().onPressDo({personaje.sacaPokemon().ataqueMin()})
-			rival.sacaPokemon().vida() = (self.vida() - personaje.sacaPokemon().ataqueMin() )
-			keyboard.num1().onPressDo({game.say(rival.sacaPokemon())})
+			var vida = rival.sacaPokemon().vida()
+			rival.sacaPokemon().vida(vida - personaje.sacaPokemon().ataqueMin()) 
+			keyboard.num1().onPressDo({game.say(rival.sacaPokemon(),rival.sacaPokemon().vida().toString())})
 			esJugador = false
 		}else 
 		rival.sacaPokemon().atacar()
+		//esto guarda la vida del pokemon para calcular el descuento
+		var vida = personaje.sacaPokemon().vida()
+		personaje.sacaPokemon().vida(vida - rival.sacaPokemon().atacar())
+		game.say(personaje.sacaPokemon(),personaje.sacaPokemon().vida())
 		
-	}	
+		esJugador = true
+		}	
 }
 
 
