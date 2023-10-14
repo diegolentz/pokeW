@@ -22,6 +22,9 @@ class Gimnasio inherits Edificio{
 	var termino = false
 	var sinVida = false
 	
+	const pokeJugador = personaje.sacaPokemon()
+	const pokeRival = rival.sacaPokemon()
+	
 	method pelea(){
 	//AGREGA LOS POKEMONES PROPIOS DEL PERSONAJE A LA LISTA DEL PERSONAJE
 		
@@ -34,8 +37,7 @@ class Gimnasio inherits Edificio{
 		self.turnoJugador()
 	}
 	method turnoJugador(){
-		const pokeJugador = personaje.sacaPokemon()
-		const pokeRival = rival.sacaPokemon()
+
 	
 		if(pokeJugador.vida() > 0){			
 			//asdasd
@@ -59,9 +61,7 @@ class Gimnasio inherits Edificio{
 		}	
 	}
 	method turnoRival() {
-		const pokeJugador = personaje.sacaPokemon()
-		const pokeRival = rival.sacaPokemon()
-	
+		
 		if(pokeRival.vida()>0){
 		pokeRival.atacar()
 		//esto guarda la vida del pokemon para calcular el descuento
@@ -72,7 +72,6 @@ class Gimnasio inherits Edificio{
 		keyboard.num5().onPressDo({self.turnoJugador()})}
 		}
 }
-
 
 class Centro inherits Edificio{
 	var property image = "mercado.png"

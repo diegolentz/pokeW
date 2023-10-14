@@ -11,32 +11,29 @@ class Pokemon{
 	
 	method atacar(){
 		var ataque = 0.randomUpTo(3).truncate(0)
+		var damage = 0
 		
-		return self.autoattack(ataque)
-		
+		if (ataque == 0){
+			damage = self.ataqueMin()
+		}else if(ataque == 1){
+			damage = self.ataqueMed()
+		}else {
+			damage = self.ataqueAlt()
+		} 
+		return damage
 		}
 	
-	method autoattack(ataque){
-		return if(ataque == 0){
-			self.ataqueMin()
-		}else if(ataque == 1){
-			self.ataqueMed()
-		}else {self.ataqueAlt()}
-	}
+	
 	
 	
 	method ataqueMin(){
-		
-		const danio = nivel * 10 
-		return danio
+		return  nivel * 10 
 	}
 	method ataqueMed(){
-		var danio = nivel * 15 
-		return danio
+		return nivel * 15 
 	}
 	method ataqueAlt(){
-		var danio = nivel * 20
-		return danio
+		return nivel * 20
 	}
 	
 	
