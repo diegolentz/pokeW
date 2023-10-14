@@ -41,14 +41,18 @@ class Gimnasio inherits Edificio{
 			//asdasd
 			keyboard.num1().onPressDo({game.say(pokeJugador,"Primer Ataque")})
 			keyboard.num1().onPressDo({pokeJugador.ataqueMin()})
+			keyboard.num1().onPressDo({game.say(pokeRival,pokeRival.vida().toString())})
+
 			keyboard.num2().onPressDo({game.say(pokeJugador,"Segundo Ataque")})
 			keyboard.num2().onPressDo({pokeJugador.ataqueMed()})
+			keyboard.num2().onPressDo({game.say(pokeRival,pokeRival.vida().toString())})
+			
 			keyboard.num3().onPressDo({game.say(pokeJugador,"Tercer Ataque")})
 			keyboard.num3().onPressDo({pokeJugador.ataqueAlt()})
+			keyboard.num3().onPressDo({game.say(pokeRival,pokeRival.vida().toString())})
 			var vida = pokeRival.vida()
 			pokeRival.vida(vida - pokeJugador.ataqueMin()) 
 			
-			keyboard.num1().onPressDo({game.say(pokeRival,pokeRival.vida().toString())})
 			//esJugador = false
 			keyboard.num5().onPressDo({self.turnoRival()})
 			
