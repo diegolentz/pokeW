@@ -15,7 +15,7 @@ class Human{
 	}
 	//RETORNA EL PRIMER POKEMON 
 	//DE LA LISTA DE CADA PERSONAJE
-	method sacaPokemon() = pokemones.first()
+	method pokemon() = pokemones.first()
 }
 
 object personaje inherits Human{
@@ -48,7 +48,7 @@ object rival inherits Human{
     var property image = "enemigoBatalla.png"
     
     //LISTA DE POKEMONES PROPIOS DEL PERSONAJE
-    var property propios = [machamp,blastoise,mewTwo]
+    var property propios = [machamp,blastoise]
     
     
    
