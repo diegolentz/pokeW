@@ -24,7 +24,9 @@ object personaje inherits Human{
     var property posicionAnterior = game.at(2, 12)   
    	
    	//LISTA DE POKEMONES PROPIOS DEL PERSONAJE
-   	var property propios = [charmileon]
+   	const property propios = []
+   	propios.
+   	
     
     
    

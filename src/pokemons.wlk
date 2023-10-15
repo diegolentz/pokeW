@@ -14,11 +14,19 @@ class Pokemon{
 
 	method atacar(){
 		var ataque = 0.randomUpTo(3).truncate(0)
+		var damage = 0
 		
-		return self.autoattack(ataque)
-		
+		if (ataque == 0){
+			damage = self.ataqueMin()
+		}else if(ataque == 1){
+			damage = self.ataqueMed()
+		}else {
+			damage = self.ataqueAlt()
+		} 
+		return damage
 		}
 	
+<<<<<<< HEAD
 	method autoattack(ataque){
 		 if(ataque == 0){
 			return self.ataqueMin()
@@ -26,6 +34,9 @@ class Pokemon{
 			return self.ataqueMed()
 		}else {return self.ataqueAlt()}
 	}
+=======
+	
+>>>>>>> ea49cae052b2dc8c23686e91682af1fc7e504a8d
 	
 	//EL METODO "atacado" ES SOBRE AL POKEMON QUE SE LE VA A RESTAR VIDA
 	//POR ULTIMO ENVIA EL MENSAJE DE TURNO PARA REALIZAR EL CAMBIO DE TURNO
@@ -36,9 +47,22 @@ class Pokemon{
 	 
 	method ataqueMin() =  nivel * 10  	
 	
+<<<<<<< HEAD
 	method ataqueMed() = nivel * 15 
 		
 	method ataqueAlt() = nivel * 20
+=======
+	method ataqueMin(){
+		return  nivel * 10 
+	}
+	method ataqueMed(){
+		return nivel * 15 
+	}
+	method ataqueAlt(){
+		return nivel * 20
+	}
+	
+>>>>>>> ea49cae052b2dc8c23686e91682af1fc7e504a8d
 	
 }
 
