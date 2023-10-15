@@ -21,9 +21,6 @@ class Gimnasio inherits Edificio{
 	var esJugador = true
 	
 	
-	const pokeJugador = personaje.sacaPokemon()
-	const pokeRival = rival.sacaPokemon()
-	
 	method pelea(){
 	//AGREGA LOS POKEMONES PROPIOS DEL PERSONAJE A LA LISTA DEL PERSONAJE
 		personaje.iniciaBatalla(personaje.propios())
@@ -35,7 +32,6 @@ class Gimnasio inherits Edificio{
 		self.configurarTeclas()
 		self.turno()
 	}
-<<<<<<< HEAD
 	
 	//DEFINO LA ASIGNACION DE TECLAS
 	method configurarTeclas(){
@@ -83,40 +79,6 @@ class Gimnasio inherits Edificio{
 			game.addVisual(personaje.pokemon())
 			
 		}	
-=======
-	method turnoJugador(){
-
-	
-		if(pokeJugador.vida() > 0){			
-			//asdasd
-			keyboard.num1().onPressDo({game.say(pokeJugador,"Primer Ataque")})
-			keyboard.num1().onPressDo({pokeJugador.ataqueMin()})
-			keyboard.num1().onPressDo({game.say(pokeRival,pokeRival.vida().toString())})
-
-			keyboard.num2().onPressDo({game.say(pokeJugador,"Segundo Ataque")})
-			keyboard.num2().onPressDo({pokeJugador.ataqueMed()})
-			keyboard.num2().onPressDo({game.say(pokeRival,pokeRival.vida().toString())})
-			
-			keyboard.num3().onPressDo({game.say(pokeJugador,"Tercer Ataque")})
-			keyboard.num3().onPressDo({pokeJugador.ataqueAlt()})
-			keyboard.num3().onPressDo({game.say(pokeRival,pokeRival.vida().toString())})
-			var vida = pokeRival.vida()
-			pokeRival.vida(vida - pokeJugador.ataqueMin()) 
-			
-			//esJugador = false
-			keyboard.num5().onPressDo({self.turnoRival()})
-			
-		}	
-	}
-	method turnoRival() {
-		
-		if(pokeRival.vida()>0){
-		pokeRival.atacar()
-		//esto guarda la vida del pokemon para calcular el descuento
-		var vida = personaje.sacaPokemon().vida()
-		pokeJugador.vida(vida - rival.sacaPokemon().atacar())
-		game.say(pokeJugador,pokeJugador.vida().toString())
->>>>>>> ea49cae052b2dc8c23686e91682af1fc7e504a8d
 		
 	}
 		
