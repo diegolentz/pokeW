@@ -262,28 +262,21 @@ object config {
 
 
 
-object gimnasio{
+object gimnasio inherits Gimnasio{
+	override method position() = game.at(0,0)
 	
 	method iniciar(){
-	const gimnasio1 = new Gimnasio(
-		position = game.at(0,0)
-	)
+	//const gimnasio1 = new Gimnasio(position = game.at(0,0))
 	const batalla = new Batalla()
 	
-	game.addVisual(gimnasio1)
+	game.addVisual(self)
 	game.addVisual(personaje)
 	game.addVisual(batalla)
-	game.addVisual(rival)
-	
-	
-	
-	gimnasio1.pelea()
+	game.addVisual(rival)	
+	self.pelea()
 	
 	}
-	
-	
 }
-
 
 
 
