@@ -13,9 +13,7 @@ program pokeworld {
 	
 	//  VISUALES
 
-	
 	config.iniciar()
-	
 	
  	
  	//  COMIENZA

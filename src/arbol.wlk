@@ -18,3 +18,18 @@ class ArbolInvisible inherits Arbol {
          personaje.position(personaje.posicionAnterior())
     }
 }
+
+class CartelMarket inherits Arbol{
+	
+	override method teEncontro(){
+		game.say(self,"ingresa para comprar artigulos")
+	}
+	
+}
+class CartelGym inherits Arbol{
+	
+	override method teEncontro(){
+		game.say(self,"ingresa para combatir")
+	}
+	
+}

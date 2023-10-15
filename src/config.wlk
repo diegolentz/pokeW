@@ -1,18 +1,27 @@
+import city.*
 import personaje.*
 import wollok.game.*
 import arbol.*
 import edificios.*
-
-
+import pokemons.*
 
 object config {
 	
 	method iniciar(){
 	
 	self.configurarTeclas()
-	const city = "city.png"
-	game.ground(city) 
+	
+	
+	
+	const city = new City(
+		position = game.at(0,0)
+	)
+	
+	game.addVisual(city)
+	
+	
 	game.addVisual(personaje)
+	
 	
 	const a0 = new Arbol(
 		position = game.at(0,0)
@@ -61,7 +70,20 @@ object config {
 	const a11 = new Arbol(
 		position = game.at(22,0)
 	)
+	
 	game.addVisual(a11)
+	//carteles
+	const c1 = new CartelGym(
+		image = "cartelM.png",
+		position = game.at(4,14)
+	)
+	game.addVisual(c1)
+		const c2 = new CartelMarket(
+		image = "cartelM.png",
+		position = game.at(22,10)
+	)
+	game.addVisual(c2)
+	
 	const a12 = new Arbol(
 		position = game.at(24,0)
 	)
@@ -86,6 +108,16 @@ object config {
 		position = game.at(24,10))
 		a19.image("arbolInvisible.png")
 	game.addVisual(a19)
+	
+	
+	const inv1 = new ArbolInvisible(
+		position = game.at(0,2))
+		inv1.image("arbolInvisible.png")
+	game.addVisual(inv1)
+	const inv2 = new ArbolInvisible(
+		position = game.at(0,4))
+		inv2.image("arbolInvisible.png")
+	game.addVisual(inv2)
 	const a20 = new Arbol(
 		position = game.at(24,14)
 	)
@@ -199,58 +231,71 @@ object config {
 	)
 	game.addVisual(cen)
 	
-	const  visual = [gim,cen,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a14,a15,a16,a18,a19,a20,a21,
-		a22,a23,a24,a25,a26,a27,a28,a29,a30,a31,a33,a34,a35,a36,a37,a38,a39,a40,a41,a42,a43,a44,a45,a46
-	]
+	
 	
 	game.onCollideDo(personaje, { algo => algo.teEncontro()})
 }	
 	
 	method configurarTeclas(){
-		keyboard.left().onPressDo({personaje.irA(personaje.position().left(1))})
+		keyboard.left().onPressDo({personaje.irA(personaje.position().left(2))})
 		keyboard.left().onPressDo({personaje.image("player_Left.png")})		
 		
 		
-		keyboard.right().onPressDo({personaje.irA(personaje.position().right(1))})
+		keyboard.right().onPressDo({personaje.irA(personaje.position().right(2))})
 		keyboard.right().onPressDo({personaje.image("player_Right.png")})		
 	
 	
-		keyboard.up().onPressDo({personaje.irA(personaje.position().up(1))})
+		keyboard.up().onPressDo({personaje.irA(personaje.position().up(2))})
 		keyboard.up().onPressDo({personaje.image("player_Up.png")})		
 	
 	
-		keyboard.down().onPressDo({personaje.irA(personaje.position().down(1))})
+		keyboard.down().onPressDo({personaje.irA(personaje.position().down(2))})
 		keyboard.down().onPressDo({personaje.image("assets//player_Down.png")})		
 	
 		keyboard.p().onPressDo({personaje.pos()})
 	}
+		
 	
 }
-object pelea{
-	method iniciar(city){
-	
-	self.configurarTeclas()
-		
-	game.ground(city) 
 
+
+
+
+
+object gimnasio inherits Gimnasio{
+	override method position() = game.at(0,0)
 	
-	}
-	method configurarTeclas(){
-		keyboard.left().onPressDo({personaje.irA(personaje.position().left(1))})
-		keyboard.left().onPressDo({personaje.image("player_Left.png")})		
-		
-		
-		keyboard.right().onPressDo({personaje.irA(personaje.position().right(1))})
-		keyboard.right().onPressDo({personaje.image("player_Right.png")})		
+	method iniciar(){
+	//const gimnasio1 = new Gimnasio(position = game.at(0,0))
+	const batalla = new Batalla()
 	
+	game.addVisual(self)
+	game.addVisual(personaje)
+	game.addVisual(batalla)
+	game.addVisual(rival)	
+	self.pelea()
 	
-		keyboard.up().onPressDo({personaje.irA(personaje.position().up(1))})
-		keyboard.up().onPressDo({personaje.image("player_Up.png")})		
-	
-	
-		keyboard.down().onPressDo({personaje.irA(personaje.position().down(1))})
-		keyboard.down().onPressDo({personaje.image("assets//player_Down.png")})		
-	
-		keyboard.p().onPressDo({personaje.pos()})
 	}
 }
+
+
+
+object market{
+	
+	method iniciar(){
+		
+		const market = new Market(
+		position = game.at(0,0)
+	)
+	
+	//game.addVisual(market)
+	game.addVisual(market)
+	game.addVisual(enfermera)	
+	
+
+	}
+
+}
+
+
+
