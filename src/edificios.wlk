@@ -34,6 +34,7 @@ class Gimnasio inherits Edificio{
 	}
 	
 	//DEFINO LA ASIGNACION DE TECLAS
+
 	method configurarTeclas(){
 		keyboard.num1().onPressDo({
 			game.say(personaje.pokemon(), "Primer Ataque")
@@ -43,13 +44,14 @@ class Gimnasio inherits Edificio{
 		})
 		keyboard.num2().onPressDo({
 			game.say(personaje.pokemon(), "Segundo Ataque")
-			rival.pokemon().atacado(personaje.pokemon().ataqueMed())
+			rival.pokemon().atacado(personaje.pokemon().ataqueMed())	
 		})
 		keyboard.num3().onPressDo({
 			game.say(personaje.pokemon(), "Tercer Ataque")
 			rival.pokemon().atacado(personaje.pokemon().ataqueAlt())
 		})
 	}
+
 	
 	//SISTEMA DE TURNOS 
 	method turno(){
@@ -79,7 +81,6 @@ class Gimnasio inherits Edificio{
 			game.addVisual(personaje.pokemon())
 			
 		}	
-		
 	}
 		
 	method turnoRival() {

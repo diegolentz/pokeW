@@ -23,6 +23,7 @@ object personaje inherits Human{
     var property image = "player_Up.png"
     var property posicionAnterior = game.at(2, 12)   
    	
+   	const charmileon =  new Charmileon()
    	//LISTA DE POKEMONES PROPIOS DEL PERSONAJE
    	var property propios = [charmileon]
     
@@ -46,7 +47,8 @@ object personaje inherits Human{
 object rival inherits Human{
     var property position = game.at(20,12)
     var property image = "enemigoBatalla.png"
-    
+    const machamp = new Machamp()
+    const blastoise = new Blastoise()
     //LISTA DE POKEMONES PROPIOS DEL PERSONAJE
     var property propios = [machamp,blastoise]
     

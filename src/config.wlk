@@ -266,7 +266,6 @@ object gimnasio inherits Gimnasio{
 	override method position() = game.at(0,0)
 	
 	method iniciar(){
-	//const gimnasio1 = new Gimnasio(position = game.at(0,0))
 	const batalla = new Batalla()
 	
 	game.addVisual(self)
@@ -274,8 +273,9 @@ object gimnasio inherits Gimnasio{
 	game.addVisual(batalla)
 	game.addVisual(rival)	
 	self.pelea()
-	
 	}
+	
+	
 }
 
 
