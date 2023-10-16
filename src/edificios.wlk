@@ -2,6 +2,7 @@ import wollok.game.*
 import config.*
 import personaje.*
 import pokemons.*
+import config.*
 
 class Edificio {
 	var property position = 0	
@@ -114,12 +115,12 @@ class Centro inherits Edificio{
 	
 }
 
-class PeleaPiso inherits Edificio{
-	var property image = ".png"
+class IconPiso inherits Edificio{
+	var property image = ".jpg"
 
 	
 	override method adentro(){
-		//pelea.iniciar()
+		piso.iniciar()
 	}
 	
-}
+}  
