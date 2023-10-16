@@ -19,9 +19,7 @@ object config {
 	
 	game.addVisual(city)
 	
-	
 	game.addVisual(personaje)
-	
 	
 	const a0 = new Arbol(
 		position = game.at(0,0)
@@ -72,18 +70,6 @@ object config {
 	)
 	
 	game.addVisual(a11)
-	//carteles
-	const c1 = new CartelGym(
-		image = "cartelM.png",
-		position = game.at(4,14)
-	)
-	game.addVisual(c1)
-		const c2 = new CartelMarket(
-		image = "cartelM.png",
-		position = game.at(22,10)
-	)
-	game.addVisual(c2)
-	
 	const a12 = new Arbol(
 		position = game.at(24,0)
 	)
@@ -104,20 +90,6 @@ object config {
 		position = game.at(24,12)
 	)
 	game.addVisual(a18)
-	const a19 = new ArbolInvisible(
-		position = game.at(24,10))
-		a19.image("arbolInvisible.png")
-	game.addVisual(a19)
-	
-	
-	const inv1 = new ArbolInvisible(
-		position = game.at(0,2))
-		inv1.image("arbolInvisible.png")
-	game.addVisual(inv1)
-	const inv2 = new ArbolInvisible(
-		position = game.at(0,4))
-		inv2.image("arbolInvisible.png")
-	game.addVisual(inv2)
 	const a20 = new Arbol(
 		position = game.at(24,14)
 	)
@@ -162,10 +134,6 @@ object config {
 		position = game.at(6,16)
 	)
 	game.addVisual(a30)
-	const a31 = new ArbolInvisible(
-		position = game.at(4,16))
-		a31.image("arbolInvisible.png")
-	game.addVisual(a31)
 	const a33 = new Arbol(
 		position = game.at(0,16)
 	)
@@ -231,8 +199,62 @@ object config {
 	)
 	game.addVisual(cen)
 	
+	//carteles
+	const c1 = new CartelGym(
+		image = "cartelM.png",
+		position = game.at(4,14)
+	)
+	game.addVisual(c1)
+		const c2 = new CartelMarket(
+		image = "cartelM.png",
+		position = game.at(22,10)
+	)
+	game.addVisual(c2)
 	
+	//invisible	
+	const a19 = new ArbolInvisible(
+		position = game.at(24,10))
+		a19.image("arbolInvisible.png")
+	game.addVisual(a19)
 	
+	const a31 = new ArbolInvisible(
+		position = game.at(4,16))
+		a31.image("arbolInvisible.png")
+	game.addVisual(a31)
+	
+	const inv1 = new ArbolInvisible(
+		position = game.at(0,2))
+		inv1.image("arbolInvisible.png")
+	game.addVisual(inv1)
+	const inv2 = new ArbolInvisible(
+		position = game.at(0,4))
+		inv2.image("arbolInvisible.png")
+	game.addVisual(inv2)
+	
+	// batalla piso
+	
+	const p1 = new IconPiso(position = game.at(6,4))
+	game.addVisual(p1)
+	const p2 = new IconPiso(position = game.at(12,2))
+	game.addVisual(p2)
+	const p3 = new IconPiso(position = game.at(18,4))
+	game.addVisual(p3)
+	const p4 = new IconPiso(position = game.at(20,10))
+	game.addVisual(p4)
+	const p5 = new IconPiso(position = game.at(22,14))
+	game.addVisual(p5)
+	const p6 = new IconPiso(position = game.at(12,8))
+	game.addVisual(p6)
+	const p7 = new IconPiso(position = game.at(8,12))
+	game.addVisual(p7)
+	const p8 = new IconPiso(position = game.at(2,10))
+	game.addVisual(p8)
+	const p9 = new IconPiso(position = game.at(4,2))
+	game.addVisual(p9)
+	const p10 = new IconPiso(position = game.at(14,12))
+	game.addVisual(p10)
+	/*
+	*/
 	game.onCollideDo(personaje, { algo => algo.teEncontro()})
 }	
 	
@@ -278,8 +300,6 @@ object gimnasio inherits Gimnasio{
 	}
 }
 
-
-
 object market{
 	
 	method iniciar(){
@@ -291,11 +311,20 @@ object market{
 	//game.addVisual(market)
 	game.addVisual(market)
 	game.addVisual(enfermera)	
-	
-
 	}
 
 }
 
-
+object piso inherits IconPiso{
+	
+	method iniciar(){
+		
+	const piso = new PeleaPiso()
+	
+	//game.addVisual(self)
+	game.addVisual(piso)
+	//self.pelea()
+	}
+	
+}
 

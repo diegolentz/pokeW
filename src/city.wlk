@@ -13,12 +13,14 @@ class City inherits Mapa{
 class Batalla inherits Mapa{
 	var property image = "pelea.png"
 	
-	method batalla(){
-		
-	}
-	
+
 }
 class Market inherits Mapa{
 	var property image = "centro_pokemon.jpg"
 	
 }
+
+class PeleaPiso inherits Mapa{
+	var property image = "peleaPiso.jpg"
+}
+
