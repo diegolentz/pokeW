@@ -34,7 +34,7 @@ class Pokemon{
 		gimnasio.turno()
 	}
 	 
-	method ataqueMin() =  nivel * 10  	
+	method ataqueMin() = nivel * 10  	
 	
 	method ataqueMed() = nivel * 15 
 		
@@ -42,22 +42,22 @@ class Pokemon{
 	
 }
 
-object blastoise inherits Pokemon {
+class Blastoise inherits Pokemon {
 	const property nombreAtaques = ["punetazo","chorro de agua","hidrobomba"]
 	var property position = game.at(15,11)	
 	var property image = "blastoise.png"
 	
 }
-object mewTwo inherits Pokemon {
+class MewTwo inherits Pokemon {
 	
 	
 }
-object machamp inherits Pokemon {
+class Machamp inherits Pokemon {
 	var property position = game.at(15,11)	
 	var property image = "machamp.png"
 	
 }
-object charmileon inherits Pokemon {
+class Charmileon inherits Pokemon {
  	var property position = game.at(7,5)	
 	var property image = "charmileon.png"
 	
