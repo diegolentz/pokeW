@@ -323,7 +323,7 @@ object piso inherits IconPiso{
 	
 	//game.addVisual(self)
 	game.addVisual(piso)
-	//self.pelea()
+	self.pelea()
 	}
 	
 }

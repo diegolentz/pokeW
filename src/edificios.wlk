@@ -127,10 +127,99 @@ class Centro inherits Edificio{
 
 class IconPiso inherits Edificio{
 	var property image = ".jpg"
-
+	var esJugador = true
 	
+	const pokePiso = new Pidgey(position = game.at(16,6))
+
 	override method adentro(){
 		piso.iniciar()
 	}
 	
+	method pelea(){
+	//AGREGA LOS POKEMONES PROPIOS DEL PERSONAJE A LA LISTA DEL PERSONAJE
+		personaje.iniciaBatalla(personaje.propios())
+		//instancio los posibles pokemones
+		
+		var pokemon = personaje.pokemon()
+		pokemon.position(game.at(8,0))
+		
+		game.addVisual(pokemon)
+		game.addVisual(pokePiso)
+
+		self.configurarTeclas()
+		self.turno()
+	}
+	method configurarTeclas(){
+		keyboard.num1().onPressDo({
+			game.say(personaje.pokemon(), "Primer Ataque")
+			//"atacado" ES UN METODO DEL POKEMON,RECIBE POR PARAMETRO 
+			// EL ATAQUE SELECCIONADO, EL CUAL RETORNA UN DAÑO
+			game.say(pokePiso,pokePiso.vida(pokePiso.vida() - personaje.pokemon().ataqueMin()).toString())
+		})
+		keyboard.num2().onPressDo({
+			game.say(personaje.pokemon(), "Segundo Ataque")
+		pokePiso.vida(pokePiso.vida() - personaje.pokemon().ataqueMin())
+		})
+		keyboard.num3().onPressDo({
+			game.say(personaje.pokemon(), "Tercer Ataque")
+			pokePiso.vida(pokePiso.vida() - personaje.pokemon().ataqueMin())
+		})
+	}
+	method turno(){
+		//EVALUO LA BANDERA JUGADOR, COMO SIEMPRE QUIERO QUE COMIENCE
+		//EL JUGADOR, ARRANCO "esJugador" EN true
+		if(esJugador){
+			self.turnoJugador()//LLAMA AL TURNO DEL JUGADOR
+		}else{
+			self.turnoRival()//LLAMA AL TURNO DEL RIVAL
+		}
+	}
+		
+	method turnoJugador(){
+		//VALIDO SI EL POKEMON ESTA VIVO , SI LA VIDA ES MENOR A 0 REMUEVE AL POKEMON 
+		if(personaje.pokemon().vida()>0){	
+			
+			//EN ESTE MOMENTO PUEDO SELECCIONAR EL ATAQUE
+			game.say(personaje.pokemon(), "Vida:" + personaje.pokemon().vida().toString())
+			game.say(personaje.pokemon(), "Turno personaje")
+			
+			esJugador = false //CAMBIO LA BANDERA
+			self.turno()
+		}else{
+			self.pokemonMuerto(personaje)
+			if(personaje.propios().all({pokemon=>pokemon.vida()<= 0})){
+				self.salir()		
+			}else{			
+				game.addVisual(personaje.pokemon())
+			}	
+		}
+	}
+			
+	method turnoRival() {
+		  if(pokePiso.vida()>0){
+			esJugador = true
+		  	game.say(pokePiso, "Turno Enemigo")
+			game.say(pokePiso,"Vida Restante:" + rival.pokemon().vida().toString())
+			game.say(pokePiso, "Ataque")
+			personaje.pokemon().atacado(pokePiso.atacar())
+		}else{
+			self.pokemonMuerto(pokePiso)
+			if(pokePiso.vida()<= 0){
+				self.salir()		
+			}
+		} 	
+	}
+	
+	//METODO QUE ELIMINA UN POKEMON CUANDO SE MUERE , RECIBE POR PARAMETRO 
+	//EL JUGADOR QUE CORRESPONDE , SI personaje O rival
+	method pokemonMuerto(pj){
+		game.removeVisual(pj.pokemon())
+		pj.pokemones().remove(pj.pokemon())
+	}
+	//METODO QUE VUELVE A LA PANTALLA INICIAL
+	method salir(){
+		game.clear()
+		config.iniciar()
+	}
+	 
 }  
