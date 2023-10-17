@@ -116,10 +116,31 @@ class Gimnasio inherits Edificio{
 
 class Centro inherits Edificio{
 	var property image = "mercado.png"
+	const machop= new Machop(position = personaje.positionPokemon())
+	var inventario={machop}
 
 	
 	override method adentro(){
 		market.iniciar()
+		
+	}
+	
+	method agregarPokemon(pokemon) {
+    	inventario.add(pokemon)
+  	}
+
+	method primeroDelInventario() = inventario.fist()
+	
+	method venderPokemon(pokemon){
+		inventario.remove(pokemon)
+	}
+	method precioPokemon(pokemon) = pokemon.precio()
+	
+	method pokemonDisponible(pokemon) {
+    	return inventario.contains(pokemon)
+  	}
+	
+	method intercambio(){
 		
 	}
 	

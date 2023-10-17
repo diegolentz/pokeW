@@ -276,6 +276,17 @@ object config {
 	
 		keyboard.p().onPressDo({personaje.pos()})
 	}
+	
+method teclasMercado(){
+		const mercado = new Centro()
+		keyboard.v().onPressDo({
+		personaje.venderPokemon(personaje.pokemon())	
+		})
+		keyboard.c().onPressDo({
+		personaje.comprarPokemon(mercado.primeroDelInventario())	
+		})
+		
+	}
 		
 	
 }
@@ -310,7 +321,11 @@ object market{
 	
 	//game.addVisual(market)
 	game.addVisual(market)
-	game.addVisual(enfermera)	
+	game.addVisual(enfermera)
+	config.teclasMercado()	
+	
+
+
 	}
 
 }
