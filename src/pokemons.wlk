@@ -8,10 +8,9 @@ import arbol.*
 class Pokemon{
 	var property vida = 200
 	var property nivel = 4
+	var property position
 	
-	//const ataques = [0,1,2]
-	//var ataque = self.atacar()
-
+	
 	method atacar(){
 		var ataque = 0.randomUpTo(3).truncate(0)
 		
@@ -43,22 +42,32 @@ class Pokemon{
 }
 
 class Blastoise inherits Pokemon {
-	const property nombreAtaques = ["punetazo","chorro de agua","hidrobomba"]
-	var property position = game.at(15,11)	
+	//const property nombreAtaques = ["punetazo","chorro de agua","hidrobomba"]	
 	var property image = "blastoise.png"
 	
 }
-class MewTwo inherits Pokemon {
-	
-	
+class Pidgey inherits Pokemon {
+	var property image = "pidgey.png"
 }
+
+class Machop inherits Pokemon {
+	var property image = "machop.png"	
+}
+
 class Machamp inherits Pokemon {
-	var property position = game.at(15,11)	
-	var property image = "machamp.png"
-	
+	var property image = "machamp.png"	
 }
+
 class Charmileon inherits Pokemon {
- 	var property position = game.at(7,5)	
-	var property image = "charmileon.png"
+	var property image = "charmileon.png"	
+}
+
+class Charmander inherits Pokemon {
+	var property image = "charmander.png"
 	
 }
+
+class Onix inherits Pokemon {
+	var property image = "onix.png"
+}
+

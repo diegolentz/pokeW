@@ -67,23 +67,21 @@ class Gimnasio inherits Edificio{
 		
 	method turnoJugador(){
 		//VALIDO SI EL POKEMON ESTA VIVO , SI LA VIDA ES MENOR A 0 REMUEVE AL POKEMON 
-		if(personaje.pokemon().vida() > 0){	
+		if(personaje.pokemon().vida()>0){	
 			//EN ESTE MOMENTO PUEDO SELECCIONAR EL ATAQUE
 			game.say(personaje.pokemon(), "Vida Restante:" + personaje.pokemon().vida().toString())
 			game.say(personaje.pokemon(), "Turno personaje")
 			esJugador = false //CAMBIO LA BANDERA
 		}else{
-			game.removeVisual(personaje.pokemon())
-			personaje.pokemones().remove(personaje.pokemon())
-			if(personaje.pokemones().isEmpty()){
-				game.clear()
-				config.iniciar()	
-			}
-			game.addVisual(personaje.pokemon())
-			
-		}	
+			self.pokemonMuerto(personaje)
+			if(personaje.propios().all({pokemon=>pokemon.vida()<= 0})){
+				self.salir()		
+			}else{			
+				game.addVisual(personaje.pokemon())
+			}	
+		}
 	}
-		
+			
 	method turnoRival() {
 		  if(rival.pokemon().vida()>0){
 			esJugador = true
@@ -92,15 +90,27 @@ class Gimnasio inherits Edificio{
 			game.say(rival, "Ataque")
 			personaje.pokemon().atacado(rival.pokemon().atacar())
 		}else{
-			game.removeVisual(rival.pokemon())
-			rival.pokemones().remove(rival.pokemon())
-			if(rival.pokemones().isEmpty()){
-				game.clear()
-				config.iniciar()	
+			self.pokemonMuerto(rival)
+			if(rival.propios().all({pokemon=>pokemon.vida()<= 0})){
+				self.salir()		
+			}else{			
+				game.addVisual(rival.pokemon())
 			}
-			game.addVisual(rival.pokemon())
 		} 	
 	}
+	
+	//METODO QUE ELIMINA UN POKEMON CUANDO SE MUERE , RECIBE POR PARAMETRO 
+	//EL JUGADOR QUE CORRESPONDE , SI personaje O rival
+	method pokemonMuerto(pj){
+		game.removeVisual(pj.pokemon())
+		pj.pokemones().remove(pj.pokemon())
+	}
+	//METODO QUE VUELVE A LA PANTALLA INICIAL
+	method salir(){
+		game.clear()
+		config.iniciar()
+	}
+	 
 		
 }
 
