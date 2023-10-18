@@ -24,12 +24,12 @@ object personaje inherits Human{
     //ES RIVAL O PERSONAJE
 
    	const charmileon =  new Charmileon(position = self.positionPokemon())
-   	//const onix=  new Onix(position = self.positionPokemon())
+
    	//LISTA DE POKEMONES PROPIOS DEL PERSONAJE
    	const property propios = #{charmileon}
    
    //RETORNA LA POSICION DEL POKEMON ALIADO
-   method positionPokemon() = game.at(7,5)
+   method positionPokemon() = game.at(8,1)
    
     method irA(nuevaPosicion) {
 		posicionAnterior = position
@@ -45,19 +45,20 @@ object personaje inherits Human{
 
 
 object rival inherits Human{
-    var property position = game.at(20,12)
+    var property position = game.at(22,9)
     var property image = "enemigoBatalla.png"
+
     //POKEMONES, CREO NUEVOS POKEMONES Y VAN A RECIBIR SU POSICION EN BASE SI
     //ES RIVAL O PERSONAJE
-    const machamp = new Machamp(position = self.positionPokemon())
+
+    const machamp   = new Machamp  (position = self.positionPokemon())
     const blastoise = new Blastoise(position = self.positionPokemon())
-    const onix = new Onix(position = self.positionPokemon())
-    //LISTA DE POKEMONES PROPIOS DEL PERSONAJE
-    const property propios = #{machamp,blastoise,onix}
-    
-    
+    const onix      = new Onix     (position = self.positionPokemon())
+
+    const property propios = #{onix,machamp,blastoise,onix}
     //RETORNA LA POSICION DEL POKEMON ENEMIGO
-    method positionPokemon() = game.at(15,11)
+
+    method positionPokemon() = game.at(17,7)
   
 }
 
@@ -68,3 +69,39 @@ object enfermera{
     
    
 }
+object pisoCombat inherits Human{
+	 var property position = game.at(17,7)
+	
+	//instancio todos los pokemones
+	const pidgeotto = new Pidgeotto(position = position)
+	const kadabra = new Kadabra(position = position)
+	const hunter = new Hunter(position = position)
+	const dragonair = new Dragonair(position = position)
+	const pikachu = new Pikachu(position = position)
+	const mewTwo = new MewTwo(position = position)
+	
+	var property propios = [self.aleatorio()]
+	
+	//var propios = propiosPiso{2}
+	
+	method aleatorio(){
+		var valor = 0.randomUpTo(5).truncate(0)
+		var elejido
+		if(valor == 0){
+			elejido = pidgeotto
+		}else if(valor == 1){
+			elejido = kadabra
+		}else if(valor == 2){
+			elejido = hunter
+		}else if(valor == 3){
+			elejido = dragonair
+		}else if(valor == 4){
+			elejido = pikachu
+		}else {elejido = mewTwo}
+		return elejido
+	}
+	method position() = game.at(17,7)
+	
+}
+	
+

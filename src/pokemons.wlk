@@ -9,6 +9,7 @@ class Pokemon{
 	var property vida = 200
 	var property nivel = 4
 	var property position
+	var property estado = 0
 	
 	
 	method atacar(){
@@ -42,33 +43,41 @@ class Pokemon{
 	
 }
 
+//del rival
 class Blastoise inherits Pokemon {
-	//const property nombreAtaques = ["punetazo","chorro de agua","hidrobomba"]	
-	var property image = "blastoise.png"
+	method image() = "blastoise_" + estado + ".png"
 	
 }
-class Pidgey inherits Pokemon {
-	var property image = "pidgey.png"
-}
-
-class Machop inherits Pokemon {
-	var property image = "machop.png"	
-}
-
 class Machamp inherits Pokemon {
-	var property image = "machamp.png"	
+	method image() = "machamp_" + estado + ".png"
 }
-
-class Charmileon inherits Pokemon {
-	var property image = "charmileon.png"	
-}
-
-class Charmander inherits Pokemon {
-	var property image = "charmander.png"
-	
-}
-
 class Onix inherits Pokemon {
-	var property image = "onix.png"
+	method image() = "onix_" + estado + ".png"
 }
+
+//mio
+class Charmileon inherits Pokemon {
+	method image() = "charmileon_" + estado + ".png"
+}
+
+//pokemones de piso
+class Pidgeotto inherits Pokemon {
+	method image() = "pidgeotto_" + estado + ".png"
+}
+class Kadabra inherits Pokemon {
+	method image() = "kadabra_" + estado + ".png"
+}	
+class Hunter inherits Pokemon {
+	method image() = "haunter_" + estado + ".png"
+}
+class Dragonair inherits Pokemon {
+	method image() = "dragonair_" + estado + ".png"
+}
+class Pikachu inherits Pokemon {
+	method image() = "pikachu_" + estado + ".png"
+}
+class MewTwo inherits Pokemon {
+	method image() = "mewtwo_" + estado + ".png"
+}
+
 
