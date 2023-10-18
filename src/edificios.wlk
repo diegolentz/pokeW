@@ -133,7 +133,8 @@ class Centro {
 class IconPiso inherits Gimnasio{
 	//var esJugador = true
 	
-	const pokePiso = new Onix(position = game.at(16,6))
+	var aleatorio = pisoCombat.iniciar()		
+
 	override method image() = ".jpg"
 
 	override method adentro(){
@@ -143,13 +144,12 @@ class IconPiso inherits Gimnasio{
 	override method pelea(){
 	//AGREGA LOS POKEMONES PROPIOS DEL PERSONAJE A LA LISTA DEL PERSONAJE
 		personaje.iniciaBatalla(personaje.propios())
-		//instancio los posibles pokemones
 		
 		var pokemon = personaje.pokemon()
-		pokemon.position(game.at(8,0))
-		
+		pokemon.position(game.at(8,1))
 		game.addVisual(pokemon)
-		game.addVisual(pokePiso)
+
+		game.addVisual(aleatorio)
 
 		self.configurarTeclas(pokemon)
 		self.turno()
@@ -158,15 +158,15 @@ class IconPiso inherits Gimnasio{
 		keyboard.num1().onPressDo({
 			game.say(personaje.pokemon(), "Primer Ataque")	
 			game.say(personaje.pokemon(), "Tercer Ataque")
-			pokePiso.atacado(pokemon.ataqueMin(),piso)
+			aleatorio.atacado(pokemon.ataqueMin(),piso)
 		})
 		keyboard.num2().onPressDo({
 			game.say(personaje.pokemon(), "Segundo Ataque")
-			pokePiso.atacado(pokemon.ataqueMed(),piso)
+			aleatorio.atacado(pokemon.ataqueMed(),piso)
 		})
 		keyboard.num3().onPressDo({
 			game.say(personaje.pokemon(), "Tercer Ataque")
-			pokePiso.atacado(pokemon.ataqueAlt(),piso)
+			aleatorio.atacado(pokemon.ataqueAlt(),piso)
 		})
 	}
 /*
@@ -178,16 +178,16 @@ class IconPiso inherits Gimnasio{
 	*/
 			
 	override method turnoRival() {
-		  if(pokePiso.vida()>0){
+		  if(aleatorio.vida()>0){
 			esJugador = true
-		  	game.say(pokePiso, "Turno Enemigo")
-			game.say(pokePiso,"Vida Restante:" + pokePiso.vida().toString())
-			game.say(pokePiso, "Ataque")
-			personaje.pokemon().atacado(pokePiso.atacar(),piso)
+		  	game.say(aleatorio, "Turno Enemigo")
+			game.say(aleatorio,"Vida Restante:" + aleatorio.vida().toString())
+			game.say(aleatorio, "Ataque")
+			personaje.pokemon().atacado(aleatorio.atacar(),piso)
 		}else{
 			//self.pokemonMuerto(pokePiso)
-			if(pokePiso.vida()<= 0){
-				game.removeVisual(pokePiso)
+			if(aleatorio.vida()<= 0){
+				game.removeVisual(aleatorio)
 				self.salir()		
 			}
 		} 	
