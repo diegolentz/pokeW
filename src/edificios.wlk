@@ -3,9 +3,13 @@ import config.*
 import personaje.*
 import pokemons.*
 import config.*
+import city.*
 
-class Edificio {
+class Gimnasio {
 	var property position = 0	
+	var  esJugador = true
+
+	method image() = "gimnasio.png"
 	
 	method teEncontro(){
 		game.clear()
@@ -15,11 +19,6 @@ class Edificio {
 	method adentro(){
 		gimnasio.iniciar()
 	}
-}
-
-class Gimnasio inherits Edificio{
-	var property image = "gimnasio.png"
-	var esJugador = true
 	
 	
 	method pelea(){
@@ -41,15 +40,15 @@ class Gimnasio inherits Edificio{
 			game.say(personaje.pokemon(), "Primer Ataque")
 			//"atacado" ES UN METODO DEL POKEMON,RECIBE POR PARAMETRO 
 			// EL ATAQUE SELECCIONADO, EL CUAL RETORNA UN DAÑO
-			rival.pokemon().atacado(personaje.pokemon().ataqueMin())
+			rival.pokemon().atacado(personaje.pokemon().ataqueMin(),gimnasio)
 		})
 		keyboard.num2().onPressDo({
 			game.say(personaje.pokemon(), "Segundo Ataque")
-			rival.pokemon().atacado(personaje.pokemon().ataqueMed())	
+			rival.pokemon().atacado(personaje.pokemon().ataqueMed(),gimnasio)	
 		})
 		keyboard.num3().onPressDo({
 			game.say(personaje.pokemon(), "Tercer Ataque")
-			rival.pokemon().atacado(personaje.pokemon().ataqueAlt())
+			rival.pokemon().atacado(personaje.pokemon().ataqueAlt(),gimnasio)
 		})
 	}
 
@@ -88,7 +87,7 @@ class Gimnasio inherits Edificio{
 		  	game.say(rival, "Turno Enemigo")
 			game.say(rival.pokemon(),"Vida Restante:" + rival.pokemon().vida().toString())
 			game.say(rival, "Ataque")
-			personaje.pokemon().atacado(rival.pokemon().atacar())
+			personaje.pokemon().atacado(rival.pokemon().atacar(),gimnasio)
 		}else{
 			self.pokemonMuerto(rival)
 			if(rival.propios().all({pokemon=>pokemon.vida()<= 0})){
@@ -114,28 +113,34 @@ class Gimnasio inherits Edificio{
 		
 }
 
-class Centro inherits Edificio{
+class Centro {
 	var property image = "mercado.png"
+	var property position = game.at(0,0)
 
+	method teEncontro(){
+		game.clear()
+		self.adentro()		
+
+	}		
 	
-	override method adentro(){
+	method adentro(){
 		market.iniciar()
 		
 	}
 	
 }
 
-class IconPiso inherits Edificio{
-	var property image = ".jpg"
-	var esJugador = true
+class IconPiso inherits Gimnasio{
+	//var esJugador = true
 	
-	const pokePiso = new Pidgey(position = game.at(16,6))
+	const pokePiso = new Onix(position = game.at(16,6))
+	override method image() = ".jpg"
 
 	override method adentro(){
 		piso.iniciar()
 	}
 	
-	method pelea(){
+	override method pelea(){
 	//AGREGA LOS POKEMONES PROPIOS DEL PERSONAJE A LA LISTA DEL PERSONAJE
 		personaje.iniciaBatalla(personaje.propios())
 		//instancio los posibles pokemones
@@ -146,65 +151,43 @@ class IconPiso inherits Edificio{
 		game.addVisual(pokemon)
 		game.addVisual(pokePiso)
 
-		self.configurarTeclas()
+		self.configurarTeclas(pokemon)
 		self.turno()
 	}
-	method configurarTeclas(){
+	method configurarTeclas(pokemon){
 		keyboard.num1().onPressDo({
-			game.say(personaje.pokemon(), "Primer Ataque")
-			//"atacado" ES UN METODO DEL POKEMON,RECIBE POR PARAMETRO 
-			// EL ATAQUE SELECCIONADO, EL CUAL RETORNA UN DAÑO
-			game.say(pokePiso,pokePiso.vida(pokePiso.vida() - personaje.pokemon().ataqueMin()).toString())
+			game.say(personaje.pokemon(), "Primer Ataque")	
+			game.say(personaje.pokemon(), "Tercer Ataque")
+			pokePiso.atacado(pokemon.ataqueMin(),piso)
 		})
 		keyboard.num2().onPressDo({
 			game.say(personaje.pokemon(), "Segundo Ataque")
-		pokePiso.vida(pokePiso.vida() - personaje.pokemon().ataqueMin())
+			pokePiso.atacado(pokemon.ataqueMed(),piso)
 		})
 		keyboard.num3().onPressDo({
 			game.say(personaje.pokemon(), "Tercer Ataque")
-			pokePiso.vida(pokePiso.vida() - personaje.pokemon().ataqueMin())
+			pokePiso.atacado(pokemon.ataqueAlt(),piso)
 		})
 	}
-	method turno(){
-		//EVALUO LA BANDERA JUGADOR, COMO SIEMPRE QUIERO QUE COMIENCE
-		//EL JUGADOR, ARRANCO "esJugador" EN true
-		if(esJugador){
-			self.turnoJugador()//LLAMA AL TURNO DEL JUGADOR
-		}else{
-			self.turnoRival()//LLAMA AL TURNO DEL RIVAL
-		}
+/*
+	override method turnoJugador(){
+		super()
+		pokemon.position(game.at(8,0))
 	}
-		
-	method turnoJugador(){
-		//VALIDO SI EL POKEMON ESTA VIVO , SI LA VIDA ES MENOR A 0 REMUEVE AL POKEMON 
-		if(personaje.pokemon().vida()>0){	
+	* 
+	*/
 			
-			//EN ESTE MOMENTO PUEDO SELECCIONAR EL ATAQUE
-			game.say(personaje.pokemon(), "Vida:" + personaje.pokemon().vida().toString())
-			game.say(personaje.pokemon(), "Turno personaje")
-			
-			esJugador = false //CAMBIO LA BANDERA
-			self.turno()
-		}else{
-			self.pokemonMuerto(personaje)
-			if(personaje.propios().all({pokemon=>pokemon.vida()<= 0})){
-				self.salir()		
-			}else{			
-				game.addVisual(personaje.pokemon())
-			}	
-		}
-	}
-			
-	method turnoRival() {
+	override method turnoRival() {
 		  if(pokePiso.vida()>0){
 			esJugador = true
 		  	game.say(pokePiso, "Turno Enemigo")
-			game.say(pokePiso,"Vida Restante:" + rival.pokemon().vida().toString())
+			game.say(pokePiso,"Vida Restante:" + pokePiso.vida().toString())
 			game.say(pokePiso, "Ataque")
-			personaje.pokemon().atacado(pokePiso.atacar())
+			personaje.pokemon().atacado(pokePiso.atacar(),piso)
 		}else{
-			self.pokemonMuerto(pokePiso)
+			//self.pokemonMuerto(pokePiso)
 			if(pokePiso.vida()<= 0){
+				game.removeVisual(pokePiso)
 				self.salir()		
 			}
 		} 	
@@ -212,14 +195,9 @@ class IconPiso inherits Edificio{
 	
 	//METODO QUE ELIMINA UN POKEMON CUANDO SE MUERE , RECIBE POR PARAMETRO 
 	//EL JUGADOR QUE CORRESPONDE , SI personaje O rival
-	method pokemonMuerto(pj){
+	override method pokemonMuerto(pj){
 		game.removeVisual(pj.pokemon())
 		pj.pokemones().remove(pj.pokemon())
-	}
-	//METODO QUE VUELVE A LA PANTALLA INICIAL
-	method salir(){
-		game.clear()
-		config.iniciar()
 	}
 	 
 }  

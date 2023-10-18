@@ -24,9 +24,9 @@ object personaje inherits Human{
     //ES RIVAL O PERSONAJE
    	const machop= new Machop(position = self.positionPokemon())
    	const charmileon =  new Charmileon(position = self.positionPokemon())
-   	const onix=  new Onix(position = self.positionPokemon())
+   	//const onix=  new Onix(position = self.positionPokemon())
    	//LISTA DE POKEMONES PROPIOS DEL PERSONAJE
-   	const property propios = #{charmileon,machop,onix}
+   	const property propios = #{charmileon,machop}
    
    //RETORNA LA POSICION DEL POKEMON ALIADO
    method positionPokemon() = game.at(7,5)
