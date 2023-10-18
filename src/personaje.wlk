@@ -22,11 +22,11 @@ object personaje inherits Human{
     
     //POKEMONES, CREO NUEVOS POKEMONES Y VAN A RECIBIR SU POSICION EN BASE SI
     //ES RIVAL O PERSONAJE
-   	const machop= new Machop(position = self.positionPokemon())
+
    	const charmileon =  new Charmileon(position = self.positionPokemon())
    	//const onix=  new Onix(position = self.positionPokemon())
    	//LISTA DE POKEMONES PROPIOS DEL PERSONAJE
-   	const property propios = #{charmileon,machop}
+   	const property propios = #{charmileon}
    
    //RETORNA LA POSICION DEL POKEMON ALIADO
    method positionPokemon() = game.at(7,5)
@@ -51,9 +51,9 @@ object rival inherits Human{
     //ES RIVAL O PERSONAJE
     const machamp = new Machamp(position = self.positionPokemon())
     const blastoise = new Blastoise(position = self.positionPokemon())
-    const pidgey = new Pidgey(position = self.positionPokemon())
+    const onix = new Onix(position = self.positionPokemon())
     //LISTA DE POKEMONES PROPIOS DEL PERSONAJE
-    const property propios = #{machamp,blastoise,pidgey}
+    const property propios = #{machamp,blastoise,onix}
     
     
     //RETORNA LA POSICION DEL POKEMON ENEMIGO
