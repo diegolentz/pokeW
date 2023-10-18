@@ -28,9 +28,10 @@ class Pokemon{
 	
 	//EL METODO "atacado" ES SOBRE AL POKEMON QUE SE LE VA A RESTAR VIDA
 	//POR ULTIMO ENVIA EL MENSAJE DE TURNO PARA REALIZAR EL CAMBIO DE TURNO
-	method atacado(damage) {
+	method atacado(damage,edificio) {
 		vida = vida - damage
-		gimnasio.turno()
+		edificio.turno()
+		//return vida
 	}
 	 
 	method ataqueMin() = nivel * 10  	

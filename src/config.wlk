@@ -10,7 +10,7 @@ object config {
 	method iniciar(){
 	
 	self.configurarTeclas()
-	
+	//self.colision()
 	
 	
 	const city = new City(
@@ -257,7 +257,7 @@ object config {
 	*/
 	game.onCollideDo(personaje, { algo => algo.teEncontro()})
 }	
-	
+		
 	method configurarTeclas(){
 		keyboard.left().onPressDo({personaje.irA(personaje.position().left(2))})
 		keyboard.left().onPressDo({personaje.image("player_Left.png")})		
@@ -321,7 +321,6 @@ object piso inherits IconPiso{
 		
 	const piso = new PeleaPiso()
 	
-	//game.addVisual(self)
 	game.addVisual(piso)
 	self.pelea()
 	}
