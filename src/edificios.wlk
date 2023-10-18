@@ -68,7 +68,7 @@ class Gimnasio {
 		//VALIDO SI EL POKEMON ESTA VIVO , SI LA VIDA ES MENOR A 0 REMUEVE AL POKEMON 
 		if(personaje.pokemon().vida()>0){	
 			//EN ESTE MOMENTO PUEDO SELECCIONAR EL ATAQUE
-			game.say(personaje.pokemon(), "Vida Restante:" + personaje.pokemon().vida().toString())
+			game.say(personaje.pokemon(), "Vida:" + personaje.pokemon().vida().toString())
 			game.say(personaje.pokemon(), "Turno personaje")
 			esJugador = false //CAMBIO LA BANDERA
 		}else{
@@ -84,8 +84,8 @@ class Gimnasio {
 	method turnoRival() {
 		  if(rival.pokemon().vida()>0){
 			esJugador = true
+			game.say(rival.pokemon(),"Vida:" + rival.pokemon().vida().toString())
 		  	game.say(rival, "Turno Enemigo")
-			game.say(rival.pokemon(),"Vida Restante:" + rival.pokemon().vida().toString())
 			game.say(rival, "Ataque")
 			personaje.pokemon().atacado(rival.pokemon().atacar(),gimnasio)
 		}else{
@@ -102,7 +102,8 @@ class Gimnasio {
 	//EL JUGADOR QUE CORRESPONDE , SI personaje O rival
 	method pokemonMuerto(pj){
 		game.removeVisual(pj.pokemon())
-		pj.pokemones().remove(pj.pokemon())
+		
+		pj.pokemones().remove(pj.pokemon()) //ada podria hacer un sort con vida para que quede a lo ultimo el mas lastimado
 	}
 	//METODO QUE VUELVE A LA PANTALLA INICIAL
 	method salir(){
@@ -133,8 +134,6 @@ class Centro {
 class IconPiso inherits Gimnasio{
 	//var esJugador = true
 	
-	var aleatorio = pisoCombat.iniciar()		
-
 	override method image() = ".jpg"
 
 	override method adentro(){
@@ -144,29 +143,28 @@ class IconPiso inherits Gimnasio{
 	override method pelea(){
 	//AGREGA LOS POKEMONES PROPIOS DEL PERSONAJE A LA LISTA DEL PERSONAJE
 		personaje.iniciaBatalla(personaje.propios())
+		pisoCombat.iniciaBatalla(pisoCombat.propios())
 		
-		var pokemon = personaje.pokemon()
-		pokemon.position(game.at(8,1))
-		game.addVisual(pokemon)
+		game.addVisual(personaje.pokemon())
+		game.addVisual(pisoCombat.pokemon())
 
-		game.addVisual(aleatorio)
-
-		self.configurarTeclas(pokemon)
+		self.configurarTeclas()
 		self.turno()
 	}
-	method configurarTeclas(pokemon){
+	
+	override method configurarTeclas(){
 		keyboard.num1().onPressDo({
 			game.say(personaje.pokemon(), "Primer Ataque")	
 			game.say(personaje.pokemon(), "Tercer Ataque")
-			aleatorio.atacado(pokemon.ataqueMin(),piso)
+			pisoCombat.pokemon().atacado(pisoCombat.pokemon().ataqueMin(),piso)
 		})
 		keyboard.num2().onPressDo({
 			game.say(personaje.pokemon(), "Segundo Ataque")
-			aleatorio.atacado(pokemon.ataqueMed(),piso)
+			pisoCombat.pokemon().atacado(pisoCombat.pokemon().ataqueMed(),piso)
 		})
 		keyboard.num3().onPressDo({
 			game.say(personaje.pokemon(), "Tercer Ataque")
-			aleatorio.atacado(pokemon.ataqueAlt(),piso)
+			pisoCombat.pokemon().atacado(pisoCombat.pokemon().ataqueAlt(),piso)
 		})
 	}
 /*
@@ -178,16 +176,15 @@ class IconPiso inherits Gimnasio{
 	*/
 			
 	override method turnoRival() {
-		  if(aleatorio.vida()>0){
+		  if(pisoCombat.pokemon().vida()>0){
 			esJugador = true
-		  	game.say(aleatorio, "Turno Enemigo")
-			game.say(aleatorio,"Vida Restante:" + aleatorio.vida().toString())
-			game.say(aleatorio, "Ataque")
-			personaje.pokemon().atacado(aleatorio.atacar(),piso)
+			game.say(pisoCombat.pokemon(),"Vida Restante:" + pisoCombat.pokemon().vida().toString())
+			game.say(pisoCombat.pokemon(), "Ataque")
+			personaje.pokemon().atacado(pisoCombat.pokemon().atacar(),piso)
 		}else{
 			//self.pokemonMuerto(pokePiso)
-			if(aleatorio.vida()<= 0){
-				game.removeVisual(aleatorio)
+			if(pisoCombat.pokemon().vida()<= 0){
+				game.removeVisual(pisoCombat.pokemon())
 				self.salir()		
 			}
 		} 	

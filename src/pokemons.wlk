@@ -68,7 +68,7 @@ class Kadabra inherits Pokemon {
 	method image() = "kadabra_" + estado + ".png"
 }	
 class Hunter inherits Pokemon {
-	method image() = "hunter_" + estado + ".png"
+	method image() = "haunter_" + estado + ".png"
 }
 class Dragonair inherits Pokemon {
 	method image() = "dragonair_" + estado + ".png"
