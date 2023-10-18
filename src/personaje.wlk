@@ -2,6 +2,7 @@ import wollok.game.*
 import config.*
 import pokemons.*
 import edificios.*
+import objectos.*
 
 class Human{
 	const property pokemones = []
@@ -20,40 +21,41 @@ object personaje inherits Human{
     var property position = game.at(2,12)
     var property image = "player_Up.png"
     var property posicionAnterior = game.at(2, 12)   
-    const mercado= new Centro()
+ 
     var property oro = 100
+    var property inventario = [poti] 
     
     //POKEMONES, CREO NUEVOS POKEMONES Y VAN A RECIBIR SU POSICION EN BASE SI
     //ES RIVAL O PERSONAJE
    	const machop= new Machop(position = self.positionPokemon())
    	const charmileon =  new Charmileon(position = self.positionPokemon())
-   	const onix=  new Onix(position = self.positionPokemon())
+   	//const onix=  new Onix(position = self.positionPokemon())
    	//LISTA DE POKEMONES PROPIOS DEL PERSONAJE
-   	const property propios = #{charmileon,machop,onix}
+   	const property propios = #{charmileon,machop}
    
    //RETORNA LA POSICION DEL POKEMON ALIADO
    	method positionPokemon() = game.at(7,5)
    	
  
     
-    method venderPokemon(pokemon){
-    	if (propios.contains(pokemon)) {
-      oro += mercado.precioPokemon(pokemon)
-      propios.remove(pokemon)
-      mercado.comprarPokemon(pokemon)
-      game.say(self,"Oro restante:" + self.oro())
+    method venderItem(item){
+    	if (inventario.contains(item)) {
+      oro += item.precio()
+      inventario.remove(item)
+      game.say(enfermera,"Oro restante:" + self.oro())
+      game.say(enfermera,"Has vendido" + item)
     	}else{
-    		self.error("No tenes pokemon para vender!!")	
+    		self.error("No tenes este item:" + item + "para vender")	
     	}
     }
     
-    method comprarPokemon(pokemon) {
-    if (oro >= mercado.precioPokemon(pokemon) && mercado.pokemonDisponible(pokemon)) {
-      oro -= mercado.precioPokemon(pokemon)
-      mercado.venderPokemon(pokemon)
-      propios.add(pokemon)
+    method comprarItem(item) {
+    if (oro >= item.precio()) {
+      oro -= item.precio()
+      inventario.add(item)
+      game.say(enfermera,"Has comprado una" + item + "gastando" + item.precio())
     }else{
-    	self.error("No tenes oro capo")
+    	self.error("No tenes oro para comprar" + item)
     }
   }
   
