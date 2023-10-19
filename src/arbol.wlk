@@ -22,6 +22,7 @@ class ArbolInvisible inherits Arbol {
 class CartelMarket inherits Arbol{
 	
 	override method teEncontro(){
+		personaje.position(personaje.posicionAnterior())
 		game.say(self,"ingresa para comprar artigulos")
 	}
 	
@@ -29,6 +30,7 @@ class CartelMarket inherits Arbol{
 class CartelGym inherits Arbol{
 	
 	override method teEncontro(){
+		personaje.position(personaje.posicionAnterior())
 		game.say(self,"ingresa para combatir")
 	}
 	

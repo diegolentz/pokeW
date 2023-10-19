@@ -29,9 +29,12 @@ object personaje inherits Human{
     //ES RIVAL O PERSONAJE
 
    	const charmileon =  new Charmileon(position = self.positionPokemon())
+   	const mewTwo = new MewTwo(position = self.positionPokemon())
+   	const hunter = new Hunter(position = self.positionPokemon())
+   	const pikachu = new Pikachu(position = self.positionPokemon()) 
 
    	//LISTA DE POKEMONES PROPIOS DEL PERSONAJE
-   	const property propios = #{charmileon}
+   	const property propios = #{charmileon,mewTwo,hunter,pikachu}
    
    //RETORNA LA POSICION DEL POKEMON ALIADO
 
@@ -88,7 +91,7 @@ object rival inherits Human{
     const blastoise = new Blastoise(position = self.positionPokemon())
     const onix      = new Onix     (position = self.positionPokemon())
 
-    const property propios = #{onix,machamp,blastoise,onix}
+    const property propios = #{onix,machamp,blastoise}
     //RETORNA LA POSICION DEL POKEMON ENEMIGO
 
     method positionPokemon() = game.at(17,7)
@@ -113,10 +116,10 @@ object pisoCombat inherits Human{
 	const pikachu = new Pikachu(position = position)
 	const mewTwo = new MewTwo(position = position)
 	
+	
 	var property propios = [self.aleatorio()]
 	
 	//var propios = propiosPiso{2}
-	
 	method aleatorio(){
 		var valor = 0.randomUpTo(5).truncate(0)
 		var elejido
