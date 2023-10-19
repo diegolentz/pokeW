@@ -23,7 +23,7 @@ object personaje inherits Human{
     //POKEMONES, CREO NUEVOS POKEMONES Y VAN A RECIBIR SU POSICION EN BASE SI
     //ES RIVAL O PERSONAJE
 
-   	const charmileon =  new Charmileon(position = self.positionPokemon())
+   	const charmileon =  new Charmileon(position = self.positionPokemon(),vida = 10000)
 
    	//LISTA DE POKEMONES PROPIOS DEL PERSONAJE
    	const property propios = #{charmileon}
@@ -55,7 +55,7 @@ object rival inherits Human{
     const blastoise = new Blastoise(position = self.positionPokemon())
     const onix      = new Onix     (position = self.positionPokemon())
 
-    const property propios = #{onix,machamp,blastoise,onix}
+    const property propios = #{onix,machamp,blastoise}
     //RETORNA LA POSICION DEL POKEMON ENEMIGO
 
     method positionPokemon() = game.at(17,7)
