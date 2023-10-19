@@ -1,3 +1,4 @@
+
 import personaje.*
 import wollok.game.*
 import pokemons.*
@@ -44,9 +45,29 @@ object poti{
 object pokebola{
 	const property precio = 40
 	
-	method usar(pokemon){
+	method validacion(){
+		if (not personaje.inventario().contain(self)){
+			self.error("No tenes pokebolas!!")
+		}
+	}
+	
+	method validacionVida(pokemon){
+		if (not pokemon.vida()<= 0){
+			self.error("Sigue vivo!!")
+		}
+	}
+	
+	method atrapado(pokemon){
 		
+		personaje.inventario().add(pokemon)
+	}
+	
+	method usar(pokemon){
+		self.validacion()
+		self.validacionVida(pokemon)
+		self.atrapado(pokemon)
 	}
 }
+
 
 

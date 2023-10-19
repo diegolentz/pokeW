@@ -11,7 +11,7 @@ class City inherits Mapa{
 }
 
 class Batalla inherits Mapa{
-	var property image = "pelea.png"
+	var property image = "peleaPiso.jpg"
 	
 
 }
