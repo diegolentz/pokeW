@@ -292,6 +292,7 @@ method teclasMercado(){
 		keyboard.s().onPressDo({
 			game.say(enfermera,"Saliendo")
 			game.clear()
+			personaje.position(personaje.posicionAnterior())
 			self.iniciar()
 			})	
 	}	
