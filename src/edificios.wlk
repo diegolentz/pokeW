@@ -8,11 +8,15 @@ import city.*
 class Gimnasio {
 	var property position = 0	
 	var  esJugador = true
+	//var property enemigo
 
 	method image() = "gimnasio.png"
 	
+	
+	
 	method teEncontro(){
 		game.clear()
+		personaje.position(personaje.posicionAnterior())
 		self.adentro()		
 
 	}		
@@ -107,6 +111,7 @@ class Gimnasio {
 	}
 	//METODO QUE VUELVE A LA PANTALLA INICIAL
 	method salir(){
+		rival.pokemones().forEach({pokemon=>pokemon.vida(200)})
 		game.clear()
 		config.iniciar()
 	}
@@ -167,13 +172,7 @@ class IconPiso inherits Gimnasio{
 			pisoCombat.pokemon().atacado(pisoCombat.pokemon().ataqueAlt(),piso)
 		})
 	}
-/*
-	override method turnoJugador(){
-		super()
-		pokemon.position(game.at(8,0))
-	}
-	* 
-	*/
+
 			
 	override method turnoRival() {
 		  if(pisoCombat.pokemon().vida()>0){
@@ -190,11 +189,7 @@ class IconPiso inherits Gimnasio{
 		} 	
 	}
 	
-	//METODO QUE ELIMINA UN POKEMON CUANDO SE MUERE , RECIBE POR PARAMETRO 
-	//EL JUGADOR QUE CORRESPONDE , SI personaje O rival
-	override method pokemonMuerto(pj){
-		game.removeVisual(pj.pokemon())
-		pj.pokemones().remove(pj.pokemon())
-	}
+
+	
 	 
 }  

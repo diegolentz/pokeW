@@ -113,17 +113,21 @@ object config {
 
 
 object gimnasio inherits Gimnasio{
+
+	
+	
 	override method position() = game.at(0,0)
 	
 	method iniciar(){
-	const batalla = new Batalla()
-	
-	game.addVisual(self)
-	game.addVisual(personaje)
-	game.addVisual(batalla)
-	game.addVisual(rival)	
-	self.pelea()
+		const batalla = new Batalla()
+		
+		game.addVisual(self)
+		game.addVisual(personaje)
+		game.addVisual(batalla)
+		game.addVisual(rival)	
+		self.pelea()
 	}
+	
 	
 	
 }
