@@ -167,7 +167,6 @@ class IconPiso inherits Gimnasio{
 	override method configurarTeclas(){
 		keyboard.num1().onPressDo({
 			game.say(personaje.pokemon(), "Primer Ataque")	
-			game.say(personaje.pokemon(), "Tercer Ataque")
 			pisoCombat.pokemon().atacado(pisoCombat.pokemon().ataqueMin(),piso)
 		})
 		keyboard.num2().onPressDo({
@@ -179,11 +178,12 @@ class IconPiso inherits Gimnasio{
 			pisoCombat.pokemon().atacado(pisoCombat.pokemon().ataqueAlt(),piso)
 		})
 		keyboard.num4().onPressDo({
-			game.say(personaje.pokemon(),"Has usado una pocion")
 			poti.usar(personaje.pokemon())
 		})
 		keyboard.num5().onPressDo({
-			game.say(personaje.pokemon(),"Has usado la pokebola")
+			superPoti.usar(personaje.pokemon())
+		})
+		keyboard.num6().onPressDo({
 			pokebola.usar(pisoCombat.pokemon())	
 		})
 	}
@@ -192,7 +192,7 @@ class IconPiso inherits Gimnasio{
 	override method turnoRival() {
 		  if(pisoCombat.pokemon().vida()>0){
 			esJugador = true
-			game.say(pisoCombat.pokemon(),"Vida Restante:" + pisoCombat.pokemon().vida().toString())
+			game.say(pisoCombat.pokemon(),"Vida:" + pisoCombat.pokemon().vida().toString())
 			game.say(pisoCombat.pokemon(), "Ataque")
 			personaje.pokemon().atacado(pisoCombat.pokemon().atacar(),piso)
 		}else{

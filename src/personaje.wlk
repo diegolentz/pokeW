@@ -23,7 +23,7 @@ object personaje inherits Human{
     var property posicionAnterior = game.at(2, 12)   
  
     var property oro = 100
-    var property inventario = [poti] 
+    var property inventario = [poti,superPoti] 
     
     //POKEMONES, CREO NUEVOS POKEMONES Y VAN A RECIBIR SU POSICION EN BASE SI
     //ES RIVAL O PERSONAJE
@@ -38,9 +38,8 @@ object personaje inherits Human{
    
    //RETORNA LA POSICION DEL POKEMON ALIADO
 
-   	method positionPokemon() = game.at(7,5)
+   	method positionPokemon() = game.at(8,1)
    	
- 
     
     method venderItem(item){
     	if (inventario.contains(item)) {
@@ -64,7 +63,6 @@ object personaje inherits Human{
   }
   
 
-   //method positionPokemon() = game.at(8,1)
    
 
     method irA(nuevaPosicion) {
