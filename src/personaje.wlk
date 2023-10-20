@@ -1,7 +1,6 @@
 import wollok.game.*
 import config.*
 import pokemons.*
-import edificios.*
 import objectos.*
 
 class Human{
@@ -21,9 +20,9 @@ object personaje inherits Human{
     var property position = game.at(2,12)
     var property image = "player_Up.png"
     var property posicionAnterior = game.at(2, 12)   
- 
-    var property oro = 100
-    var property inventario = [poti,superPoti] 
+    
+      var property oro = 100
+    var property inventario = [poti,superPoti,poti] 
     
     //POKEMONES, CREO NUEVOS POKEMONES Y VAN A RECIBIR SU POSICION EN BASE SI
     //ES RIVAL O PERSONAJE
@@ -37,11 +36,9 @@ object personaje inherits Human{
    	const property propios = #{charmileon,mewTwo,hunter,pikachu}
    
    //RETORNA LA POSICION DEL POKEMON ALIADO
-
-   	method positionPokemon() = game.at(8,1)
-   	
-    
-    method venderItem(item){
+   method positionPokemon() = game.at(8,1)
+   
+       method venderItem(item){
     	if (inventario.contains(item)) {
       oro += item.precio()
       inventario.remove(item)
@@ -61,10 +58,7 @@ object personaje inherits Human{
     	self.error("No tenes oro para comprar" + item)
     }
   }
-  
-
    
-
     method irA(nuevaPosicion) {
 		posicionAnterior = position
        	position = nuevaPosicion         
@@ -137,5 +131,3 @@ object pisoCombat inherits Human{
 	method position() = game.at(17,7)
 	
 }
-	
-

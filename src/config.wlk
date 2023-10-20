@@ -6,7 +6,6 @@ import edificios.*
 import pokemons.*
 import objectos.*
 
-
 object config {
 	
 	method iniciar(){
@@ -14,7 +13,7 @@ object config {
 	self.configurarTeclas()
 	//self.colision()
 	
-
+	
 	const city = new City(
 		position = game.at(0,0))
 	
@@ -42,7 +41,8 @@ object config {
 	//edificios-------------------------------------------------------------------------------------------
 	
 	const gim = new Gimnasio(
-		position = game.at(2,16)
+		position = game.at(2,16),
+		enemigo = rival
 	)
 	game.addVisual(gim)
 	const cen = new Centro(
@@ -82,7 +82,7 @@ object config {
 					    [12, 8], [8, 12], [2, 10], [4, 2], [14, 12]]
 
 	posiciones.forEach { pos =>
-	    const piso = new IconPiso(position = game.at(pos.first(), pos.last()))
+	    const piso = new IconPiso(position = game.at(pos.first(), pos.last()),enemigo = pisoCombat)
 	    game.addVisualIn(piso, piso.position())}
 
 	game.onCollideDo(personaje, { algo => algo.teEncontro()})
@@ -107,7 +107,7 @@ object config {
 		keyboard.p().onPressDo({personaje.pos()})
 	}
 	
-method teclasMercado(){
+	method teclasMercado(){
 		
 		keyboard.num1().onPressDo({
 			personaje.comprarItem(poti)	
@@ -124,17 +124,18 @@ method teclasMercado(){
 			personaje.position(personaje.posicionAnterior())
 			self.iniciar()
 			})	
-	}	
+	}
+	
 }
 
 
 
 
-object gimnasio inherits Gimnasio{
-
-	
+object gimnasio inherits Gimnasio(enemigo = rival){
 	
 	override method position() = game.at(0,0)
+	
+	
 	
 	method iniciar(){
 		const batalla = new Batalla()
@@ -147,6 +148,20 @@ object gimnasio inherits Gimnasio{
 	}
 	
 	
+	
+}
+
+object piso inherits IconPiso(enemigo= pisoCombat){
+	
+	
+	method iniciar(){
+		
+	const piso = new PeleaPiso()
+	
+	game.addVisual(piso)
+	game.addVisual(pisoCombat)
+	self.pelea()
+	}
 	
 }
 
@@ -169,16 +184,3 @@ object market inherits Centro{
 	}
 
 }
-
-object piso inherits IconPiso{
-	
-	method iniciar(){
-		
-	const piso = new PeleaPiso()
-	
-	game.addVisual(piso)
-	self.pelea()
-	}
-	
-}
-

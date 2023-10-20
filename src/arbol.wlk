@@ -35,4 +35,3 @@ class CartelGym inherits Arbol{
 	}
 	
 }
-

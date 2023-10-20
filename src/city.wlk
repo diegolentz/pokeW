@@ -23,4 +23,3 @@ class Market inherits Mapa{
 class PeleaPiso inherits Mapa{
 	var property image = "peleaPiso.jpg"
 }
-

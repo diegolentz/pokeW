@@ -32,7 +32,6 @@ class Pokemon{
 	method atacado(damage,edificio) {
 		vida = vida - damage
 		edificio.turno()
-		//return vida
 	}
 	 
 	method ataqueMin() = nivel * 10  	
@@ -83,5 +82,3 @@ class Pikachu inherits Pokemon {
 class MewTwo inherits Pokemon {
 	method image() = "mewtwo_" + estado + ".png"
 }
-
-

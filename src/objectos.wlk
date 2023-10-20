@@ -1,4 +1,3 @@
-
 import personaje.*
 import wollok.game.*
 import pokemons.*
@@ -40,10 +39,8 @@ object poti{
 	}
 	method usar(pokemon){
 		self.validacion()
-		game.say(personaje.pokemon(),"Has usado una pocion")
+		game.say(personaje.pokemon(),"Has usado una poti")
 		pokemon.aumentarVida(efecto)
-		personaje.inventario().remove(self)
-		game.say(personaje.pokemon(),"Vida:" + personaje.pokemon().vida().toString())
 		
 	}
 }
@@ -51,30 +48,7 @@ object poti{
 object pokebola{
 	const property precio = 40
 	
-	method validacion(){
-		if (not personaje.inventario().contains(self)){
-			self.error("No tenes pokebolas!!")
-		}
-	}
-	
-	method validacionVida(pokemon){
-		if (not pokemon.vida()<= 0){
-			self.error("Sigue vivo!!")
-		}
-	}
-	
-	method atrapado(pokemon){
-		
-		personaje.inventario().add(pokemon)
-	}
-	
 	method usar(pokemon){
-		self.validacion()
-		self.validacionVida(pokemon)
-		game.say(personaje.pokemon(),"Has usado la pokebola")
-		self.atrapado(pokemon)
+		
 	}
 }
-
-
-
