@@ -4,6 +4,7 @@ import wollok.game.*
 import arbol.*
 import edificios.*
 import pokemons.*
+import objectos.*
 
 
 object config {
@@ -13,7 +14,7 @@ object config {
 	self.configurarTeclas()
 	//self.colision()
 	
-	
+
 	const city = new City(
 		position = game.at(0,0))
 	
@@ -105,30 +106,51 @@ object config {
 	
 		keyboard.p().onPressDo({personaje.pos()})
 	}
-		
 	
+method teclasMercado(){
+		
+		keyboard.num1().onPressDo({
+			personaje.comprarItem(poti)	
+			})
+		keyboard.num2().onPressDo({
+			personaje.comprarItem(superPoti)	
+			})
+		keyboard.v().onPressDo({
+			personaje.venderItem(poti)
+			})
+		keyboard.s().onPressDo({
+			game.say(enfermera,"Saliendo")
+			game.clear()
+			personaje.position(personaje.posicionAnterior())
+			self.iniciar()
+			})	
+	}	
 }
 
 
 
 
 object gimnasio inherits Gimnasio{
+
+	
+	
 	override method position() = game.at(0,0)
 	
 	method iniciar(){
-	const batalla = new Batalla()
-	
-	game.addVisual(self)
-	game.addVisual(personaje)
-	game.addVisual(batalla)
-	game.addVisual(rival)	
-	self.pelea()
+		const batalla = new Batalla()
+		
+		game.addVisual(self)
+		game.addVisual(personaje)
+		game.addVisual(batalla)
+		game.addVisual(rival)	
+		self.pelea()
 	}
+	
 	
 	
 }
 
-object market{
+object market inherits Centro{
 	
 	method iniciar(){
 		
@@ -138,7 +160,12 @@ object market{
 	
 	//game.addVisual(market)
 	game.addVisual(market)
-	game.addVisual(enfermera)	
+	game.addVisual(enfermera)
+	config.teclasMercado()
+	self.mostrarPrecios()	
+	
+
+
 	}
 
 }

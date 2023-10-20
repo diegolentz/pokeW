@@ -4,15 +4,20 @@ import personaje.*
 import pokemons.*
 import config.*
 import city.*
+import objectos.*
 
 class Gimnasio {
 	var property position = 0	
 	var  esJugador = true
+	//var property enemigo
 
 	method image() = "gimnasio.png"
 	
+	
+	
 	method teEncontro(){
 		game.clear()
+		personaje.position(personaje.posicionAnterior())
 		self.adentro()		
 
 	}		
@@ -107,6 +112,7 @@ class Gimnasio {
 	}
 	//METODO QUE VUELVE A LA PANTALLA INICIAL
 	method salir(){
+		rival.pokemones().forEach({pokemon=>pokemon.vida(200)})
 		game.clear()
 		config.iniciar()
 	}
@@ -128,7 +134,13 @@ class Centro {
 		market.iniciar()
 		
 	}
-	
+	method mostrarPrecios() {
+        var mensaje = "¡Bienvenido al Mercado Pokémon!\n" +
+                      "Precio de pociones: " + poti.precio() + " monedas.\n" +
+                      "Precio de superPoti: " + superPoti.precio() + " monedas."
+        
+        game.say(enfermera,mensaje)
+	}	
 }
 
 class IconPiso inherits Gimnasio{
@@ -155,7 +167,6 @@ class IconPiso inherits Gimnasio{
 	override method configurarTeclas(){
 		keyboard.num1().onPressDo({
 			game.say(personaje.pokemon(), "Primer Ataque")	
-			game.say(personaje.pokemon(), "Tercer Ataque")
 			pisoCombat.pokemon().atacado(pisoCombat.pokemon().ataqueMin(),piso)
 		})
 		keyboard.num2().onPressDo({
@@ -166,19 +177,22 @@ class IconPiso inherits Gimnasio{
 			game.say(personaje.pokemon(), "Tercer Ataque")
 			pisoCombat.pokemon().atacado(pisoCombat.pokemon().ataqueAlt(),piso)
 		})
+		keyboard.num4().onPressDo({
+			poti.usar(personaje.pokemon())
+		})
+		keyboard.num5().onPressDo({
+			superPoti.usar(personaje.pokemon())
+		})
+		keyboard.num6().onPressDo({
+			pokebola.usar(pisoCombat.pokemon())	
+		})
 	}
-/*
-	override method turnoJugador(){
-		super()
-		pokemon.position(game.at(8,0))
-	}
-	* 
-	*/
+
 			
 	override method turnoRival() {
 		  if(pisoCombat.pokemon().vida()>0){
 			esJugador = true
-			game.say(pisoCombat.pokemon(),"Vida Restante:" + pisoCombat.pokemon().vida().toString())
+			game.say(pisoCombat.pokemon(),"Vida:" + pisoCombat.pokemon().vida().toString())
 			game.say(pisoCombat.pokemon(), "Ataque")
 			personaje.pokemon().atacado(pisoCombat.pokemon().atacar(),piso)
 		}else{
@@ -190,11 +204,8 @@ class IconPiso inherits Gimnasio{
 		} 	
 	}
 	
-	//METODO QUE ELIMINA UN POKEMON CUANDO SE MUERE , RECIBE POR PARAMETRO 
-	//EL JUGADOR QUE CORRESPONDE , SI personaje O rival
-	override method pokemonMuerto(pj){
-		game.removeVisual(pj.pokemon())
-		pj.pokemones().remove(pj.pokemon())
-	}
+
+	
 	 
 }  
+

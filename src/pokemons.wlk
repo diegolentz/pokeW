@@ -41,6 +41,10 @@ class Pokemon{
 		
 	method ataqueAlt() = nivel * 20
 	
+	method aumentarVida(efecto){
+		vida = vida + efecto
+	}
+	
 }
 
 //del rival

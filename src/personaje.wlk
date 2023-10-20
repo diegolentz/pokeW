@@ -1,6 +1,8 @@
 import wollok.game.*
 import config.*
 import pokemons.*
+import edificios.*
+import objectos.*
 
 class Human{
 	const property pokemones = []
@@ -19,18 +21,50 @@ object personaje inherits Human{
     var property position = game.at(2,12)
     var property image = "player_Up.png"
     var property posicionAnterior = game.at(2, 12)   
+ 
+    var property oro = 100
+    var property inventario = [poti,superPoti] 
     
     //POKEMONES, CREO NUEVOS POKEMONES Y VAN A RECIBIR SU POSICION EN BASE SI
     //ES RIVAL O PERSONAJE
 
-   	const charmileon =  new Charmileon(position = self.positionPokemon(),vida = 10000)
+   	const charmileon =  new Charmileon(position = self.positionPokemon())
+   	const mewTwo = new MewTwo(position = self.positionPokemon())
+   	const hunter = new Hunter(position = self.positionPokemon())
+   	const pikachu = new Pikachu(position = self.positionPokemon()) 
 
    	//LISTA DE POKEMONES PROPIOS DEL PERSONAJE
-   	const property propios = #{charmileon}
+   	const property propios = #{charmileon,mewTwo,hunter,pikachu}
    
    //RETORNA LA POSICION DEL POKEMON ALIADO
-   method positionPokemon() = game.at(8,1)
+
+   	method positionPokemon() = game.at(8,1)
+   	
+    
+    method venderItem(item){
+    	if (inventario.contains(item)) {
+      oro += item.precio()
+      inventario.remove(item)
+      game.say(enfermera,"Oro restante:" + self.oro())
+      game.say(enfermera,"Has vendido" + item)
+    	}else{
+    		self.error("No tenes este item:" + item + "para vender")	
+    	}
+    }
+    
+    method comprarItem(item) {
+    if (oro >= item.precio()) {
+      oro -= item.precio()
+      inventario.add(item)
+      game.say(enfermera,"Has comprado una" + item + "gastando" + item.precio())
+    }else{
+    	self.error("No tenes oro para comprar" + item)
+    }
+  }
+  
+
    
+
     method irA(nuevaPosicion) {
 		posicionAnterior = position
        	position = nuevaPosicion         
@@ -80,10 +114,10 @@ object pisoCombat inherits Human{
 	const pikachu = new Pikachu(position = position)
 	const mewTwo = new MewTwo(position = position)
 	
+	
 	var property propios = [self.aleatorio()]
 	
 	//var propios = propiosPiso{2}
-	
 	method aleatorio(){
 		var valor = 0.randomUpTo(5).truncate(0)
 		var elejido
