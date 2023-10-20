@@ -36,7 +36,7 @@ object personaje inherits Human{
    	const pikachu = new Pikachu(position = self.positionPokemon()) 
 
    	//LISTA DE POKEMONES PROPIOS DEL PERSONAJE
-   	const property propios = #{charmileon,mewTwo,hunter,pikachu}
+   	const property propios = #{charmileon}
    
    //RETORNA LA POSICION DEL POKEMON ALIADO
    method positionPokemon() = game.at(8,1)
@@ -71,7 +71,11 @@ object personaje inherits Human{
 		game.say(self,position)
 	}
 	method iniciaMarket(){}
-
+	
+	method recompensa(cash) {
+		oro += cash
+		return cash
+	}
 }
 
 
@@ -82,9 +86,9 @@ object rival inherits Human{
     //POKEMONES, CREO NUEVOS POKEMONES Y VAN A RECIBIR SU POSICION EN BASE SI
     //ES RIVAL O PERSONAJE
 
-    const machamp   = new Machamp  (position = self.positionPokemon())
-    const blastoise = new Blastoise(position = self.positionPokemon())
-    const onix      = new Onix     (position = self.positionPokemon())
+    const machamp   = new Machamp  (position = self.positionPokemon(), nivel= 5)
+    const blastoise = new Blastoise(position = self.positionPokemon(), nivel = 5)
+    const onix      = new Onix     (position = self.positionPokemon(), nivel = 5)
 
     const property propios = #{onix,machamp,blastoise}
     //RETORNA LA POSICION DEL POKEMON ENEMIGO

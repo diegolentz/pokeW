@@ -31,7 +31,17 @@ class Pokemon{
 		vida = vida - damage
 		edificio.turno()
 	}
-	 
+ 
+ 	method sube(){ 
+ 		 nivel =nivel + 1
+ 		 return nivel
+ 		 }
+	 method evoluciona(elmio){
+	 	if(elmio.nivel() == 5){
+	 		elmio.estado(2)
+	 		game.say(self,"evolucione vieja!")
+	 	}
+	 }
 	method ataqueMin() = nivel * 10  	
 	
 	method ataqueMed() = nivel * 15 

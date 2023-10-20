@@ -43,7 +43,13 @@ object poti{
 object pokebola{
 	const property precio = 40
 	
-	method usar(pokemon){
-		
+	method puedeAtrapar(alguien) =  alguien.vida() > 10 and personaje.pokebolas().size() != 0
+	
+	method usar(alguien){
+			game.removeVisual(alguien)
+			pisoCombat.pokemones().remove(alguien)
+			alguien.estado(1)
+			alguien.position(personaje.positionPokemon())
+			personaje.propios().add(alguien)
 	}
 }

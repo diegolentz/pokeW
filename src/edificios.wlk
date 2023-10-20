@@ -80,6 +80,7 @@ class Gimnasio {
 			//EN ESTE MOMENTO PUEDO SELECCIONAR EL ATAQUE
 			game.say(personaje.pokemon(), "Vida:" + personaje.pokemon().vida().toString())
 			game.say(personaje.pokemon(), "Turno personaje")
+			
 			esJugador = false //CAMBIO LA BANDERA
 		}else{
 			self.pokemonMuerto(personaje)
@@ -96,9 +97,12 @@ class Gimnasio {
 			esJugador = true
 			game.say(enemigo.pokemon(),"Vida:" + enemigo.pokemon().vida().toString())
 		  	game.say(enemigo.pokemon(), "Turno Enemigo")
-			game.say(enemigo.pokemon(), "Ataque")
+		//	game.say(enemigo.pokemon(), "Ataque")
 			personaje.pokemon().atacado(enemigo.pokemon().atacar(),self)
 		}else{
+			personaje.pokemon().sube()
+			personaje.pokemon().evoluciona(personaje.pokemon())
+			game.say(personaje.pokemon(),"recompensa " + personaje.recompensa(75))
 			self.pokemonMuerto(enemigo)
 			if(enemigo.propios().all({pokemon=>pokemon.vida()<= 0})){
 				self.salir()		
@@ -156,7 +160,13 @@ class IconPiso inherits Gimnasio{
 	override method configurarTeclas(){
 		super()
 		keyboard.num6().onPressDo({
-			pokebola.usar(pisoCombat.pokemon())
+			//pokebola.puedeAtrapar(enemigo.pokemon())
+			if(pokebola.puedeAtrapar(enemigo.pokemon())){
+				pokebola.usar(enemigo.pokemon())
+				self.salir()
+			}else{
+				game.say(self,"ooooole gato!")
+			}
 			})
 	}
 
@@ -165,4 +175,5 @@ class IconPiso inherits Gimnasio{
 		enemigo.propios().clear()
 		enemigo.propios().add(enemigo.aleatorio())
 	}
+
 }
