@@ -128,14 +128,9 @@ object config {
 	
 }
 
-
-
-
 object gimnasio inherits Gimnasio(enemigo = rival){
 	
 	override method position() = game.at(0,0)
-	
-	
 	
 	method iniciar(){
 		const batalla = new Batalla()
@@ -146,13 +141,9 @@ object gimnasio inherits Gimnasio(enemigo = rival){
 		game.addVisual(rival)	
 		self.pelea()
 	}
-	
-	
-	
 }
 
-object piso inherits IconPiso(enemigo= pisoCombat){
-	
+object piso inherits IconPiso(enemigo = pisoCombat){
 	
 	method iniciar(){
 		
@@ -162,7 +153,6 @@ object piso inherits IconPiso(enemigo= pisoCombat){
 	game.addVisual(pisoCombat)
 	self.pelea()  
 	}
-	
 }
 
 object market inherits Centro{
@@ -170,17 +160,11 @@ object market inherits Centro{
 	method iniciar(){
 		
 		const market = new Market(
-		position = game.at(0,0)
-	)
+		position = game.at(0,0))
 	
-	//game.addVisual(market)
 	game.addVisual(market)
 	game.addVisual(enfermera)
 	config.teclasMercado()
 	self.mostrarPrecios()	
-	
-
-
 	}
-
 }
