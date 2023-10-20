@@ -150,6 +150,12 @@ object piso inherits IconPiso(enemigo = pisoCombat){
 	
 	method iniciar(){
 		
+	const pidgeotto = new Pidgeotto(position = position)
+	const kadabra = new Kadabra(position = position)
+	const hunter = new Hunter(position = position)
+	const dragonair = new Dragonair(position = position)
+	const pikachu = new Pikachu(position = position)
+	const mewTwo = new MewTwo(position = position)
 	const piso = new PeleaPiso()
 	
 	game.addVisual(piso)

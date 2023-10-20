@@ -8,7 +8,7 @@ object superPoti {
 	const property precio = 100
 	
 	method validacion(){
-		if (not personaje.superPotis().contains(self)){
+		if (personaje.superPotis().isEmpty()){
 			self.error("No tenes superPotis!!")
 		}
 	}
@@ -28,7 +28,7 @@ object poti{
 	const property precio = 40
 	
 	method validacion(){
-		if (not personaje.potis().contains(self)){
+		if (personaje.potis().isEmpty()){
 			self.error("No tenes potis!!")
 		}
 	}
@@ -43,7 +43,7 @@ object poti{
 object pokebola{
 	const property precio = 40
 	
-	method puedeAtrapar(alguien) =  alguien.vida() > 10 and personaje.pokebolas().size() != 0
+	method puedeAtrapar(alguien) =  alguien.vida() > 10 and personaje.pokebolas().size() > 0
 	
 	method usar(alguien){
 			game.removeVisual(alguien)

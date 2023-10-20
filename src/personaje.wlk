@@ -13,7 +13,7 @@ class Human{
 	}
 	//RETORNA EL PRIMER POKEMON 
 	//DE LA LISTA DE CADA PERSONAJE
-	method pokemon() = pokemones.head()
+	method pokemon() = pokemones.first()
 }
 
 object personaje inherits Human{
@@ -94,18 +94,11 @@ object rival inherits Human{
     //RETORNA LA POSICION DEL POKEMON ENEMIGO
 
     method positionPokemon() = game.at(17,7)
-/*
-   method revive(){
-   	self.pokemones().forEach({pokemon => pokemon.vida(200)})
-   }
-*/  
 }
-
 
 object enfermera{
    var property position = game.at(12,8)
     var property image = "enfermera.png"
-    
    
 }
 object pisoCombat inherits Human{
@@ -119,15 +112,15 @@ object pisoCombat inherits Human{
 	const pikachu = new Pikachu(position = position)
 	const mewTwo = new MewTwo(position = position)
 	
-	
-	
 	const property propios = #{self.aleatorio()}
-	
 
 	//var propios = propiosPiso{2}
 	method aleatorio(){
 		var valor = 0.randomUpTo(5).truncate(0)
 		var elejido = self.elejir(valor)
+		if(personaje.pokemones().contains(elejido)){
+			self.aleatorio()
+		}
 		return elejido
 	}
 		
@@ -148,5 +141,4 @@ object pisoCombat inherits Human{
 	}
 	
 	method position() = game.at(17,7)
-
 }
