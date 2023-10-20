@@ -160,7 +160,7 @@ object piso inherits IconPiso(enemigo= pisoCombat){
 	
 	game.addVisual(piso)
 	game.addVisual(pisoCombat)
-	self.pelea()
+	self.pelea()  
 	}
 	
 }

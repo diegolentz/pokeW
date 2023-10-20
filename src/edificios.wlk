@@ -10,7 +10,6 @@ class Gimnasio {
 	var property position = 0	
 	var  esJugador = true
 	var  enemigo
-	
 
 	method image() = "gimnasio.png"
 
@@ -21,12 +20,9 @@ class Gimnasio {
 
 	}		
 	
-	
 	 method adentro(){
 		gimnasio.iniciar()
 	}
-	
-	
 	
 	method pelea(){
 	//AGREGA LOS POKEMONES PROPIOS DEL PERSONAJE A LA LISTA DEL PERSONAJE
@@ -39,7 +35,6 @@ class Gimnasio {
 		self.configurarTeclas()
 		self.turno()
 	}
-	
 	//DEFINO LA ASIGNACION DE TECLAS
 
 	method configurarTeclas(){
@@ -68,7 +63,6 @@ class Gimnasio {
 		})
 	}
 
-	
 	//SISTEMA DE TURNOS 
 	method turno(){
 		//EVALUO LA BANDERA JUGADOR, COMO SIEMPRE QUIERO QUE COMIENCE
@@ -127,8 +121,6 @@ class Gimnasio {
 		game.clear()
 		config.iniciar()
 	}
-	 
-		
 }
 
 class Centro {
@@ -174,5 +166,9 @@ class IconPiso inherits Gimnasio{
 			pokebola.usar(pisoCombat.pokemon())
 			})
 	}
-
+	override method salir(){
+		enemigo.revive()
+		game.clear()
+		config.iniciar()
+	}
 }
