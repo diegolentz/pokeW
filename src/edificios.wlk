@@ -181,7 +181,7 @@ class IconPiso inherits Gimnasio{
 			poti.usar(personaje.pokemon())
 		})
 		keyboard.num5().onPressDo({
-			superPoti.usar(personaje.pokemon())
+			superPoti.usar()
 		})
 		keyboard.num6().onPressDo({
 			pokebola.usar(pisoCombat.pokemon())	
