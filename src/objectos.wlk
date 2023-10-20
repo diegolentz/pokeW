@@ -19,10 +19,12 @@ object superPoti {
 		}
 	}
 	
-	method usar(pokemon){
+	method usar(){
 		self.validacion()
 		game.say(personaje.pokemon(),"Has usado una superpoti")
-		personaje.propios().forEach({pokemons=>pokemon.aumentarVida(efecto)})
+		personaje.inventario().remove(self)
+		personaje.propios().forEach({poke=>poke.aumentarVida(efecto)})
+		game.say(personaje.pokemon(),"Vida:" + personaje.pokemon().vida().toString())
 	}
 	
 }
