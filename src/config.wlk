@@ -108,22 +108,25 @@ object config {
 	}
 	
 	method teclasMercado(){
-		
-		keyboard.num1().onPressDo({
-			personaje.comprarItem(poti)	
+				keyboard.num1().onPressDo({
+				personaje.comprarItem(personaje.potis(),poti)
 			})
-		keyboard.num2().onPressDo({
-			personaje.comprarItem(superPoti)	
+				keyboard.num2().onPressDo({
+				personaje.comprarItem(personaje.superPotis(),superPoti)
 			})
-		keyboard.v().onPressDo({
-			personaje.venderItem(poti)
+				keyboard.num3().onPressDo({
+				personaje.comprarItem(personaje.pokebolas(),pokebola)
 			})
-		keyboard.s().onPressDo({
-			game.say(enfermera,"Saliendo")
-			game.clear()
-			personaje.position(personaje.posicionAnterior())
-			self.iniciar()
-			})	
+			keyboard.num4().onPressDo({
+				personaje.venderItem(personaje.potis(),poti)
+			})
+			keyboard.num5().onPressDo({
+				personaje.venderItem(personaje.superPotis(),superPoti)
+			})
+			keyboard.e().onPressDo({
+				game.clear()
+				self.iniciar()
+			})
 	}
 	
 }

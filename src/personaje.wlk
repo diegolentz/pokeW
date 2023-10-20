@@ -21,7 +21,7 @@ object personaje inherits Human{
     var property image = "player_Up.png"
     var property posicionAnterior = game.at(2, 12)   
     
-      var property oro = 100
+      var property oro = 1000
       const property potis = #{poti,poti}
       const property superPotis = #{superPoti}
       const property pokebolas = #{pokebola}
@@ -41,24 +41,24 @@ object personaje inherits Human{
    //RETORNA LA POSICION DEL POKEMON ALIADO
    method positionPokemon() = game.at(8,1)
    
-       method venderItem(item){
-    	if (inventario.contains(item)) {
-      oro += item.precio()
-      inventario.remove(item)
-      game.say(enfermera,"Oro restante:" + self.oro())
-      game.say(enfermera,"Has vendido" + item)
+   method venderItem(tipo,item){
+		if (tipo.contains(item)) {
+		    game.say(enfermera,"vendiste " + item)
+			oro += item.precio()
+		    tipo.remove(item)
     	}else{
-    		self.error("No tenes este item:" + item + "para vender")	
+	    	self.error("No tenes este item")	
     	}
-    }
+	}
+    	
     
-    method comprarItem(item) {
+    method comprarItem(tipo,item) {
     if (oro >= item.precio()) {
+      game.say(enfermera,"compraste " + item)
+      tipo.add(item)
       oro -= item.precio()
-      inventario.add(item)
-      game.say(enfermera,"Has comprado una" + item + "gastando" + item.precio())
     }else{
-    	self.error("No tenes oro para comprar" + item)
+    	self.error("oro insuficiente")
     }
   }
    

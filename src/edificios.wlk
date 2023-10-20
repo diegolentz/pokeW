@@ -125,30 +125,24 @@ class Gimnasio {
 class Centro {
 	var property image = "mercado.png"
 
-	
-	
-
 	var property position = game.at(0,0)
-
 
 	method teEncontro(){
 		game.clear()
+		personaje.position(personaje.posicionAnterior())
 		self.adentro()		
-
 	}		
 	
 	method adentro(){
 		market.iniciar()
-		}
+	}
 	
 	method mostrarPrecios() {
         var mensaje = "¡Bienvenido al Mercado Pokémon!\n" +
                       "Precio de pociones: " + poti.precio() + " monedas.\n" +
                       "Precio de superPoti: " + superPoti.precio() + " monedas."
-        
         game.say(enfermera,mensaje)
     }
-	
 }
 
 class IconPiso inherits Gimnasio{
@@ -165,13 +159,10 @@ class IconPiso inherits Gimnasio{
 			pokebola.usar(pisoCombat.pokemon())
 			})
 	}
-	
-	
+
 	override method salir(){
 		super()
 		enemigo.propios().clear()
 		enemigo.propios().add(enemigo.aleatorio())
 	}
-	
-	
 }
