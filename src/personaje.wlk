@@ -87,7 +87,11 @@ object rival inherits Human{
     //RETORNA LA POSICION DEL POKEMON ENEMIGO
 
     method positionPokemon() = game.at(17,7)
-  
+/*
+   method revive(){
+   	self.pokemones().forEach({pokemon => pokemon.vida(200)})
+   }
+*/  
 }
 
 
@@ -109,11 +113,18 @@ object pisoCombat inherits Human{
 	const mewTwo = new MewTwo(position = position)
 	
 	
-	var property propios = [self.aleatorio()]
 	
+	const property propios = #{self.aleatorio()}
+	
+
 	//var propios = propiosPiso{2}
 	method aleatorio(){
 		var valor = 0.randomUpTo(5).truncate(0)
+		var elejido = self.elejir(valor)
+		return elejido
+	}
+		
+	method elejir(valor){
 		var elejido
 		if(valor == 0){
 			elejido = pidgeotto
@@ -128,6 +139,7 @@ object pisoCombat inherits Human{
 		}else {elejido = mewTwo}
 		return elejido
 	}
-	method position() = game.at(17,7)
 	
+	method position() = game.at(17,7)
+
 }

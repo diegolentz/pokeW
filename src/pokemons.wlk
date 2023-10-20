@@ -14,10 +14,8 @@ class Pokemon{
 	
 	method atacar(){
 		var ataque = 0.randomUpTo(3).truncate(0)
-		
 		return self.autoattack(ataque)
-		
-		}
+	}
 	
 	method autoattack(ataque){
 		 if(ataque == 0){

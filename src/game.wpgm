@@ -10,15 +10,10 @@ program pokeworld {
 	game.height(18)
 	game.width(26)
 	
-	
 	//  VISUALES
-
 	config.iniciar()
-	//game.onCollideDo(personaje, { algo => algo.teEncontro()})
-	
  	
  	//  COMIENZA
 	game.start()
-		
 }
 	

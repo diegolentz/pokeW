@@ -10,7 +10,6 @@ class Gimnasio {
 	var property position = 0	
 	var  esJugador = true
 	var  enemigo
-	
 
 	method image() = "gimnasio.png"
 
@@ -18,15 +17,11 @@ class Gimnasio {
 		game.clear()
 		personaje.position(personaje.posicionAnterior())
 		self.adentro()		
-
 	}		
-	
 	
 	 method adentro(){
 		gimnasio.iniciar()
 	}
-	
-	
 	
 	method pelea(){
 	//AGREGA LOS POKEMONES PROPIOS DEL PERSONAJE A LA LISTA DEL PERSONAJE
@@ -39,7 +34,6 @@ class Gimnasio {
 		self.configurarTeclas()
 		self.turno()
 	}
-	
 	//DEFINO LA ASIGNACION DE TECLAS
 
 	method configurarTeclas(){
@@ -68,7 +62,6 @@ class Gimnasio {
 		})
 	}
 
-	
 	//SISTEMA DE TURNOS 
 	method turno(){
 		//EVALUO LA BANDERA JUGADOR, COMO SIEMPRE QUIERO QUE COMIENCE
@@ -118,17 +111,14 @@ class Gimnasio {
 	//EL JUGADOR QUE CORRESPONDE , SI personaje O rival
 	method pokemonMuerto(pj){
 		game.removeVisual(pj.pokemon())
-		
 		pj.pokemones().remove(pj.pokemon()) //ada podria hacer un sort con vida para que quede a lo ultimo el mas lastimado
 	}
 	//METODO QUE VUELVE A LA PANTALLA INICIAL
 	method salir(){
-		enemigo.pokemones().forEach({pokemon=>pokemon.vida(200)})
+		enemigo.propios().forEach{pokemon => pokemon.vida(200)}
 		game.clear()
 		config.iniciar()
 	}
-	 
-		
 }
 
 class Centro {
@@ -174,5 +164,13 @@ class IconPiso inherits Gimnasio{
 			pokebola.usar(pisoCombat.pokemon())
 			})
 	}
-
+	
+	
+	override method salir(){
+		super()
+		enemigo.propios().clear()
+		enemigo.propios().add(enemigo.aleatorio())
+	}
+	
+	
 }
