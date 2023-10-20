@@ -113,8 +113,10 @@ object pisoCombat inherits Human{
 	const mewTwo = new MewTwo(position = position)
 	
 	
+	
 	const property propios = #{self.aleatorio()}
 	
+
 	//var propios = propiosPiso{2}
 	method aleatorio(){
 		var valor = 0.randomUpTo(5).truncate(0)
@@ -139,10 +141,5 @@ object pisoCombat inherits Human{
 	}
 	
 	method position() = game.at(17,7)
-/*
-	method revive(){
-		propios.forEach{pok => pok.vida(200)}
-		self.propios(self.aleatorio())
-	}
-*/
+
 }

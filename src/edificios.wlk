@@ -165,13 +165,12 @@ class IconPiso inherits Gimnasio{
 			})
 	}
 	
-	/*
+	
 	override method salir(){
-		enemigo.propios().forEach({pokemon => pokemon.vida(200)})
-	//	pisoCombat.revive()
-		game.clear()
-		config.iniciar()
+		super()
+		enemigo.propios().clear()
+		enemigo.propios().add(enemigo.aleatorio())
 	}
 	
-	*/
+	
 }
