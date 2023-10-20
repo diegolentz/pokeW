@@ -58,6 +58,7 @@ class Gimnasio {
 		})
 		keyboard.num5().onPressDo({
 			superPoti.usar()
+			game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
 			self.turno()	
 		})
 	}

@@ -22,7 +22,10 @@ object personaje inherits Human{
     var property posicionAnterior = game.at(2, 12)   
     
       var property oro = 100
-    var property inventario = [poti,superPoti,poti] 
+      const property potis = #{poti,poti}
+      const property superPotis = #{superPoti}
+      const property pokebolas = #{pokebola}
+       
     
     //POKEMONES, CREO NUEVOS POKEMONES Y VAN A RECIBIR SU POSICION EN BASE SI
     //ES RIVAL O PERSONAJE
