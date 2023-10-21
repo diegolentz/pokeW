@@ -102,42 +102,29 @@ object enfermera{
    
 }
 object pisoCombat inherits Human{
-	 var property position = game.at(17,7)
-	
-	//instancio todos los pokemones
-	const pidgeotto = new Pidgeotto(position = position)
-	const kadabra = new Kadabra(position = position)
-	const hunter = new Hunter(position = position)
-	const dragonair = new Dragonair(position = position)
-	const pikachu = new Pikachu(position = position)
-	const mewTwo = new MewTwo(position = position)
-	
+	var property position = game.at(17,7)
 	const property propios = #{self.aleatorio()}
-
-	//var propios = propiosPiso{2}
-	method aleatorio(){
-		var valor = 0.randomUpTo(5).truncate(0)
-		var elejido = self.elejir(valor)
-		if(personaje.pokemones().contains(elejido)){
-			self.aleatorio()
-		}
-		return elejido
-	}
-		
+	
+	//DEVUELVE EL POKEMON RETORNADO DEL METODO elegir ATRAVEZ DE UN NUMERO ALEATORIO
+	method aleatorio() = self.elejir(self.valorAleatorio())
+	
+	//RETORNA UN NUMERO ALEATORIO DEL 0 AL 5
+	method valorAleatorio() = 0.randomUpTo(5).truncate(0)
+	
+	//FUNCION QUE RETORNA UN NUEVO POKEMON SEGUN EL NUMERO
 	method elejir(valor){
-		var elejido
 		if(valor == 0){
-			elejido = pidgeotto
+			return new Pidgeotto(position = position)
 		}else if(valor == 1){
-			elejido = kadabra
+			return new Kadabra(position = position)
 		}else if(valor == 2){
-			elejido = hunter
+			return  new Hunter(position = position)
 		}else if(valor == 3){
-			elejido = dragonair
+			return new Dragonair(position = position)
 		}else if(valor == 4){
-			elejido = pikachu
-		}else {elejido = mewTwo}
-		return elejido
+			return new Pikachu(position = position)
+		}else { return new MewTwo(position = position)}
+		
 	}
 	
 	method position() = game.at(17,7)

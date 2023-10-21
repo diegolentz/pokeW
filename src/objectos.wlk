@@ -48,17 +48,23 @@ object pokebola{
 	method puedeAtrapar(alguien) =  alguien.vida() > 10 and personaje.pokebolas().size() > 0
 	
 	method usar(alguien){
-			const nuevo = self.crearpoKemon(alguien)
-			
-			nuevo.position(game.at(8,1))
-			nuevo.estado(1)
-			
+			//ASIGNO LA POSICION AL POKEMON QUE ATRAPE A LA POSICION DE MIS POKEMONS
+			alguien.position(personaje.positionPokemon())
+			//nuevo.estado(1)
+			//REMUEVO EL LA VISUAL DEL POKEMON DEL PISO
 			game.removeVisual(alguien)
+			//ELIMINO AL POKEMON DEL ARRAY DEL ENEMIGO pokePiso
 			pisoCombat.pokemones().remove(alguien)
 			
-			personaje.propios().add(nuevo)
+			//AGREGO AL POKEMON DEL PISO EN MI ARRAY 
+			personaje.propios().add(alguien)
 			piso.salir()
 	}
+}
+	
+	/*
+	 
+	 
 	method crearpoKemon(alguien) {
 		
 		
@@ -77,4 +83,4 @@ object pokebola{
 			}
 			return pokemon
 	}
-}
+	 */

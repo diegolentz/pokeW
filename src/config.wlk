@@ -150,11 +150,11 @@ object piso inherits IconPiso(enemigo = pisoCombat){
 	
 	method iniciar(){
 		
-	const piso = new PeleaPiso()
-	
-	game.addVisual(piso)
-	game.addVisual(pisoCombat)
-	self.pelea()  
+		const piso = new PeleaPiso()
+		
+		game.addVisual(piso)
+		game.addVisual(pisoCombat)
+		self.pelea()  
 	}
 }
 

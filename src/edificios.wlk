@@ -160,14 +160,13 @@ class IconPiso inherits Gimnasio{
 	override method configurarTeclas(){
 		super()
 		keyboard.num6().onPressDo({
-			
 			if(pokebola.puedeAtrapar(enemigo.pokemon())){
 				pokebola.usar(enemigo.pokemon())
 				self.salir()
 			}else{
 				game.say(self,"ooooole gato!")
 			}
-			})
+		})
 	}
 
 	override method salir(){
