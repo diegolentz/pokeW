@@ -1,6 +1,8 @@
 import personaje.*
 import wollok.game.*
 import pokemons.*
+import config.*
+
 
 // Cura a todos los pokemones 
 object superPoti {
@@ -46,10 +48,33 @@ object pokebola{
 	method puedeAtrapar(alguien) =  alguien.vida() > 10 and personaje.pokebolas().size() > 0
 	
 	method usar(alguien){
+			const nuevo = self.crearpoKemon(alguien)
+			
+			nuevo.position(game.at(8,1))
+			nuevo.estado(1)
+			
 			game.removeVisual(alguien)
 			pisoCombat.pokemones().remove(alguien)
-			alguien.estado(1)
-			alguien.position(personaje.positionPokemon())
-			personaje.propios().add(alguien)
+			
+			personaje.propios().add(nuevo)
+			piso.salir()
+	}
+	method crearpoKemon(alguien) {
+		
+		
+			if (alguien.toString() == "pidgeotto"){
+				const pokemon = new Pidgeotto(position = game.at(8,1), estado = 1)
+			}else if(alguien.toString() == "kadabra"){
+				const pokemon = new Kadabra(position = game.at(8,1), estado = 1)
+			}else if(alguien.toString() == "hunter"){
+				const pokemon = new Hunter(position = game.at(8,1), estado = 1)
+			}else if(alguien.toString() == "dragonair"){
+				const pokemon= new Dragonair(position = game.at(8,1), estado = 1)		
+			}else if(alguien.toString() == "pikachu"){
+				const pokemon= new Pikachu(position = game.at(8,1), estado = 1)
+			}else{ 
+				const pokemon = new MewTwo(position = game.at(8,1), estado = 1)
+			}
+			return pokemon
 	}
 }
