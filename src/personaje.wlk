@@ -79,7 +79,6 @@ object personaje inherits Human{
 
 
 object rival inherits Human{
-    var property position = game.at(22,9)
     var property image = "enemigoBatalla.png"
 
     //POKEMONES, CREO NUEVOS POKEMONES Y VAN A RECIBIR SU POSICION EN BASE SI
@@ -92,6 +91,7 @@ object rival inherits Human{
     const property propios = #{onix,machamp,blastoise}
     //RETORNA LA POSICION DEL POKEMON ENEMIGO
 
+    method position() = game.at(22,9)
     method positionPokemon() = game.at(17,7)
 }
 
