@@ -41,28 +41,37 @@ class Gimnasio {
 			game.say(personaje.pokemon(), "Primer Ataque")
 			//"atacado" ES UN METODO DEL POKEMON,RECIBE POR PARAMETRO 
 			// EL ATAQUE SELECCIONADO, EL CUAL RETORNA UN DAÑO
-			enemigo.pokemon().atacado(personaje.pokemon().ataqueMin(),self)
+			enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(0),self)
+			
+			personaje.pokemon().atacado(enemigo.pokemon().atacar(),self)
 		})
 		keyboard.num2().onPressDo({
 			game.say(personaje.pokemon(), "Segundo Ataque")
-			enemigo.pokemon().atacado(personaje.pokemon().ataqueMed(),self)	
+			enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(1),self)	
+			personaje.pokemon().atacado(enemigo.pokemon().atacar(),self)
 		})
 		keyboard.num3().onPressDo({
 			game.say(personaje.pokemon(), "Tercer Ataque")
-			enemigo.pokemon().atacado(personaje.pokemon().ataqueAlt(),self)
+			enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(2),self)
+			personaje.pokemon().atacado(enemigo.pokemon().atacar(),self)
 		})
 		keyboard.num4().onPressDo({
 			poti.usar(personaje.pokemon())
 			game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
-			self.turno()
+			personaje.pokemon().atacado(enemigo.pokemon().atacar(),self)
+			//self.turno()
 		})
 		keyboard.num5().onPressDo({
 			superPoti.usar()
 			game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
-			self.turno()	
+			personaje.pokemon().atacado(enemigo.pokemon().atacar(),self)
+			//self.turnoJugador()	
 		})
 	}
-
+	
+	method estanTodosMuertos(pj) = pj.pokemones().all({pokemon=>pokemon.muerto()})
+	
+	
 	//SISTEMA DE TURNOS 
 	method turno(){
 		//EVALUO LA BANDERA JUGADOR, COMO SIEMPRE QUIERO QUE COMIENCE
@@ -76,7 +85,7 @@ class Gimnasio {
 		
 	method turnoJugador(){
 		//VALIDO SI EL POKEMON ESTA VIVO , SI LA VIDA ES MENOR A 0 REMUEVE AL POKEMON 
-		if(personaje.pokemon().vida()>0){	
+		if(not personaje.pokemon().muerto()){	
 			//EN ESTE MOMENTO PUEDO SELECCIONAR EL ATAQUE
 			game.say(personaje.pokemon(), "Vida:" + personaje.pokemon().vida().toString())
 			game.say(personaje.pokemon(), "Turno personaje")
@@ -84,7 +93,7 @@ class Gimnasio {
 			esJugador = false //CAMBIO LA BANDERA
 		}else{
 			self.pokemonMuerto(personaje)
-			if(personaje.propios().all({pokemon=>pokemon.vida()<= 0})){
+			if(self.estanTodosMuertos(personaje)){
 				self.salir()		
 			}else{			
 				game.addVisual(personaje.pokemon())
@@ -93,18 +102,17 @@ class Gimnasio {
 	}
 			
 	method turnoRival() {
-		  if(enemigo.pokemon().vida()>0){
+		  if(not enemigo.pokemon().muerto()){
 			esJugador = true
 			game.say(enemigo.pokemon(),"Vida:" + enemigo.pokemon().vida().toString())
 		  	game.say(enemigo.pokemon(), "Turno Enemigo")
-		//	game.say(enemigo.pokemon(), "Ataque")
-			personaje.pokemon().atacado(enemigo.pokemon().atacar(),self)
+			//personaje.pokemon().atacado(enemigo.pokemon().atacar(),self)
 		}else{
 			personaje.pokemon().sube()
 			personaje.pokemon().evoluciona(personaje.pokemon())
 			game.say(personaje.pokemon(),"recompensa " + personaje.recompensa(75))
 			self.pokemonMuerto(enemigo)
-			if(enemigo.propios().all({pokemon=>pokemon.vida()<= 0})){
+			if(self.estanTodosMuertos(enemigo)){
 				self.salir()		
 			}else{			
 				game.addVisual(enemigo.pokemon())
@@ -121,6 +129,7 @@ class Gimnasio {
 	//METODO QUE VUELVE A LA PANTALLA INICIAL
 	method salir(){
 		enemigo.propios().forEach{pokemon => pokemon.vida(200)}
+		personaje.pokemones().clear()
 		game.clear()
 		config.iniciar()
 	}
@@ -142,16 +151,18 @@ class Centro {
 	}
 	
 	method mostrarPrecios() {
-        var mensaje = "¡Bienvenido al Mercado Pokémon!\n" +
-                      "Precio de pociones: " + poti.precio() + " monedas.\n" +
-                      "Precio de superPoti: " + superPoti.precio() + " monedas."
-        game.say(enfermera,mensaje)
+        var mensaje = "¡Bienvenido al market!"
+        var mensaje2 = "Pociones: " + poti.precio() + " monedas"
+        var mensaje3 ="SuperPotis: " + superPoti.precio() + " monedas."
+        
+        const array = [mensaje,mensaje2,mensaje3]
+        array.forEach({algo => game.say(enfermera,algo)})
     }
 }
 
 class IconPiso inherits Gimnasio{
 	
-	override method image() = ".jpg"
+	override method image() = "hierba.png"
 
 	override method adentro(){
 		piso.iniciar()
@@ -172,7 +183,7 @@ class IconPiso inherits Gimnasio{
 	override method salir(){
 		super()
 		enemigo.propios().clear()
-		enemigo.propios().add(enemigo.aleatorio())
+		enemigo.propios().add(enemigo.lista().anyOne())
 	}
 
 }

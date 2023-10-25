@@ -6,25 +6,23 @@ import objectos.*
 class Human{
 	const property pokemones = []
 
-	//AGREGA LOS POKEMONES PROPIOS 
-	//DE CADA PERSONAJE A SU JUGADOR CORRESPONDIENTE	
-	method iniciaBatalla(propios){
-	    pokemones.addAll(propios)
-	}
-	//RETORNA EL PRIMER POKEMON 
-	//DE LA LISTA DE CADA PERSONAJE
+	//AGREGA LOS POKEMONES PROPIOS DE CADA PERSONAJE A SU JUGADOR CORRESPONDIENTE	
+	method iniciaBatalla(propios){pokemones.addAll(propios)}
+	
+	//RETORNA EL PRIMER POKEMON DE LA LISTA DE CADA PERSONAJE
 	method pokemon() = pokemones.first()
+	
 }
 
 object personaje inherits Human{
     var property position = game.at(2,12)
-    var property image = "player_Up.png"
     var property posicionAnterior = game.at(2, 12)   
+    var property image = "player_Up.png"
     
-      var property oro = 1000
-      const property potis = #{poti,poti}
-      const property superPotis = #{superPoti}
-      const property pokebolas = #{pokebola}
+     var property oro = 1000
+     const property potis = #{poti,poti}
+     const property superPotis = #{superPoti}
+     const property pokebolas = #{pokebola}
        
     
     //POKEMONES, CREO NUEVOS POKEMONES Y VAN A RECIBIR SU POSICION EN BASE SI
@@ -36,7 +34,8 @@ object personaje inherits Human{
    	const pikachu = new Pikachu(position = self.positionPokemon()) 
 
    	//LISTA DE POKEMONES PROPIOS DEL PERSONAJE
-   	const property propios = #{charmileon}
+   	const property propios = #{charmileon,mewTwo,hunter,pikachu}
+    
    
    //RETORNA LA POSICION DEL POKEMON ALIADO
    method positionPokemon() = game.at(8,1)
@@ -97,35 +96,21 @@ object rival inherits Human{
 }
 
 object enfermera{
-   var property position = game.at(12,8)
-    var property image = "enfermera.png"
+	
+   method position() = game.at(12,8)
+   method image() = "enfermera.png"
    
 }
 object pisoCombat inherits Human{
-	var property position = game.at(17,7)
-	const property propios = #{self.aleatorio()}
 	
-	//DEVUELVE EL POKEMON RETORNADO DEL METODO elegir ATRAVEZ DE UN NUMERO ALEATORIO
-	method aleatorio() = self.elejir(self.valorAleatorio())
+	const property lista = [self.pidgeotto(),self.kadabra(),self.hunter(),self.dragonair(),self.picachu()]
+	const property propios = #{lista.anyOne()}
 	
-	//RETORNA UN NUMERO ALEATORIO DEL 0 AL 5
-	method valorAleatorio() = 0.randomUpTo(5).truncate(0)
-	
-	//FUNCION QUE RETORNA UN NUEVO POKEMON SEGUN EL NUMERO
-	method elejir(valor){
-		if(valor == 0){
-			return new Pidgeotto(position = position)
-		}else if(valor == 1){
-			return new Kadabra(position = position)
-		}else if(valor == 2){
-			return  new Hunter(position = position)
-		}else if(valor == 3){
-			return new Dragonair(position = position)
-		}else if(valor == 4){
-			return new Pikachu(position = position)
-		}else { return new MewTwo(position = position)}
-		
-	}
+	method pidgeotto() =new Pidgeotto(position = self.position())
+	method kadabra() = new Kadabra(position = self.position())
+	method hunter() = new Hunter(position = self.position())
+	method dragonair() = new Dragonair(position = self.position())
+	method picachu() = new Pikachu(position = self.position())
 	
 	method position() = game.at(17,7)
 }

@@ -10,21 +10,14 @@ class Pokemon{
 	var property nivel = 4
 	var property position
 	var property estado = 0
+	const property poderes = [ataqueMin,ataqueMed,ataqueAlt]
+		
+	method atacar() = poderes.anyOne().poder()
 	
+	method elegirAtaque(poder) = poderes.get(poder).poder()
 	
-	method atacar(){
-		var ataque = 0.randomUpTo(3).truncate(0)
-		return self.autoattack(ataque)
-	}
-	
-	method autoattack(ataque){
-		 if(ataque == 0){
-			return self.ataqueMin()
-		}else if(ataque == 1){
-			return self.ataqueMed()
-		}else {return self.ataqueAlt()}
-	}
-	
+	method muerto() = self.vida()<=0	 
+	 
 	//EL METODO "atacado" ES SOBRE AL POKEMON QUE SE LE VA A RESTAR VIDA
 	//POR ULTIMO ENVIA EL MENSAJE DE TURNO PARA REALIZAR EL CAMBIO DE TURNO
 	method atacado(damage,edificio) {
@@ -42,11 +35,6 @@ class Pokemon{
 	 		game.say(self,"evolucione vieja!")
 	 	}
 	 }
-	method ataqueMin() = nivel * 10  	
-	
-	method ataqueMed() = nivel * 15 
-		
-	method ataqueAlt() = nivel * 20
 	
 	method aumentarVida(efecto){
 		vida = vida + efecto
@@ -54,6 +42,17 @@ class Pokemon{
 	
 }
 
+object ataqueMin{
+	method poder() = 10  
+}
+
+object ataqueMed{
+	method poder() = 15 
+}
+
+object ataqueAlt{
+	method poder() = 20 
+}
 //del rival
 class Blastoise inherits Pokemon {
 	method image() = "blastoise_" + estado + ".png"

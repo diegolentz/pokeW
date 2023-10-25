@@ -13,9 +13,7 @@ object config {
 	self.configurarTeclas()
 	//self.colision()
 	
-	
-	const city = new City(
-		position = game.at(0,0))
+	const city = new City(/*position = game.at(0,0)*/)
 	
 	game.addVisual(city)
 	
@@ -34,9 +32,9 @@ object config {
     [0, 10], [0, 8], [0, 6], [2, 6], [4, 6], [6, 6],
     [8, 6], [10, 6], [12, 6], [14, 6], [16, 6]]
 
-	posicionesArboles.forEach { posicion =>
-	    const arbol = new Arbol(position = game.at(posicion.first(), posicion.last()))
-	    game.addVisual(arbol)}
+	posicionesArboles.forEach { posicion =>const arbol = new Arbol(position = game.at(posicion.first(), posicion.last()))
+		game.addVisual(arbol)
+	}
 
 	//edificios-------------------------------------------------------------------------------------------
 	
@@ -52,12 +50,12 @@ object config {
 	
 	//carteles-------------------------------------------------------------------------------------------
 	const c1 = new CartelGym(
-		image = "cartelM.png",
+		//image = "cartelM.png",
 		position = game.at(4,14)
 	)
 	game.addVisual(c1)
 		const c2 = new CartelMarket(
-		image = "cartelM.png",
+		//image = "cartelM.png",
 		position = game.at(22,10)
 	)
 	game.addVisual(c2)
@@ -71,8 +69,7 @@ object config {
 
 	arbolesInvisibles.forEach { data =>
 		    const invisible = new ArbolInvisible(
-	        position = game.at(data.first(), data.last()),
-		    image = "arbolInvisible.png")
+	        position = game.at(data.first(), data.last()))
 	    	game.addVisual(invisible)}
 	
 	
@@ -163,7 +160,7 @@ object market inherits Centro{
 	method iniciar(){
 		
 		const market = new Market(
-		position = game.at(0,0))
+		/*position = game.at(0,0)*/)
 	
 	game.addVisual(market)
 	game.addVisual(enfermera)

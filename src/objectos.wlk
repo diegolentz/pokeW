@@ -55,32 +55,11 @@ object pokebola{
 			game.removeVisual(alguien)
 			//ELIMINO AL POKEMON DEL ARRAY DEL ENEMIGO pokePiso
 			pisoCombat.pokemones().remove(alguien)
-			
 			//AGREGO AL POKEMON DEL PISO EN MI ARRAY 
 			personaje.propios().add(alguien)
+			alguien.estado(1)
+			
 			piso.salir()
 	}
-}
+}	
 	
-	/*
-	 
-	 
-	method crearpoKemon(alguien) {
-		
-		
-			if (alguien.toString() == "pidgeotto"){
-				const pokemon = new Pidgeotto(position = game.at(8,1), estado = 1)
-			}else if(alguien.toString() == "kadabra"){
-				const pokemon = new Kadabra(position = game.at(8,1), estado = 1)
-			}else if(alguien.toString() == "hunter"){
-				const pokemon = new Hunter(position = game.at(8,1), estado = 1)
-			}else if(alguien.toString() == "dragonair"){
-				const pokemon= new Dragonair(position = game.at(8,1), estado = 1)		
-			}else if(alguien.toString() == "pikachu"){
-				const pokemon= new Pikachu(position = game.at(8,1), estado = 1)
-			}else{ 
-				const pokemon = new MewTwo(position = game.at(8,1), estado = 1)
-			}
-			return pokemon
-	}
-	 */
