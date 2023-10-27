@@ -29,8 +29,9 @@ class Gimnasio {
 		
 		game.addVisual(personaje.pokemon())
 		game.addVisual(enemigo.pokemon())
-
+		
 		self.configurarTeclas()
+		self.turnoJugador(personaje)
 	}
 	//DEFINO LA ASIGNACION DE TECLAS
 
@@ -142,8 +143,7 @@ class IconPiso inherits Gimnasio{
 				pokebola.usar(enemigo.pokemon())
 				self.salir()
 			}else{
-				self.error("ole gato")
-				//game.say(enemigo.pokemon(),"ooooole gato!")
+				self.error("No tenes pokebolas o no me Atacaste lo suficiente")
 				personaje.pokebolas().remove(personaje.pokebolas().head())
 				personaje.pokemon().atacado(enemigo.pokemon().atacar())
 				game.say(personaje.pokemon(),personaje.pokemon().vida().toString())

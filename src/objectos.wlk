@@ -50,18 +50,16 @@ object pokebola{
 	
 	method precio() = 40
 	
-	method puedeAtrapar(alguien) =  alguien.vida() < 210 and personaje.pokebolas().size() > 0
+	method puedeAtrapar(alguien) =  alguien.vida() < 90 and personaje.pokebolas().size() > 0
 	
 	method usar(alguien){
 			game.removeVisual(alguien)
 			//ELIMINO AL POKEMON DEL ARRAY DEL ENEMIGO pokePiso
 			pisoCombat.pokemones().remove(alguien)
-			//pisoCombat.propios().remove(alguien)
 			alguien.position(personaje.positionPokemon())
 			//AGREGO AL POKEMON DEL PISO EN MI ARRAY 
 			alguien.estado(1)
 			personaje.propios().add(alguien)
-			
 			piso.salir()
 	}
 	

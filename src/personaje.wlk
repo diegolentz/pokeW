@@ -22,7 +22,7 @@ object personaje inherits Human{
      var property oro = 1000
      const property potis = [poti,poti]
      const property superPotis = [superPoti]
-     const property pokebolas = [pokebola,pokebola,pokebola,pokebola,pokebola,pokebola,pokebola,pokebola]
+     const property pokebolas = [pokebola]
        
     
     //POKEMONES, CREO NUEVOS POKEMONES Y VAN A RECIBIR SU POSICION EN BASE SI
