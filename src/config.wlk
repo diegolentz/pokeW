@@ -11,11 +11,8 @@ object config {
 	method iniciar(){
 	
 	self.configurarTeclas()
-	//self.colision()
 	
-	
-	const city = new City(
-		position = game.at(0,0))
+	const city = new City()
 	
 	game.addVisual(city)
 	
@@ -34,9 +31,9 @@ object config {
     [0, 10], [0, 8], [0, 6], [2, 6], [4, 6], [6, 6],
     [8, 6], [10, 6], [12, 6], [14, 6], [16, 6]]
 
-	posicionesArboles.forEach { posicion =>
-	    const arbol = new Arbol(position = game.at(posicion.first(), posicion.last()))
-	    game.addVisual(arbol)}
+	posicionesArboles.forEach { posicion =>const arbol = new Arbol(position = game.at(posicion.first(), posicion.last()))
+		game.addVisual(arbol)
+	}
 
 	//edificios-------------------------------------------------------------------------------------------
 	
@@ -52,12 +49,10 @@ object config {
 	
 	//carteles-------------------------------------------------------------------------------------------
 	const c1 = new CartelGym(
-		image = "cartelM.png",
 		position = game.at(4,14)
 	)
 	game.addVisual(c1)
 		const c2 = new CartelMarket(
-		image = "cartelM.png",
 		position = game.at(22,10)
 	)
 	game.addVisual(c2)
@@ -71,8 +66,7 @@ object config {
 
 	arbolesInvisibles.forEach { data =>
 		    const invisible = new ArbolInvisible(
-	        position = game.at(data.first(), data.last()),
-		    image = "arbolInvisible.png")
+	        position = game.at(data.first(), data.last()))
 	    	game.addVisual(invisible)}
 	
 	
@@ -108,22 +102,25 @@ object config {
 	}
 	
 	method teclasMercado(){
-		
-		keyboard.num1().onPressDo({
-			personaje.comprarItem(poti)	
+				keyboard.num1().onPressDo({
+				personaje.comprarItem(personaje.potis(),poti)
 			})
-		keyboard.num2().onPressDo({
-			personaje.comprarItem(superPoti)	
+				keyboard.num2().onPressDo({
+				personaje.comprarItem(personaje.superPotis(),superPoti)
 			})
-		keyboard.v().onPressDo({
-			personaje.venderItem(poti)
+				keyboard.num3().onPressDo({
+				personaje.comprarItem(personaje.pokebolas(),pokebola)
 			})
-		keyboard.s().onPressDo({
-			game.say(enfermera,"Saliendo")
-			game.clear()
-			personaje.position(personaje.posicionAnterior())
-			self.iniciar()
-			})	
+			keyboard.num4().onPressDo({
+				personaje.venderItem(personaje.potis(),poti)
+			})
+			keyboard.num5().onPressDo({
+				personaje.venderItem(personaje.superPotis(),superPoti)
+			})
+			keyboard.e().onPressDo({
+				game.clear()
+				self.iniciar()
+			})
 	}
 	
 }
@@ -147,11 +144,11 @@ object piso inherits IconPiso(enemigo = pisoCombat){
 	
 	method iniciar(){
 		
-	const piso = new PeleaPiso()
-	
-	game.addVisual(piso)
-	game.addVisual(pisoCombat)
-	self.pelea()  
+		const piso = new PeleaPiso()
+		
+		game.addVisual(piso)
+		game.addVisual(pisoCombat)
+		self.pelea()  
 	}
 }
 
@@ -160,7 +157,7 @@ object market inherits Centro{
 	method iniciar(){
 		
 		const market = new Market(
-		position = game.at(0,0))
+		/*position = game.at(0,0)*/)
 	
 	game.addVisual(market)
 	game.addVisual(enfermera)
