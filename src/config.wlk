@@ -11,9 +11,8 @@ object config {
 	method iniciar(){
 	
 	self.configurarTeclas()
-	//self.colision()
 	
-	const city = new City(/*position = game.at(0,0)*/)
+	const city = new City()
 	
 	game.addVisual(city)
 	
@@ -50,12 +49,10 @@ object config {
 	
 	//carteles-------------------------------------------------------------------------------------------
 	const c1 = new CartelGym(
-		//image = "cartelM.png",
 		position = game.at(4,14)
 	)
 	game.addVisual(c1)
 		const c2 = new CartelMarket(
-		//image = "cartelM.png",
 		position = game.at(22,10)
 	)
 	game.addVisual(c2)

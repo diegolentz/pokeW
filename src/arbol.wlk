@@ -10,16 +10,13 @@ class Arbol {
     
     method teEncontro() {
         personaje.position(personaje.posicionAnterior())
-        //game.say(personaje, "¡Cuidado, el arbol...")
     }
 }
 
 class ArbolInvisible inherits Arbol {
    	
-    override method teEncontro() {
-    	// super()
-         //personaje.position(personaje.posicionAnterior())
-    }
+   	override method image() = "arbolInvisible.png"
+   	
 }
 
 class CartelMarket inherits Arbol{

@@ -32,7 +32,6 @@ class Gimnasio {
 		game.addVisual(enemigo.pokemon())
 
 		self.configurarTeclas()
-		//self.turno()
 	}
 	//DEFINO LA ASIGNACION DE TECLAS
 
@@ -63,13 +62,16 @@ class Gimnasio {
 		keyboard.num4().onPressDo({
 			poti.usar(personaje.pokemon())
 			game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
+			game.say(enemigo.pokemon(),"Atacando")
 			personaje.pokemon().atacado(enemigo.pokemon().atacar())
-			
+			game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
 		})
 		keyboard.num5().onPressDo({
 			superPoti.usar()
 			game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
+			game.say(enemigo.pokemon(),"Atacando")
 			personaje.pokemon().atacado(enemigo.pokemon().atacar())
+			game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
 				
 		})
 	}
@@ -78,10 +80,7 @@ class Gimnasio {
 		
 	method turnoJugador(pj){
 		//VALIDO SI EL POKEMON ESTA VIVO , SI LA VIDA ES MENOR A 0 REMUEVE AL POKEMON 
-		if(not pj.pokemon().muerto()){	
-			//EN ESTE MOMENTO PUEDO SELECCIONAR EL ATAQUE
-			game.say(pj.pokemon(), "Vida:" + pj.pokemon().vida().toString())
-		}else{
+		if(pj.pokemon().muerto()){	
 			self.pokemonMuerto(pj)
 			if(self.estanTodosMuertos(pj)){
 				self.salir()		
@@ -89,6 +88,7 @@ class Gimnasio {
 				game.addVisual(pj.pokemon())
 			}	
 		}
+		game.say(pj.pokemon(), "Vida:" + pj.pokemon().vida().toString())
 	}
 	
 	//METODO QUE ELIMINA UN POKEMON CUANDO SE MUERE , RECIBE POR PARAMETRO 
@@ -123,8 +123,7 @@ class Centro {
 	}
 	
 	method mostrarPrecios() {
-        var mensaje =["¡Bienvenido al market!","Pociones: " + poti.precio() + " monedas","SuperPotis: " + superPoti.precio() + " monedas."] 
-
+        const mensaje =["¡Bienvenido al market!","Pociones: " + poti.precio() + " monedas","SuperPotis: " + superPoti.precio() + " monedas."] 
         mensaje.forEach({algo => game.say(enfermera,algo)})
     }
 }

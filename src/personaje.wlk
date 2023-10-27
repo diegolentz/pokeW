@@ -76,7 +76,7 @@ object personaje inherits Human{
 	
 	method recompensa(cash) {
 		oro += cash
-		return cash
+		//return cash
 	}
 }
 
