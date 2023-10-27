@@ -8,7 +8,6 @@ import objectos.*
 
 class Gimnasio {
 	var property position = 0	
-	//var  esJugador = true
 	var  enemigo
 
 	method image() = "gimnasio.png"
@@ -143,7 +142,11 @@ class IconPiso inherits Gimnasio{
 				pokebola.usar(enemigo.pokemon())
 				self.salir()
 			}else{
-				game.say(self,"ooooole gato!")
+				self.error("ole gato")
+				//game.say(enemigo.pokemon(),"ooooole gato!")
+				personaje.pokebolas().remove(personaje.pokebolas().head())
+				personaje.pokemon().atacado(enemigo.pokemon().atacar())
+				game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
 			}
 		})
 	}
@@ -152,6 +155,7 @@ class IconPiso inherits Gimnasio{
 		super()
 		enemigo.propios().clear()
 		enemigo.propios().add(enemigo.lista().anyOne())
+		
 	}
 
 }
