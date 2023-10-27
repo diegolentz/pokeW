@@ -8,7 +8,7 @@ import objectos.*
 
 class Gimnasio {
 	var property position = 0	
-	var  esJugador = true
+	//var  esJugador = true
 	var  enemigo
 
 	method image() = "gimnasio.png"
@@ -32,7 +32,7 @@ class Gimnasio {
 		game.addVisual(enemigo.pokemon())
 
 		self.configurarTeclas()
-		self.turno()
+		//self.turno()
 	}
 	//DEFINO LA ASIGNACION DE TECLAS
 
@@ -41,83 +41,54 @@ class Gimnasio {
 			game.say(personaje.pokemon(), "Primer Ataque")
 			//"atacado" ES UN METODO DEL POKEMON,RECIBE POR PARAMETRO 
 			// EL ATAQUE SELECCIONADO, EL CUAL RETORNA UN DAÑO
-			enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(0),self)
-			
-			personaje.pokemon().atacado(enemigo.pokemon().atacar(),self)
+			enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(0))
+			self.turnoJugador(enemigo)
+			personaje.pokemon().atacado(enemigo.pokemon().atacar())
+			self.turnoJugador(personaje)
 		})
 		keyboard.num2().onPressDo({
 			game.say(personaje.pokemon(), "Segundo Ataque")
-			enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(1),self)	
-			personaje.pokemon().atacado(enemigo.pokemon().atacar(),self)
+			enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(1))	
+			self.turnoJugador(enemigo)
+			personaje.pokemon().atacado(enemigo.pokemon().atacar())
+			self.turnoJugador(personaje)
 		})
 		keyboard.num3().onPressDo({
 			game.say(personaje.pokemon(), "Tercer Ataque")
-			enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(2),self)
-			personaje.pokemon().atacado(enemigo.pokemon().atacar(),self)
+			enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(2))
+			self.turnoJugador(enemigo)
+			personaje.pokemon().atacado(enemigo.pokemon().atacar())
+			self.turnoJugador(personaje)
 		})
 		keyboard.num4().onPressDo({
 			poti.usar(personaje.pokemon())
 			game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
-			personaje.pokemon().atacado(enemigo.pokemon().atacar(),self)
-			//self.turno()
+			personaje.pokemon().atacado(enemigo.pokemon().atacar())
+			
 		})
 		keyboard.num5().onPressDo({
 			superPoti.usar()
 			game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
-			personaje.pokemon().atacado(enemigo.pokemon().atacar(),self)
-			//self.turnoJugador()	
+			personaje.pokemon().atacado(enemigo.pokemon().atacar())
+				
 		})
 	}
 	
 	method estanTodosMuertos(pj) = pj.pokemones().all({pokemon=>pokemon.muerto()})
-	
-	
-	//SISTEMA DE TURNOS 
-	method turno(){
-		//EVALUO LA BANDERA JUGADOR, COMO SIEMPRE QUIERO QUE COMIENCE
-		//EL JUGADOR, ARRANCO "esJugador" EN true
-		if(esJugador){
-			self.turnoJugador()//LLAMA AL TURNO DEL JUGADOR
-		}else{
-			self.turnoRival()//LLAMA AL TURNO DEL RIVAL
-		}
-	}
 		
-	method turnoJugador(){
+	method turnoJugador(pj){
 		//VALIDO SI EL POKEMON ESTA VIVO , SI LA VIDA ES MENOR A 0 REMUEVE AL POKEMON 
-		if(not personaje.pokemon().muerto()){	
+		if(not pj.pokemon().muerto()){	
 			//EN ESTE MOMENTO PUEDO SELECCIONAR EL ATAQUE
-			game.say(personaje.pokemon(), "Vida:" + personaje.pokemon().vida().toString())
-			game.say(personaje.pokemon(), "Turno personaje")
-			
-			esJugador = false //CAMBIO LA BANDERA
+			game.say(pj.pokemon(), "Vida:" + pj.pokemon().vida().toString())
 		}else{
-			self.pokemonMuerto(personaje)
-			if(self.estanTodosMuertos(personaje)){
+			self.pokemonMuerto(pj)
+			if(self.estanTodosMuertos(pj)){
 				self.salir()		
 			}else{			
-				game.addVisual(personaje.pokemon())
+				game.addVisual(pj.pokemon())
 			}	
 		}
-	}
-			
-	method turnoRival() {
-		  if(not enemigo.pokemon().muerto()){
-			esJugador = true
-			game.say(enemigo.pokemon(),"Vida:" + enemigo.pokemon().vida().toString())
-		  	game.say(enemigo.pokemon(), "Turno Enemigo")
-			//personaje.pokemon().atacado(enemigo.pokemon().atacar(),self)
-		}else{
-			personaje.pokemon().sube()
-			personaje.pokemon().evoluciona(personaje.pokemon())
-			game.say(personaje.pokemon(),"recompensa " + personaje.recompensa(75))
-			self.pokemonMuerto(enemigo)
-			if(self.estanTodosMuertos(enemigo)){
-				self.salir()		
-			}else{			
-				game.addVisual(enemigo.pokemon())
-			}
-		} 	
 	}
 	
 	//METODO QUE ELIMINA UN POKEMON CUANDO SE MUERE , RECIBE POR PARAMETRO 
@@ -136,10 +107,11 @@ class Gimnasio {
 }
 
 class Centro {
-	var property image = "mercado.png"
 
 	var property position = game.at(0,0)
 
+	method image() = "mercado.png"
+	
 	method teEncontro(){
 		game.clear()
 		personaje.position(personaje.posicionAnterior())
@@ -151,12 +123,9 @@ class Centro {
 	}
 	
 	method mostrarPrecios() {
-        var mensaje = "¡Bienvenido al market!"
-        var mensaje2 = "Pociones: " + poti.precio() + " monedas"
-        var mensaje3 ="SuperPotis: " + superPoti.precio() + " monedas."
-        
-        const array = [mensaje,mensaje2,mensaje3]
-        array.forEach({algo => game.say(enfermera,algo)})
+        var mensaje =["¡Bienvenido al market!","Pociones: " + poti.precio() + " monedas","SuperPotis: " + superPoti.precio() + " monedas."] 
+
+        mensaje.forEach({algo => game.say(enfermera,algo)})
     }
 }
 

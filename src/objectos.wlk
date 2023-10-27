@@ -7,7 +7,7 @@ import config.*
 // Cura a todos los pokemones 
 object superPoti {
 	const efecto = 60
-	const property precio = 100
+	method precio() = 100
 	
 	method validacion(){
 		if (personaje.superPotis().isEmpty()){
@@ -27,13 +27,17 @@ object superPoti {
 // Cura solo al que estas usando
 object poti{
 	const efecto = 30
-	const property precio = 40
+	
+	method  precio() = 40
 	
 	method validacion(){
-		if (personaje.potis().isEmpty()){
+		if (self.tiene()){
 			self.error("No tenes potis!!")
 		}
 	}
+	
+	method tiene() = personaje.potis().isEmpty()
+	
 	method usar(pokemon){
 		self.validacion()
 		personaje.potis().remove(self)
@@ -43,7 +47,8 @@ object poti{
 }
 
 object pokebola{
-	const property precio = 40
+	
+	method precio() = 40
 	
 	method puedeAtrapar(alguien) =  alguien.vida() > 10 and personaje.pokebolas().size() > 0
 	

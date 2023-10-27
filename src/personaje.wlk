@@ -40,8 +40,10 @@ object personaje inherits Human{
    //RETORNA LA POSICION DEL POKEMON ALIADO
    method positionPokemon() = game.at(8,1)
    
+   method validacionVenta(tipo,item) =tipo.contains(item)
+   
    method venderItem(tipo,item){
-		if (tipo.contains(item)) {
+		if (self.validacionVenta(tipo,item)) {
 		    game.say(enfermera,"vendiste " + item)
 			oro += item.precio()
 		    tipo.remove(item)
@@ -49,13 +51,14 @@ object personaje inherits Human{
 	    	self.error("No tenes este item")	
     	}
 	}
-    	
+   	
+   	method validarCompra(item) = oro >= item.precio()
     
     method comprarItem(tipo,item) {
-    if (oro >= item.precio()) {
-      game.say(enfermera,"compraste " + item)
-      tipo.add(item)
-      oro -= item.precio()
+	    if (self.validarCompra(item)) {
+	      game.say(enfermera,"compraste " + item)
+	      tipo.add(item)
+	      oro -= item.precio()
     }else{
     	self.error("oro insuficiente")
     }
