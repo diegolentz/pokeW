@@ -20,21 +20,21 @@ object personaje inherits Human{
     var property image = "player_Up.png"
     
      var property oro = 1000
-     const property potis = #{poti,poti}
-     const property superPotis = #{superPoti}
-     const property pokebolas = #{pokebola}
+     const property potis = [poti,poti]
+     const property superPotis = [superPoti]
+     const property pokebolas = [pokebola]
        
     
     //POKEMONES, CREO NUEVOS POKEMONES Y VAN A RECIBIR SU POSICION EN BASE SI
     //ES RIVAL O PERSONAJE
 
    	const charmileon =  new Charmileon(position = self.positionPokemon())
-   	const mewTwo = new MewTwo(position = self.positionPokemon())
-   	const hunter = new Hunter(position = self.positionPokemon())
-   	const pikachu = new Pikachu(position = self.positionPokemon()) 
+   	const mewTwo = new MewTwo(position = self.positionPokemon(),estado = 1)
+   	const hunter = new Hunter(position = self.positionPokemon(),estado = 1)
+   	const pikachu = new Pikachu(position = self.positionPokemon(),estado = 1) 
 
    	//LISTA DE POKEMONES PROPIOS DEL PERSONAJE
-   	const property propios = #{charmileon,mewTwo,hunter,pikachu}
+   	const property propios = #{charmileon}
     
    
    //RETORNA LA POSICION DEL POKEMON ALIADO
@@ -105,15 +105,14 @@ object enfermera{
    
 }
 object pisoCombat inherits Human{
-	
-	const property lista = [self.pidgeotto(),self.kadabra(),self.hunter(),self.dragonair(),self.picachu()]
-	const property propios = #{lista.anyOne()}
-	
-	method pidgeotto() =new Pidgeotto(position = self.position())
-	method kadabra() = new Kadabra(position = self.position())
-	method hunter() = new Hunter(position = self.position())
-	method dragonair() = new Dragonair(position = self.position())
-	method picachu() = new Pikachu(position = self.position())
-	
+	const property propios = #{self.lista().anyOne()}
 	method position() = game.at(17,7)
+	
+	method lista() = [self.pidgeotto(),self.kadabra(),self.hunter(),self.dragonair(),self.picachu()]
+	method pidgeotto() =new Pidgeotto(position = self.position() ,estado = 0)
+	method kadabra() = new Kadabra(position = self.position(),estado = 0)
+	method hunter() = new Hunter(position = self.position(),estado = 0)
+	method dragonair() = new Dragonair(position = self.position(),estado = 0)
+	method picachu() = new Pikachu(position = self.position(),estado = 0)
+	
 }
