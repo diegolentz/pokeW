@@ -136,6 +136,10 @@ object gimnasio inherits Gimnasio(enemigo = rival){
 		game.addVisual(personaje)
 		game.addVisual(batalla)
 		game.addVisual(rival)	
+		
+		if(self.estanTodosMuertos(personaje)){
+			self.salir()
+		}
 		self.pelea()
 	}
 }
@@ -148,6 +152,9 @@ object piso inherits IconPiso(enemigo = pisoCombat){
 		
 		game.addVisual(piso)
 		game.addVisual(pisoCombat)
+		if(self.estanTodosMuertos(personaje)){
+			self.salir()
+		}
 		self.pelea()  
 	}
 }
