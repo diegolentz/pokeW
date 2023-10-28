@@ -34,7 +34,7 @@ object personaje inherits Human{
    	const pikachu = new Pikachu(position = self.positionPokemon(),estado = 1) 
 
    	//LISTA DE POKEMONES PROPIOS DEL PERSONAJE
-   	const property propios = #{charmileon}
+   	const property propios = #{charmileon,pikachu,mewTwo,hunter}
     
    
    //RETORNA LA POSICION DEL POKEMON ALIADO

@@ -12,8 +12,6 @@ class City inherits Mapa{
 
 class Batalla inherits Mapa{
 	method image() = "peleaPiso.jpg"
-	
-
 }
 class Market inherits Mapa{
 	method image() = "centro_pokemon.jpg"

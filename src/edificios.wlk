@@ -18,20 +18,20 @@ class Gimnasio {
 		self.adentro()		
 	}		
 	
-	 method adentro(){
+	method adentro(){
 		gimnasio.iniciar()
 	}
 	
 	method pelea(){
 	//AGREGA LOS POKEMONES PROPIOS DEL PERSONAJE A LA LISTA DEL PERSONAJE
-		personaje.iniciaBatalla(personaje.propios())
+		personaje.iniciaBatalla(personaje.propios().filter({pokemon=> not pokemon.muerto()}))
 		enemigo.iniciaBatalla(enemigo.propios())
 		
 		game.addVisual(personaje.pokemon())
 		game.addVisual(enemigo.pokemon())
 		
 		self.configurarTeclas()
-		self.turnoJugador(personaje)
+		
 	}
 	//DEFINO LA ASIGNACION DE TECLAS
 
@@ -72,24 +72,30 @@ class Gimnasio {
 			game.say(enemigo.pokemon(),"Atacando")
 			personaje.pokemon().atacado(enemigo.pokemon().atacar())
 			game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
-				
 		})
 	}
 	
-	method estanTodosMuertos(pj) = pj.pokemones().all({pokemon=>pokemon.muerto()})
-		
 	method turnoJugador(pj){
-		//VALIDO SI EL POKEMON ESTA VIVO , SI LA VIDA ES MENOR A 0 REMUEVE AL POKEMON 
-		if(pj.pokemon().muerto()){	
-			self.pokemonMuerto(pj)
-			if(self.estanTodosMuertos(pj)){
-				self.salir()		
-			}else{			
-				game.addVisual(pj.pokemon())
-			}	
-		}
+		if(pj.pokemon().muerto()){
+			self.estaMuerto(pj)//VALIDO SI EL POKEMON ESTA VIVO 
+		} 
 		game.say(pj.pokemon(), "Vida:" + pj.pokemon().vida().toString())
 	}
+	
+	method estaMuerto(pj){
+		self.pokemonMuerto(pj)
+		self.murieron(pj)
+	}
+	
+	method estanTodosMuertos(pj) = pj.propios().all({pokemon=>pokemon.muerto()})
+	
+	method murieron(pj){
+		if(self.estanTodosMuertos(pj)) {
+			self.salir()
+		}				
+		game.addVisual(pj.pokemon())	
+	}
+		
 	
 	//METODO QUE ELIMINA UN POKEMON CUANDO SE MUERE , RECIBE POR PARAMETRO 
 	//EL JUGADOR QUE CORRESPONDE , SI personaje O rival
@@ -155,7 +161,6 @@ class IconPiso inherits Gimnasio{
 		super()
 		enemigo.propios().clear()
 		enemigo.propios().add(enemigo.lista().anyOne())
-		
 	}
 
 }
