@@ -128,7 +128,7 @@ object config {
 object gimnasio inherits Gimnasio(enemigo = rival){
 	
 	override method position() = game.at(0,0)
-	
+
 	method iniciar(){
 		const batalla = new Batalla()
 		
@@ -136,15 +136,15 @@ object gimnasio inherits Gimnasio(enemigo = rival){
 		game.addVisual(personaje)
 		game.addVisual(batalla)
 		game.addVisual(rival)	
-		
-		if(self.estanTodosMuertos(personaje)){
-			self.salir()
-		}
+		self.murieron(personaje)
 		self.pelea()
 	}
+	 
+	 
 }
 
 object piso inherits IconPiso(enemigo = pisoCombat){
+	
 	
 	method iniciar(){
 		
@@ -152,11 +152,11 @@ object piso inherits IconPiso(enemigo = pisoCombat){
 		
 		game.addVisual(piso)
 		game.addVisual(pisoCombat)
-		if(self.estanTodosMuertos(personaje)){
-			self.salir()
-		}
+		self.murieron(personaje)
 		self.pelea()  
 	}
+	 
+	 
 }
 
 object market inherits Centro{

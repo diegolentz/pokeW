@@ -11,7 +11,9 @@ class Gimnasio {
 	var  enemigo
 
 	method image() = "gimnasio.png"
-
+	
+	
+	
 	method teEncontro(){
 		game.clear()
 		personaje.position(personaje.posicionAnterior())
@@ -21,6 +23,8 @@ class Gimnasio {
 	method adentro(){
 		gimnasio.iniciar()
 	}
+	
+	
 	
 	method pelea(){
 	//AGREGA LOS POKEMONES PROPIOS DEL PERSONAJE A LA LISTA DEL PERSONAJE
@@ -84,18 +88,20 @@ class Gimnasio {
 	
 	method estaMuerto(pj){
 		self.pokemonMuerto(pj)
-		self.murieron(pj)
+		self.agregarPokemon(pj)
 	}
 	
 	method estanTodosMuertos(pj) = pj.propios().all({pokemon=>pokemon.muerto()})
 	
+	method agregarPokemon(pj){
+		self.murieron(pj)
+		game.addVisual(pj.pokemon())	
+	}
+	
 	method murieron(pj){
 		if(self.estanTodosMuertos(pj)) {
 			self.salir()
-		}				
-		game.addVisual(pj.pokemon())	
 	}
-		
 	
 	//METODO QUE ELIMINA UN POKEMON CUANDO SE MUERE , RECIBE POR PARAMETRO 
 	//EL JUGADOR QUE CORRESPONDE , SI personaje O rival
