@@ -10,10 +10,12 @@ object superPoti {
 	method precio() = 100
 	
 	method validacion(){
-		if (personaje.superPotis().isEmpty()){
+		if (self.tiene()){
 			self.error("No tenes superPotis!!")
 		}
 	}
+	
+	method tiene() = personaje.superPotis().isEmpty()
 	
 	method usar(){
 		self.validacion()

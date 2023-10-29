@@ -43,25 +43,24 @@ object personaje inherits Human{
    method validacionVenta(tipo,item) =tipo.contains(item)
    
    method venderItem(tipo,item){
-		if (self.validacionVenta(tipo,item)) {
-		    game.say(enfermera,"vendiste " + item)
-			oro += item.precio()
-		    tipo.remove(item)
-    	}else{
+		if (not self.validacionVenta(tipo,item)) {
 	    	self.error("No tenes este item")	
     	}
+		game.say(enfermera,"vendiste " + item)
+		oro += item.precio()
+	    tipo.remove(item)
+    	
 	}
    	
    	method validarCompra(item) = oro >= item.precio()
     
     method comprarItem(tipo,item) {
-	    if (self.validarCompra(item)) {
-	      game.say(enfermera,"compraste " + item)
-	      tipo.add(item)
-	      oro -=  item.precio()
-    }else{
-    	self.error("oro insuficiente")
-    }
+	    if (not self.validarCompra(item)) {
+    		self.error("oro insuficiente")
+    	}
+	    game.say(enfermera,"compraste " + item)
+	    tipo.add(item)
+	    oro -=  item.precio()
   }
   
   
