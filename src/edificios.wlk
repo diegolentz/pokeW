@@ -12,8 +12,6 @@ class Gimnasio {
 
 	method image() = "gimnasio.png"
 	
-	
-	
 	method teEncontro(){
 		game.clear()
 		personaje.position(personaje.posicionAnterior())
@@ -45,23 +43,23 @@ class Gimnasio {
 			//"atacado" ES UN METODO DEL POKEMON,RECIBE POR PARAMETRO 
 			// EL ATAQUE SELECCIONADO, EL CUAL RETORNA UN DAÑO
 			enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(0))
-			self.turnoJugador(enemigo)
+			self.win(enemigo)
 			personaje.pokemon().atacado(enemigo.pokemon().atacar())
-			self.turnoJugador(personaje)
+			self.defeat(personaje)
 		})
 		keyboard.num2().onPressDo({
 			game.say(personaje.pokemon(), "Segundo Ataque")
 			enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(1))	
-			self.turnoJugador(enemigo)
+			self.win(enemigo)
 			personaje.pokemon().atacado(enemigo.pokemon().atacar())
-			self.turnoJugador(personaje)
+			self.defeat(personaje)
 		})
 		keyboard.num3().onPressDo({
 			game.say(personaje.pokemon(), "Tercer Ataque")
 			enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(2))
-			self.turnoJugador(enemigo)
+			self.win(enemigo)
 			personaje.pokemon().atacado(enemigo.pokemon().atacar())
-			self.turnoJugador(personaje)
+			self.defeat(personaje)
 		})
 		keyboard.num4().onPressDo({
 			poti.usar(personaje.pokemon())
@@ -84,6 +82,22 @@ class Gimnasio {
 			self.estaMuerto(pj)//VALIDO SI EL POKEMON ESTA VIVO 
 		} 
 		game.say(pj.pokemon(), "Vida:" + pj.pokemon().vida().toString())
+	} 
+	
+	method win(pj){
+		if(self.estanTodosMuertos(pj)){
+			personaje.propios().forEach({pokemon=>pokemon.sube(pokemon)})	
+			self.salir()	
+		}
+		self.turnoJugador(pj)
+	}
+	
+	method defeat(pj){
+		if(self.estanTodosMuertos(pj)){
+			enemigo.propios().forEach{pokemon => pokemon.vida(200)}
+			self.salir()			
+		}
+		self.turnoJugador(pj)
 	}
 	
 	method estaMuerto(pj){
@@ -93,29 +107,27 @@ class Gimnasio {
 	
 	method estanTodosMuertos(pj) = pj.propios().all({pokemon=>pokemon.muerto()})
 	
-	method agregarPokemon(pj){
-		self.murieron(pj)
-		game.addVisual(pj.pokemon())	
-	}
+	method agregarPokemon(pj){game.addVisual(pj.pokemon())}
 	
-	method murieron(pj){
-		if(self.estanTodosMuertos(pj)) {
+	method murieron(){
+		if(self.noPuedenEntrar() ) {
 			self.salir()
+		}
 	}
-	
 	//METODO QUE ELIMINA UN POKEMON CUANDO SE MUERE , RECIBE POR PARAMETRO 
 	//EL JUGADOR QUE CORRESPONDE , SI personaje O rival
 	method pokemonMuerto(pj){
 		game.removeVisual(pj.pokemon())
-		pj.pokemones().remove(pj.pokemon()) //ada podria hacer un sort con vida para que quede a lo ultimo el mas lastimado
+		pj.pokemones().remove(pj.pokemon()) 
 	}
 	//METODO QUE VUELVE A LA PANTALLA INICIAL
 	method salir(){
-		enemigo.propios().forEach{pokemon => pokemon.vida(200)}
-		personaje.pokemones().clear()
+		enemigo.pokemones().clear()
 		game.clear()
 		config.iniciar()
 	}
+	
+	method noPuedenEntrar() = self.estanTodosMuertos(personaje) or self.estanTodosMuertos(enemigo)
 }
 
 class Centro {
@@ -134,10 +146,9 @@ class Centro {
 		market.iniciar()
 	}
 	
-	method mostrarPrecios() {
-        const mensaje =["¡Bienvenido al market!","Pociones: " + poti.precio() + " monedas","SuperPotis: " + superPoti.precio() + " monedas."] 
-        mensaje.forEach({algo => game.say(enfermera,algo)})
-    }
+	method mostrarPrecios() = ["¡Bienvenido al market!","Pociones: " + poti.precio() + " monedas","SuperPotis: " + superPoti.precio() + " monedas."] 
+
+    method mostrarMensajes() {self.mostrarPrecios().forEach({mensaje=> game.say(enfermera,mensaje)})}
 }
 
 class IconPiso inherits Gimnasio{
@@ -151,15 +162,15 @@ class IconPiso inherits Gimnasio{
 	override method configurarTeclas(){
 		super()
 		keyboard.num6().onPressDo({
-			if(pokebola.puedeAtrapar(enemigo.pokemon())){
-				pokebola.usar(enemigo.pokemon())
-				self.salir()
-			}else{
+			if(not pokebola.puedeAtrapar(enemigo.pokemon())){
 				self.error("No tenes pokebolas o no me Atacaste lo suficiente")
 				personaje.pokebolas().remove(personaje.pokebolas().head())
 				personaje.pokemon().atacado(enemigo.pokemon().atacar())
 				game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
 			}
+			pokebola.usar(enemigo.pokemon())
+				game.say(personaje.pokemon(),"Atrapado")
+				self.salir()
 		})
 	}
 

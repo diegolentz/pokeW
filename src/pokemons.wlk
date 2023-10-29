@@ -22,20 +22,23 @@ class Pokemon{
 	//POR ULTIMO ENVIA EL MENSAJE DE TURNO PARA REALIZAR EL CAMBIO DE TURNO
 	method atacado(damage) {vida = vida - damage}
  
- 	method sube(){ 
- 		 nivel =nivel + 1
- 		 return nivel
- 		 }
+ 	method sube(pokemon){
+ 		nivel =nivel + 1
+ 		if(self.evolucion(pokemon) ){
+ 			pokemon.estado(2)
+ 		}
+ 	}
+ 	
 	 method evoluciona(elmio){
-	 	if(elmio.nivel() == 5){
+	 	if(self.evolucion(elmio)){
 	 		elmio.estado(2)
 	 		game.say(self,"evolucione vieja!")
 	 	}
 	 }
+	 
+	method evolucion(pokemon) = pokemon.nivel() >= 5 
 	
-	method aumentarVida(efecto){
-		vida = vida + efecto
-	}
+	method aumentarVida(efecto){vida = vida + efecto}
 	
 }
 
