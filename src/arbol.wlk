@@ -40,3 +40,15 @@ class CartelGym inherits CartelMarket{
 	}
 	
 }
+
+object cartelDeCompra{
+	 method image() = "cartelDeCompras.png"
+	
+	 method position() = game.at(13,1)
+}
+
+object cartelDePelea{
+	 method image() = "cartelDePelea.png"
+	
+	 method position() = game.at(17,1)
+}

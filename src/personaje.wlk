@@ -19,7 +19,7 @@ object personaje inherits Human{
     var property posicionAnterior = game.at(2, 12)   
     var property image = "player_Up.png"
     
-     var property oro = 1000
+     var property oro = 100
      const property potis = [poti,poti]
      const property superPotis = [superPoti]
      const property pokebolas = [pokebola]
@@ -58,11 +58,13 @@ object personaje inherits Human{
 	    if (self.validarCompra(item)) {
 	      game.say(enfermera,"compraste " + item)
 	      tipo.add(item)
-	      oro -= item.precio()
+	      oro -=  item.precio()
     }else{
     	self.error("oro insuficiente")
     }
   }
+  
+  
    
     method irA(nuevaPosicion) {
 		posicionAnterior = position
