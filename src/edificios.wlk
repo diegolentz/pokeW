@@ -110,7 +110,7 @@ class Gimnasio {
 	method agregarPokemon(pj){game.addVisual(pj.pokemon())}
 	
 	method murieron(){
-		if(self.noPuedenEntrar() ) {
+		if(self.noPuedenEntrar()) {
 			self.salir()
 		}
 	}
