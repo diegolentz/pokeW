@@ -54,7 +54,8 @@ class Gimnasio {
 	
 	method win(pj){
 		if(self.estanTodosMuertos(pj)){
-			personaje.propios().forEach({pokemon=>pokemon.sube(pokemon)})	
+			personaje.propios().forEach({pokemon=>pokemon.sube(pokemon)})
+			personaje.recompensa(100)	
 			self.salir()	
 		}
 		self.turnoJugador(pj)
