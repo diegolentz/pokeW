@@ -3,68 +3,58 @@ import wollok.game.*
 import pokemons.*
 import config.*
 
+class Item {
+    var property precio = 0
 
-// Cura a todos los pokemones 
-object superPoti {
-	const efecto = 60
-	method precio() = 100
-	
-	method validacion(){
-		if (self.tiene()){
-			self.error("No tenes superPotis!!")
-		}
-	}
-	
-	method tiene() = personaje.superPotis().isEmpty()
-	
-	method usar(){
-		self.validacion()
-		game.say(personaje.pokemon(),"Has usado una superpoti")
-		personaje.superPotis().remove(self)
-		personaje.propios().forEach({poke=>poke.aumentarVida(efecto)})
-		game.say(personaje.pokemon(),"Vida:" + personaje.pokemon().vida().toString())
-	}
+    method validacion(item) {
+        if (self.tiene(item)) {
+            self.error("No tienes este ítem.")
+        }
+    }
+    method tiene(item) = false
+    method usar(pokemon) {
+        self.validacion(self)
+        self.efecto(pokemon)
+    }
+    method efecto(pokemon) {
+        game.say(personaje.pokemon(), "Has usado una cura")
+        game.say(personaje.pokemon(), "Vida:" + personaje.pokemon().vida().toString())
+    }
 }
 
-// Cura solo al que estas usando
-object poti{
-	const efecto = 30
-	
-	method  precio() = 40
-	
-	method validacion(){
-		if (self.tiene()){
-			self.error("No tenes potis!!")
-		}
-	}
-	
-	method tiene() = personaje.potis().isEmpty()
-	
-	method usar(pokemon){
-		self.validacion()
-		personaje.potis().remove(self)
-		game.say(personaje.pokemon(),"Has usado una poti")
-		pokemon.aumentarVida(efecto)
-	}
-}
+object superPoti inherits Item(precio = 100) {
+    const efecto = 60
 
-object pokebola{
-	
-	method precio() = 40
-	
-	method puedeAtrapar(alguien) =  alguien.vida() < 90 and personaje.pokebolas().size() > 0
-	
-	method usar(alguien){
-			game.removeVisual(alguien)
-			//ELIMINO AL POKEMON DEL ARRAY DEL ENEMIGO pokePiso
-			pisoCombat.pokemones().remove(alguien)
-			alguien.position(personaje.positionPokemon())
-			//AGREGO AL POKEMON DEL PISO EN MI ARRAY 
-			alguien.estado(1)
-			personaje.propios().add(alguien)
-			piso.salir()
-	}
-	
-	
-}	
-	
+    override method precio() = 100
+    override method tiene(item) = !personaje.superPotis().contains(item)
+    override method efecto(pokemon) {
+    	super(pokemon)
+        personaje.superPotis().remove(self)
+        personaje.propios().forEach({ poke => poke.aumentarVida(efecto) })
+    }
+}
+object poti inherits Item {
+    const efecto = 30
+
+    override method precio() = 40
+    override method tiene(item) = !personaje.potis().contains(item)
+    override method efecto(pokemon) {
+    	super(pokemon)
+        personaje.potis().remove(self)
+        pokemon.aumentarVida(efecto)
+    }
+}
+object pokebola inherits Item(precio = 40){
+
+    method puedeAtrapar(alguien) = self.alcanzaVida(alguien) and self.alcanzaPokebolas(alguien)
+    override method usar(alguien) {
+        game.removeVisual(alguien)
+        pisoCombat.pokemones().remove(alguien)
+        alguien.position(personaje.positionPokemon())
+        alguien.estado(1)
+        personaje.propios().add(alguien)
+        piso.salir()
+    }
+    method alcanzaVida(alguien) = alguien.vida() < 90
+    method alcanzaPokebolas(alguien) = personaje.pokebolas().size() > 0
+}

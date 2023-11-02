@@ -69,7 +69,7 @@ class Gimnasio {
 			game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
 		})
 		keyboard.num5().onPressDo({
-			superPoti.usar()
+			superPoti.usar(personaje.pokemon())
 			game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
 			game.say(enemigo.pokemon(),"Atacando")
 			personaje.pokemon().atacado(enemigo.pokemon().atacar())

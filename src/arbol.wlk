@@ -13,6 +13,8 @@ class Arbol {
     }
 }
 
+
+
 class ArbolInvisible inherits Arbol {
    	
    	override method image() = "arbolInvisible.png"
