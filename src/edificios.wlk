@@ -22,15 +22,15 @@ class Gimnasio {
 		gimnasio.iniciar()
 	}
 	
-	
+	method iniciarPersonajes(pj){
+		pj.iniciaBatalla(pj.propios().filter({pokemon=>not pokemon.muerto()}))
+		game.addVisual(pj.pokemon())
+	}
 	
 	method pelea(){
 	//AGREGA LOS POKEMONES PROPIOS DEL PERSONAJE A LA LISTA DEL PERSONAJE
-		personaje.iniciaBatalla(personaje.propios().filter({pokemon=> not pokemon.muerto()}))
-		enemigo.iniciaBatalla(enemigo.propios())
-		
-		game.addVisual(personaje.pokemon())
-		game.addVisual(enemigo.pokemon())
+		self.iniciarPersonajes(personaje)
+		self.iniciarPersonajes(enemigo)
 		
 		self.configurarTeclas()
 		
@@ -38,43 +38,11 @@ class Gimnasio {
 	//DEFINO LA ASIGNACION DE TECLAS
 
 	method configurarTeclas(){
-		keyboard.num1().onPressDo({
-			game.say(personaje.pokemon(), "Primer Ataque")
-			//"atacado" ES UN METODO DEL POKEMON,RECIBE POR PARAMETRO 
-			// EL ATAQUE SELECCIONADO, EL CUAL RETORNA UN DAÑO
-			enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(0))
-			self.win(enemigo)
-			personaje.pokemon().atacado(enemigo.pokemon().atacar())
-			self.defeat(personaje)
-		})
-		keyboard.num2().onPressDo({
-			game.say(personaje.pokemon(), "Segundo Ataque")
-			enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(1))	
-			self.win(enemigo)
-			personaje.pokemon().atacado(enemigo.pokemon().atacar())
-			self.defeat(personaje)
-		})
-		keyboard.num3().onPressDo({
-			game.say(personaje.pokemon(), "Tercer Ataque")
-			enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(2))
-			self.win(enemigo)
-			personaje.pokemon().atacado(enemigo.pokemon().atacar())
-			self.defeat(personaje)
-		})
-		keyboard.num4().onPressDo({
-			poti.usar(personaje.pokemon())
-			game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
-			game.say(enemigo.pokemon(),"Atacando")
-			personaje.pokemon().atacado(enemigo.pokemon().atacar())
-			game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
-		})
-		keyboard.num5().onPressDo({
-			superPoti.usar(personaje.pokemon())
-			game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
-			game.say(enemigo.pokemon(),"Atacando")
-			personaje.pokemon().atacado(enemigo.pokemon().atacar())
-			game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
-		})
+		keyboard.num1().onPressDo({game.say(personaje.pokemon(), "Primer Ataque") enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(0)) self.win(enemigo) personaje.pokemon().atacado(enemigo.pokemon().atacar()) self.defeat(personaje)})
+		keyboard.num2().onPressDo({game.say(personaje.pokemon(), "Segundo Ataque") enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(1)) self.win(enemigo) personaje.pokemon().atacado(enemigo.pokemon().atacar()) self.defeat(personaje)})
+		keyboard.num3().onPressDo({game.say(personaje.pokemon(), "Tercer Ataque") enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(2)) self.win(enemigo) personaje.pokemon().atacado(enemigo.pokemon().atacar()) self.defeat(personaje)})
+		keyboard.num4().onPressDo({poti.usar(personaje.pokemon()) game.say(personaje.pokemon(),personaje.pokemon().vida().toString()) game.say(enemigo.pokemon(),"Atacando") personaje.pokemon().atacado(enemigo.pokemon().atacar()) game.say(personaje.pokemon(),personaje.pokemon().vida().toString())})
+		keyboard.num5().onPressDo({ superPoti.usar(personaje.pokemon()) game.say(personaje.pokemon(),personaje.pokemon().vida().toString()) game.say(enemigo.pokemon(),"Atacando") personaje.pokemon().atacado(enemigo.pokemon().atacar()) game.say(personaje.pokemon(),personaje.pokemon().vida().toString())})
 	}
 	
 	method turnoJugador(pj){
@@ -122,9 +90,14 @@ class Gimnasio {
 	}
 	//METODO QUE VUELVE A LA PANTALLA INICIAL
 	method salir(){
-		enemigo.pokemones().clear()
+		self.eliminarTodos()
 		game.clear()
 		config.iniciar()
+	}
+	
+	method eliminarTodos(){
+		enemigo.pokemones().clear()
+		personaje.pokemones().clear()
 	}
 	
 	method noPuedenEntrar() = self.estanTodosMuertos(personaje) or self.estanTodosMuertos(enemigo)
