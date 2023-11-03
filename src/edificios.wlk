@@ -50,6 +50,11 @@ class Gimnasio {
 			self.estaMuerto(pj)//VALIDO SI EL POKEMON ESTA VIVO 
 		} 
 		game.say(pj.pokemon(), "Vida:" + pj.pokemon().vida().toString())
+	}
+	
+	method ataqueEnemigo(){
+		personaje.pokemon().atacado(enemigo.pokemon().atacar())
+		game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
 	} 
 	
 	method win(pj){
@@ -116,9 +121,7 @@ class Centro {
 		self.adentro()		
 	}		
 	
-	method adentro(){
-		market.iniciar()
-	}
+	method adentro(){market.iniciar()}
 	
 	method mostrarPrecios() = ["¡Bienvenido al market!","Pociones: " + poti.precio() + " monedas","SuperPotis: " + superPoti.precio() + " monedas."] 
 
@@ -129,23 +132,21 @@ class IconPiso inherits Gimnasio{
 	
 	override method image() = "hierba.png"
 
-	override method adentro(){
-		piso.iniciar()
-	}
+	override method adentro(){piso.iniciar()}
 	
 	override method configurarTeclas(){
 		super()
-		keyboard.num6().onPressDo({
-			if(not pokebola.puedeAtrapar(enemigo.pokemon())){
-				self.error("No tenes pokebolas o no me Atacaste lo suficiente")
-				personaje.pokebolas().remove(personaje.pokebolas().head())
-				personaje.pokemon().atacado(enemigo.pokemon().atacar())
-				game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
-			}
-			pokebola.usar(enemigo.pokemon())
-				game.say(personaje.pokemon(),"Atrapado")
-				self.salir()
-		})
+		keyboard.num6().onPressDo({if (not pokebola.puedeAtrapar(enemigo.pokemon())){self.noLoAtrapo()} self.loAtrapo()})
+	}
+	
+	method loAtrapo(){
+		pokebola.usar(enemigo.pokemon())
+		self.salir()
+	}
+	
+	method noLoAtrapo(){
+		self.error("No pudiste atraparlo")
+		self.ataqueEnemigo()
 	}
 
 	override method salir(){

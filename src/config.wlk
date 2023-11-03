@@ -78,12 +78,16 @@ object gimnasio inherits Gimnasio(enemigo = rival){
 
 	method iniciar(){
 		self.murieron()
-		game.addVisual(personaje)
-		game.addVisual(new Batalla())
-		game.addVisual(rival)
-		game.addVisual(cartelDePelea)	
+		self.preparar()
 		self.pelea()
 	} 
+	
+	method preparar(){
+		game.addVisual(new Batalla())
+		game.addVisual(cartelDePelea)	
+		game.addVisual(personaje)
+		game.addVisual(rival)
+	}
 }
 
 object piso inherits IconPiso(enemigo = pisoCombat){
@@ -93,20 +97,30 @@ object piso inherits IconPiso(enemigo = pisoCombat){
 			self.salir()
 			self.error("No puedes entrar a la pelea")
 		}
+		self.preparar()
+		self.pelea()  
+	}	 
+	
+	method preparar(){
 		game.addVisual(new PeleaPiso())
 		game.addVisual(pisoCombat)
 		game.addVisual(cartelDePelea)
-		self.pelea()  
-	}	 
+	}
 }
 
 object market inherits Centro{
 	
 	method iniciar() {
+		config.teclasMercado()
+		self.preparar()	
+		self.mostrarMensajes()
+	}
+	
+	method preparar(){
 		game.addVisual(new Market())
 		game.addVisual(enfermera)
 		game.addVisual(cartelDeCompra)
-		config.teclasMercado()
-		self.mostrarMensajes()	
+		
 	}
+	
 }

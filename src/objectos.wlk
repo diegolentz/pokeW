@@ -48,6 +48,7 @@ object pokebola inherits Item(precio = 40){
 
     method puedeAtrapar(alguien) = self.alcanzaVida(alguien) and self.alcanzaPokebolas(alguien)
     override method usar(alguien) {
+    	personaje.pokebolas().remove(personaje.pokebolas().head())
         game.removeVisual(alguien)
         pisoCombat.pokemones().remove(alguien)
         alguien.position(personaje.positionPokemon())
