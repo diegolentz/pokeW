@@ -1,0 +1,92 @@
+import wollok.game.*
+import config.*
+import personaje.*
+import edificios.*
+import city.*
+import arbol.*
+import pokemons.*
+import objectos.*
+
+
+describe "Tests del juego" {
+	
+	test "edificios" {
+		
+		assert.notThat(gimnasio.estanTodosMuertos(personaje))
+		assert.notThat(gimnasio.estanTodosMuertos(rival))
+		assert.notThat(gimnasio.noPuedenEntrar())
+		
+		personaje.propios().forEach({pokemon=>pokemon.vida(0)})
+		assert.that(gimnasio.estanTodosMuertos(personaje))
+		assert.that(gimnasio.noPuedenEntrar())
+		
+		personaje.propios().forEach({pokemon=>pokemon.vida(200)})
+		assert.notThat(piso.estanTodosMuertos(pisoCombat))
+	}
+	
+	test "objetos"{
+		
+
+		
+		assert.notThat(superPoti.tiene(superPoti))
+		
+		personaje.superPotis().clear()
+		assert.that(superPoti.tiene(superPoti))
+		
+		assert.notThat(poti.tiene(poti))
+		
+		personaje.potis().clear()
+		assert.that(poti.tiene(poti))
+		
+		const mewTwo = new MewTwo(position=game.at(0,0))	
+		assert.notThat(pokebola.puedeAtrapar(mewTwo))
+		mewTwo.vida(50)
+		assert.that(pokebola.puedeAtrapar(mewTwo))
+		
+	}
+	
+	test "personaje"{
+	
+		assert.equals(100,personaje.oro())
+		
+		assert.that(personaje.validarCompra(poti))
+		assert.that(personaje.validarCompra(superPoti))
+		assert.that(personaje.validarCompra(pokebola))
+		
+		personaje.oro(0)
+		assert.notThat(personaje.validarCompra(poti))
+		assert.notThat(personaje.validarCompra(superPoti))
+		assert.notThat(personaje.validarCompra(pokebola))
+		
+		assert.that(personaje.validacionVenta(personaje.superPotis(),superPoti))
+		assert.that(personaje.validacionVenta(personaje.potis(),poti))
+		assert.that(personaje.validacionVenta(personaje.pokebolas(),pokebola))
+		
+		personaje.superPotis().clear()
+		personaje.potis().clear()
+		personaje.pokebolas().clear()
+		assert.notThat(personaje.validacionVenta(personaje.superPotis(),superPoti))
+		assert.notThat(personaje.validacionVenta(personaje.potis(),poti))
+		assert.notThat(personaje.validacionVenta(personaje.pokebolas(),pokebola))
+		
+	}	
+	
+	test "Pokemons"{
+		const mewTwo = new MewTwo(position=game.at(0,0))
+		
+		mewTwo.atacado(ataqueMin.poder())
+		assert.equals(190,mewTwo.vida())
+		
+		assert.notThat(mewTwo.evolucion(mewTwo))
+		
+		mewTwo.nivel(6)
+		assert.that(mewTwo.evolucion(mewTwo))
+		
+		assert.notThat(mewTwo.muerto())
+		mewTwo.vida(0)
+		assert.that(mewTwo.muerto())
+		
+		mewTwo.aumentarVida(30)
+		assert.equals(30,mewTwo.vida())
+	}
+}

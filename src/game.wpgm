@@ -10,16 +10,10 @@ program pokeworld {
 	game.height(18)
 	game.width(26)
 	
-	
 	//  VISUALES
-
-	
 	config.iniciar()
-	
-	
  	
  	//  COMIENZA
 	game.start()
-		
 }
 	
