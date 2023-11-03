@@ -26,16 +26,17 @@ describe "Tests del juego" {
 	
 	test "objetos"{
 		
+
 		
-		assert.notThat(superPoti.tiene())
+		assert.notThat(superPoti.tiene(superPoti))
 		
 		personaje.superPotis().clear()
-		assert.that(superPoti.tiene())
+		assert.that(superPoti.tiene(superPoti))
 		
-		assert.notThat(poti.tiene())
+		assert.notThat(poti.tiene(poti))
 		
 		personaje.potis().clear()
-		assert.that(poti.tiene())
+		assert.that(poti.tiene(poti))
 		
 		const mewTwo = new MewTwo(position=game.at(0,0))	
 		assert.notThat(pokebola.puedeAtrapar(mewTwo))

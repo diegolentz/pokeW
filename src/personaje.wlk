@@ -28,14 +28,10 @@ object personaje inherits Human{
     //POKEMONES, CREO NUEVOS POKEMONES Y VAN A RECIBIR SU POSICION EN BASE SI
     //ES RIVAL O PERSONAJE
 
-   	const charmileon =  new Charmileon(position = self.positionPokemon())
-   	const mewTwo = new MewTwo(position = self.positionPokemon(),estado = 1)
-   	const hunter = new Hunter(position = self.positionPokemon(),estado = 1)
-   	const pikachu = new Pikachu(position = self.positionPokemon(),estado = 1) 
+   	const charmileon =  new Charmileon(position = self.positionPokemon()) 
 
    	//LISTA DE POKEMONES PROPIOS DEL PERSONAJE
-   	const property propios = #{charmileon,pikachu,mewTwo,hunter}
-    
+   	const property propios = #{charmileon}
    
    //RETORNA LA POSICION DEL POKEMON ALIADO
    method positionPokemon() = game.at(8,1)
@@ -47,24 +43,29 @@ object personaje inherits Human{
 	    	self.error("No tenes este item")	
     	}
 		game.say(enfermera,"vendiste " + item)
+		self.vendio(tipo,item)
+	}
+   	
+   	method vendio(tipo,item){
 		oro += item.precio()
 	    tipo.remove(item)
-    	
-	}
+   	}
    	
    	method validarCompra(item) = oro >= item.precio()
     
     method comprarItem(tipo,item) {
 	    if (not self.validarCompra(item)) {
-    		self.error("oro insuficiente")
+			self.error("oro insuficiente")
     	}
 	    game.say(enfermera,"compraste " + item)
-	    tipo.add(item)
-	    oro -=  item.precio()
+	    self.compro(tipo,item)
   }
   
+  method compro(tipo,item){
+	   tipo.add(item)
+	   oro -=  item.precio()
+  }
   
-   
     method irA(nuevaPosicion) {
 		posicionAnterior = position
        	position = nuevaPosicion         
@@ -77,7 +78,6 @@ object personaje inherits Human{
 	
 	method recompensa(cash) {
 		oro += cash
-		//return cash
 	}
 }
 
