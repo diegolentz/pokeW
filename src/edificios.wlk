@@ -17,6 +17,20 @@ class Gimnasio {
 		personaje.position(personaje.posicionAnterior())
 		self.adentro()		
 	}		
+		method iniciar(){
+		if(self.noPuedenEntrar()){
+			self.saliendo()
+		}else{
+		self.preparar()
+		self.pelea() 
+		}
+	}	 
+	method preparar(){}
+	method saliendo() {
+			self.salir()
+			game.say(personaje, "perdistes")
+			game.onTick(1000, "SALIENDO", {game.stop()})
+	}
 	
 	method adentro(){
 		gimnasio.iniciar()
