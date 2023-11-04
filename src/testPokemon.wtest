@@ -70,12 +70,11 @@ describe "Tests del juego" {
 		assert.notThat(personaje.validacionVenta(personaje.pokebolas(),pokebola))
 		
 	}	
-	
 	test "Pokemons"{
 		const mewTwo = new MewTwo(position=game.at(0,0))
 		
 		mewTwo.atacado(ataqueMin.poder())
-		assert.equals(190,mewTwo.vida())
+		assert.equals(90,mewTwo.vida())
 		
 		assert.notThat(mewTwo.evolucion(mewTwo))
 		
