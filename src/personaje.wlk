@@ -3,6 +3,9 @@ import config.*
 import pokemons.*
 import objectos.*
 
+class UserException inherits Exception { }
+
+
 class Human{
 	const property pokemones = []
 
@@ -13,13 +16,19 @@ class Human{
 	}
 	
 	//RETORNA EL PRIMER POKEMON DE LA LISTA DE CADA PERSONAJE
-	method pokemon() = pokemones.first()
+	method pokemon() {
+		if(!self.tienePokemon()){
+			 throw new UserException(message = "Pelea terminada!")
+		}
+			return pokemones.first()
+	}
+	method tienePokemon() = pokemones.size() > 0
 	
 }
 
 object personaje inherits Human{
-    var property position = game.at(2,12)
-    var property posicionAnterior = game.at(2, 12)   
+    var property position = game.at(2,4)
+    var property posicionAnterior = game.at(2, 4)   
     var property image = "player_Up.png"
     
      var property oro = 100

@@ -66,7 +66,7 @@ object mapa{
 
 	method aparecerArbolesInvicibles() = self.arbolesInvisibles().forEach { data =>game.addVisual(new ArbolInvisible(position = game.at(data.first(), data.last())))}
 	
-	method posiciones() = [[6, 4], [12, 2], [18, 4], [20, 10], [22, 14],[12, 8], [8, 12], [2, 10], [4, 2], [14, 12]]
+	method posiciones() = [[6, 4], [12, 2], [18, 4], [20, 10], [22, 14],[12, 8], [8, 12], [2, 10], [14, 12]]
 
 	method posicionesPiso() = self.posiciones().forEach { pos =>game.addVisual(new IconPiso(position = game.at(pos.first(), pos.last()),enemigo = pisoCombat))}
 	
