@@ -52,9 +52,9 @@ class Gimnasio {
 	//DEFINO LA ASIGNACION DE TECLAS
 
 	method configurarTeclas(){
-		keyboard.num1().onPressDo({game.say(personaje.pokemon(), "Primer Ataque") enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(0)) self.win(enemigo) personaje.pokemon().atacado(enemigo.pokemon().atacar()) self.defeat(personaje)})
-		keyboard.num2().onPressDo({game.say(personaje.pokemon(), "Segundo Ataque") enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(1)) self.win(enemigo) personaje.pokemon().atacado(enemigo.pokemon().atacar()) self.defeat(personaje)})
-		keyboard.num3().onPressDo({game.say(personaje.pokemon(), "Tercer Ataque") enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(2)) self.win(enemigo) personaje.pokemon().atacado(enemigo.pokemon().atacar()) self.defeat(personaje)})
+		keyboard.num1().onPressDo({game.say(personaje.pokemon(), "Primer Ataque") self.ataquePersonaje(0) self.win(enemigo) self.ataqueEnemigo() self.defeat(personaje)})
+		keyboard.num2().onPressDo({game.say(personaje.pokemon(), "Segundo Ataque") self.ataquePersonaje(1) self.win(enemigo) self.ataqueEnemigo() self.defeat(personaje)})
+		keyboard.num3().onPressDo({game.say(personaje.pokemon(), "Tercer Ataque") self.ataquePersonaje(2) self.win(enemigo) self.ataqueEnemigo() self.defeat(personaje)})
 		keyboard.num4().onPressDo({poti.usar(personaje.pokemon()) game.say(personaje.pokemon(),personaje.pokemon().vida().toString()) game.say(enemigo.pokemon(),"Atacando") personaje.pokemon().atacado(enemigo.pokemon().atacar()) game.say(personaje.pokemon(),personaje.pokemon().vida().toString())})
 		keyboard.num5().onPressDo({ superPoti.usar(personaje.pokemon()) game.say(personaje.pokemon(),personaje.pokemon().vida().toString()) game.say(enemigo.pokemon(),"Atacando") personaje.pokemon().atacado(enemigo.pokemon().atacar()) game.say(personaje.pokemon(),personaje.pokemon().vida().toString())})
 	}
@@ -65,12 +65,14 @@ class Gimnasio {
 		} 
 		game.say(pj.pokemon(), "Vida:" + pj.pokemon().vida().toString())
 	}
-	
 	method ataqueEnemigo(){
 		personaje.pokemon().atacado(enemigo.pokemon().atacar())
-		game.say(personaje.pokemon(),personaje.pokemon().vida().toString())
-	} 
-	
+	}
+		
+	method ataquePersonaje(numero){
+		enemigo.pokemon().atacado(personaje.pokemon().elegirAtaque(numero))
+	}
+
 	method win(pj){
 		if(self.estanTodosMuertos(pj)){
 			personaje.propios().forEach({pokemon=>pokemon.sube(pokemon)})
