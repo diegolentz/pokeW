@@ -7,7 +7,10 @@ class Human{
 	const property pokemones = []
 
 	//AGREGA LOS POKEMONES PROPIOS DE CADA PERSONAJE A SU JUGADOR CORRESPONDIENTE	
-	method iniciaBatalla(propios){pokemones.addAll(propios)}
+	method iniciaBatalla(propios){
+		
+		pokemones.addAll(propios)
+	}
 	
 	//RETORNA EL PRIMER POKEMON DE LA LISTA DE CADA PERSONAJE
 	method pokemon() = pokemones.first()

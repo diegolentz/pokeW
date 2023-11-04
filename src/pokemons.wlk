@@ -6,7 +6,7 @@ import city.*
 import arbol.*
 
 class Pokemon{
-	var property vida = 200
+	var property vida = 100
 	var property nivel = 4
 	var property position
 	var property estado = 0
@@ -20,7 +20,13 @@ class Pokemon{
 	 
 	//EL METODO "atacado" ES SOBRE AL POKEMON QUE SE LE VA A RESTAR VIDA
 	//POR ULTIMO ENVIA EL MENSAJE DE TURNO PARA REALIZAR EL CAMBIO DE TURNO
-	method atacado(damage) {vida = vida - damage}
+	 method atacado(damage) {
+        if (!self.muerto()) {
+            vida = vida - damage
+        } 
+	}
+
+
  
  	method sube(pokemon){
  		nivel =nivel + 1

@@ -76,32 +76,17 @@ object gimnasio inherits Gimnasio(enemigo = rival){
 	
 	override method position() = game.at(0,0)
 
-	method iniciar(){
-		self.murieron()
-		self.preparar()
-		self.pelea()
-	} 
-	
-	method preparar(){
+	override method preparar(){
 		game.addVisual(new Batalla())
 		game.addVisual(cartelDePelea)	
-		game.addVisual(personaje)
+		//game.addVisual(personaje)
 		game.addVisual(rival)
 	}
 }
 
 object piso inherits IconPiso(enemigo = pisoCombat){
 	
-	method iniciar(){
-		if(self.noPuedenEntrar()){
-			self.salir()
-			self.error("No puedes entrar a la pelea")
-		}
-		self.preparar()
-		self.pelea()  
-	}	 
-	
-	method preparar(){
+	override method preparar(){
 		game.addVisual(new PeleaPiso())
 		game.addVisual(pisoCombat)
 		game.addVisual(cartelDePelea)
