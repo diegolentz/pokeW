@@ -64,6 +64,7 @@ class Gimnasio {
 			self.salir()	
 		}
 		self.turnoJugador(pj)
+		
 	}
 	
 	method defeat(pj){
