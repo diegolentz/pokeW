@@ -100,9 +100,9 @@ object rival inherits Human{
     //POKEMONES, CREO NUEVOS POKEMONES Y VAN A RECIBIR SU POSICION EN BASE SI
     //ES RIVAL O PERSONAJE
 
-    const machamp   = new Machamp  (position = self.positionPokemon(), nivel= 5)
-    const blastoise = new Blastoise(position = self.positionPokemon(), nivel = 5)
-    const onix      = new Onix     (position = self.positionPokemon(), nivel = 5)
+    const machamp   = new Machamp  (position = self.positionPokemon(), nivel= 7)
+    const blastoise = new Blastoise(position = self.positionPokemon(), nivel = 7)
+    const onix      = new Onix     (position = self.positionPokemon(), nivel = 7)
 
     const property propios = #{onix,machamp,blastoise}
     //RETORNA LA POSICION DEL POKEMON ENEMIGO
